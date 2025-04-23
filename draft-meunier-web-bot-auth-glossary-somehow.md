@@ -62,7 +62,7 @@ informative:
   PRIVATE-PROOF-API:
     title: Explainer by Googlers Private Proof API
     target: https://explainers-by-googlers.github.io/private-proof/
-  PRIVATE-STATE-TOKEN: 
+  PRIVATE-STATE-TOKEN:
     title: W3C Private State Token API
     target: https://wicg.github.io/trust-token-api/
   REQ-MTLS: I-D.draft-jhoyla-req-mtls-flag
@@ -128,7 +128,7 @@ mechanism that empowers small and large agents to share their identity.
 {::boilerplate bcp14-tagged}
 
 Agent
-: autonomous entities that perceive the environment and can take actions on behalf of users. 
+: autonomous entities that perceive the environment and can take actions on behalf of users.
 
 Origin
 : Host resources, which are of interest to agents.
@@ -275,6 +275,8 @@ There is a multitude of Key and directory format. This include and is not limite
 # Security Considerations
 
 TODO Security
+
+Quote {{!RFC9518}} and {{!RFC8890}}
 
 
 # Privacy Considerations
