@@ -9,16 +9,16 @@ number:
 date:
 consensus: true
 v: 3
-area: AREA
-workgroup: WG Working Group
+# area: AREA
+# workgroup: WG Working Group
 keyword:
  - not-yet
 venue:
-  group: WG
-  type: Working Group
-  mail: WG@example.com
-  arch: https://example.com/WG
-  github: thibmeu/draft-meunier-glossary-somehow
+#  group: WG
+#  type: Working Group
+#  mail: WG@example.com
+#  arch: https://example.com/WG
+  github: "thibmeu/draft-meunier-glossary-somehow"
   latest: "https://thibmeu.github.io/draft-meunier-glossary-somehow/draft-meunier-web-bot-auth-glossary-somehow.html"
 
 author:
