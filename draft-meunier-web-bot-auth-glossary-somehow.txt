@@ -1,0 +1,506 @@
+
+
+
+
+WG Working Group                                              T. Meunier
+Internet-Draft                                                Cloudflare
+Intended status: Informational                             23 April 2025
+Expires: 25 October 2025
+
+
+                         Web bot auth Glossary
+           draft-meunier-web-bot-auth-glossary-somehow-latest
+
+Abstract
+
+   Automated traffic authentication provides a unique set of security
+   challenges, constraints, and possibilities that affect every user of
+   the Internet.  This document seeks to collect use cases within the
+   space, with a specific focus on AI related technologies.
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   The latest revision of this draft can be found at
+   https://thibmeu.github.io/draft-meunier-glossary-somehow/draft-
+   meunier-web-bot-auth-glossary-somehow.html.  Status information for
+   this document may be found at https://datatracker.ietf.org/doc/draft-
+   meunier-web-bot-auth-glossary-somehow/.
+
+   Discussion of this document takes place on the WG Working Group
+   mailing list (mailto:WG@example.com), which is archived at
+   https://example.com/WG.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/thibmeu/draft-meunier-glossary-somehow.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 25 October 2025.
+
+Copyright Notice
+
+   Copyright (c) 2025 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+   2.  Motivation
+   3.  Conventions and Definitions
+   4.  Architecture
+     4.1.  Overview
+     4.2.  Use cases
+       4.2.1.  Identifying a company
+       4.2.2.  Identification of a known account
+       4.2.3.  Ability to rate limit/gate access based on selective
+               disclosure
+     4.3.  Security goals and threat model
+     4.4.  Public vs private presentation
+     4.5.  Single vs multi show
+     4.6.  Transport
+     4.7.  Round trip
+   5.  Key management and discovery
+     5.1.  Catalog
+     5.2.  Submission / out-of-band
+     5.3.  In-flight
+     5.4.  Format
+   6.  Security Considerations
+   7.  Privacy Considerations
+   8.  IANA Considerations
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
+   Acknowledgments
+   Author's Address
+
+1.  Introduction
+
+      Thibault: this is taken from http message signature draft
+
+   Agents are increasingly used in business and user workflows,
+   including AI assistants, search indexing, content aggregation, and
+   automated testing.  These agents need to reliably identify themselves
+   to origins for several reasons:
+
+   1.  Regulatory compliance requiring transparency of automated systems
+
+   2.  Origin resource management and access control
+
+   3.  Protection against impersonation and reputation management
+
+   4.  Service level differentiation between human and automated traffic
+
+   Current identification methods such as IP allowlisting, User-Agent
+   strings, or shared API keys have significant limitations in security,
+   scalability, manageability, and fairness.  This document presents
+   these use cases, as well as possible paths to address them.
+
+2.  Motivation
+
+   There is an increase in agent traffic on the Internet.  Many agents
+   choose to identify their traffic today via IP Address lists and/or
+   unique User-Agents.  This is often done to demonstrate trust and
+   safety claims, support allowlisting/denylisting the traffic in a
+   granular manor, and enable sites to monitor and rate limit per agent
+   operator.  However, these mechanisms have drawbacks:
+
+   1.  User-Agent, when used alone, can be spoofed meaning anyone may
+       attempt to act as that agent.  It is also overloaded - an agent
+       may be using Chromium and wish to present itself as such to
+       ensure rendering works, yet it still wants to differentiate its
+       traffic to the site.
+
+   2.  IP blocks alone can present a confusing story.  IPs on cloud
+       plaforms have layers of ownership - the platform owns the IP and
+       registers it in their published IP blocks, only to be re-
+       published by the agent with little to bind the publication to the
+       actual service provider that may be renting infra.  Purchasing
+       dedicated IP blocks is expensive, time consuming, and requires
+       significant specialist knowledge to set up.  These IP blocks may
+       have prior reputation history that needs to be carefully
+       inspected and managed before purchase and use.
+
+   3.  An agent may go to every website on the Internet and share a
+       secret with them like a Bearer from [OAUTH-BEARER-RFC].  This is
+       impractical to scale for any agent beyond select partnerships,
+       and insecure, as key rotation is challenging and becomes less
+       secure as the consumers scale.
+
+   Using well-established cryptography, we can instead define a simple
+   and secure mechanism that empowers small and large agents to share
+   their identity.
+
+3.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+   Agent  autonomous entities that perceive the environment and can take
+      actions on behalf of users.
+
+   Origin  Host resources, which are of interest to agents.
+
+   Bot  same as agent, but not hiding their identity (web crawling,
+      ddos) and usually larger scale.  Think Google web crawler,
+      Facebook link shortner, Microsoft email scanner.
+
+   Application Firewall  control incoming traffic to an origin based on
+      a set of rules.  This may include but is not limited to IP
+      filtering, User-Agent match, or cryptographic signature
+      verification.
+
+   Forward proxy  Presents request on behalf of users.  I include the
+      act of understanding a users request from a prompt and making all
+      necessary requests in a different format.  Agents are forward
+      proxy for eyeballs, Cloudflare MASQUE relay is a forward proxy for
+      agents.  Think Private Relay, Workers, OHTTP.
+
+   Eyeball  ultimate beneficiary of the content.
+
+   Browser  Software acting as a gateway to the web.  These are agents
+      with a lot more human gating for actions.  Examples are Chrome
+      desktop, Firefox mobile, Safari webview.
+
+   Human  a physical person, like you and me.
+
+   Rate limit  limiting access to a resource.  An origin can decide to
+      rate limit all connections from an individual agent, from a
+      specific operator, or to a specific resource.  This may be a fixed
+      number of request, a budget, a time, location, legal.
+
+   Unlinkability  Cryptographic guarantee making two requests
+      undistinguishable from one another.
+
+   Account  Persistent identifier of a client to an origin.  This
+      requires a registration phase.
+
+   Registration  creation of an identity.  That identity may be private,
+      with anonymous credentials for instance.  It can involve one time
+      payment, subscription, an account with user name/password, an age,
+      a legal jurisdiction, others
+
+4.  Architecture
+
+   The architecture involves multiple actors: a credential issuer that
+   requires an c ertain criteria to be passed via an attester, the
+   client which an be a bot or human-mediated agent which IP is not
+   known, and the web origin placed behind a reverse proxy that may be
+   fronting its infrastructure.  The issuer provides cryptographic
+   credentials to the client, which are then attached to requests and
+   optionally verified by proxies before reaching the origin.  This
+   chain allows for authentication without necessarily revealing
+   identifying details to each intermediate.
+
+4.1.  Overview
+
+                        +---------------+             +----------+
+                   .--->| Reverse Proxy |------------>|  Origin  |
+                  /     +---------------+             +-----+----+
+                 /                                          ^
+                /                                           ║
+   +----------+/                                            ║
+   |  Client  +                                           Trust
+   +----------+\                                            ║
+                \                                           ║
+                 \                                          v
+                  \     +----------+                  +-----+----+
+                   '--->| Attester |----------------->|  Issuer  |
+                        +----------+                  +----------+
+
+4.2.  Use cases
+
+   We divide the use cases in three categories.
+
+4.2.1.  Identifying a company
+
+   This is required by origins to know where the traffic is coming from
+   This is also a demand of honest companies that want to identify
+   themselves but have a hard time doing it at the moment.
+
+   You can think of web crawlers wanting to authenticate against
+   origins, security companies that want to perform scans, or AI
+   crawlers that are looking to identify against a set of partners.
+
+4.2.2.  Identification of a known account
+
+   An individual should be able to identify against a provider it has an
+   existing relationship with in the form of an account.  This can be
+   because the individual has a subscription, or others.
+
+4.2.3.  Ability to rate limit/gate access based on selective disclosure
+
+   Not all use case require an account, or can be solely done by a
+   company.  Origins may want to rate limit individuals, without
+   identifying them.  Service providers would like to ensure that their
+   users are not abusive without necessarily coordinating with each and
+   every origins or insting client traffics.  In addition, origins may
+   want to know a limited set of informations about a user such as
+   thenir location, which they used to infer by deriving it from others,
+   like IP, ASN, timing, browser fingerprint.
+
+4.3.  Security goals and threat model
+
+   The security model includes several actors: credential issuers,
+   attesters, clients (bots or agents), reverse proxies, and origin
+   servers.  The primary goals are to prevent impersonation, allow for
+   credential revocation, support delegation and rotation, and maintain
+   trust boundaries.  Mechanisms must be resilient to replay attacks and
+   Sybil attacks, and should ensure that credential issuance is
+   auditable and accountable.
+
+      TODO: consider adding deployment models
+
+4.4.  Public vs private presentation
+
+   If the Issuer is also the Origin or its reverse proxy, it is possible
+   to use shared secrets for verification.  In cases where the issuer
+   and verifier are different entities, asymmetric cryptography becomes
+   necessary, allowing the bot to prove authenticity using a public key
+   infrastructure.
+
+4.5.  Single vs multi show
+
+   Some credentials may be designed for one-time use only (for anti
+   replay or privacy reasons), while others can support multiple
+   presentations through the use of cryptographic derivation techniques.
+   This distinction affects privacy, scalability, and implementation
+   complexity.
+
+4.6.  Transport
+
+   Authentication tokens may be exchanged at different protocol layers
+   and through different transports.  Each may have different
+   deployment, performance, and security guarantees.
+
+   For TLS, we have seen [REQ-MTLS] and [PRIVACYPASS-IN-TLS]
+   respectively addressing Section 4.2.1 and Section 4.2.3.
+
+   For HTTP, we see [HTTP-MESSAGE-SIGNATURE-FOR-BOTS] and PRIVACYPASS-
+   HTTP-AUTH-RFC respectively addressing Section 4.2.1 and
+   Section 4.2.3.  [OAUTH-BEARER-RFC] fits as well for Section 4.2.2.
+
+   Other methods have been seen such as leveraging a dedicated format on
+   top of a JavaScript API.  This is the case for W3C
+   [PRIVATE-STATE-TOKEN] or the more recent [PRIVATE-PROOF-API].
+
+   Focusing on AI specifically, it's worth mentioning two proponent
+   protocol definition efforts:
+
+   *  [A2A-AUTH] which follows [OPENAPI3-AUTH].  This means it allows
+      for Basic, Bearer, API Keys, and [OAUTH2-RFC].  OpenAPI mentions
+      using [HTTP-AUTHSCHEME] registry, but there does not seem to be a
+      definition for recent schemes such as [PRIVACYPASS-HTTP-AUTH-RFC],
+      CONCEALED-AUTH-RFC, or [DPOP-AUTH-RFC].
+
+   *  [MCP-AUTH] uses [OAUTH2-RFC] as a resource server, and does not
+      support WWW-Authenticate headers.  This is currently being debated
+      on GitHub.
+
+4.7.  Round trip
+
+   We thrive to minimise the number of round trips.  Even though a nonce
+   may be provided, it add delays and compute
+
+5.  Key management and discovery
+
+5.1.  Catalog
+
+   Like there are registries to resolve IP address metadata, there are
+   going to be registries to identify the owner of public key material.
+   These are mentioned by [A2A-DISCOVERY] and [MCP-DISCOVERY].
+
+   The primary goal of these catalog is to associate metadata to public
+   key, and to discover them.  They SHOULD have some sort of tamper
+   resistent, to prevent the provider of a catalog to provide from
+   information.
+
+   As an analogy, one can think of [CERTIFICATE-TRANSPARENCY-RFC], or
+   the more recent effort in [KEY-TRANSPARENCY-ARCHITECTURE].
+
+5.2.  Submission / out-of-band
+
+   Sumbission is also going to happen out of band.  This is both for a
+   practical reason that it's simpler than setting up a catalog, or for
+   privacy reason.
+
+5.3.  In-flight
+
+   Discovery may happen in-flight, that is when a request arrives from a
+   client to an origin.  This could be considered a trust on first use.
+   While the level of trust is low, it could be viable for certain use
+   cases.  Such discovery could be via an HTTP header containing a
+   domain name with a well-known, a URL, a certificate, others.
+
+5.4.  Format
+
+   There is a multitude of Key and directory format.  This include and
+   is not limited to JWKS, CWKS, Privacy Pass, Agent Card, or HTTP
+   Message Signatures.
+
+6.  Security Considerations
+
+   TODO Security
+
+7.  Privacy Considerations
+
+   See [RFC6973].
+
+      TODO: anonymity set, correlation, it depends on the issuer and
+      origin. origins SHOULD thrive to ask the minimum that's required
+
+8.  IANA Considerations
+
+   This document has no IANA actions.
+
+9.  References
+
+9.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC6973]  Cooper, A., Tschofenig, H., Aboba, B., Peterson, J.,
+              Morris, J., Hansen, M., and R. Smith, "Privacy
+              Considerations for Internet Protocols", RFC 6973,
+              DOI 10.17487/RFC6973, July 2013,
+              <https://www.rfc-editor.org/rfc/rfc6973>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+9.2.  Informative References
+
+   [A2A-AUTH] "A2A protocol Authentication", n.d.,
+              <https://google.github.io/
+              A2A/#/documentation?id=authentication-and-authorization>.
+
+   [A2A-DISCOVERY]
+              "A2A protocol Agent discovery", n.d.,
+              <https://google.github.io/A2A/#/topics/agent_discovery>.
+
+   [CERTIFICATE-TRANSPARENCY-RFC]
+              Laurie, B., Langley, A., and E. Kasper, "Certificate
+              Transparency", RFC 6962, DOI 10.17487/RFC6962, June 2013,
+              <https://www.rfc-editor.org/rfc/rfc6962>.
+
+   [CONCEALED-AUTH-RFC]
+              Schinazi, D., Oliver, D., and J. Hoyland, "The Concealed
+              HTTP Authentication Scheme", RFC 9729,
+              DOI 10.17487/RFC9729, February 2025,
+              <https://www.rfc-editor.org/rfc/rfc9729>.
+
+   [DPOP-AUTH-RFC]
+              Fett, D., Campbell, B., Bradley, J., Lodderstedt, T.,
+              Jones, M., and D. Waite, "OAuth 2.0 Demonstrating Proof of
+              Possession (DPoP)", RFC 9449, DOI 10.17487/RFC9449,
+              September 2023, <https://www.rfc-editor.org/rfc/rfc9449>.
+
+   [HTTP-AUTHSCHEME]
+              "IANA HTTP Authentication Scheme Registry", n.d.,
+              <https://www.iana.org/assignments/http-authschemes/http-
+              authschemes.xhtml>.
+
+   [HTTP-MESSAGE-SIGNATURE-FOR-BOTS]
+              Meunier, T., "HTTP Message Signatures for automated
+              traffic Architecture", Work in Progress, Internet-Draft,
+              draft-meunier-web-bot-auth-architecture-00, 15 April 2025,
+              <https://datatracker.ietf.org/doc/html/draft-meunier-web-
+              bot-auth-architecture-00>.
+
+   [KEY-TRANSPARENCY-ARCHITECTURE]
+              McMillion, B., "Key Transparency Architecture", Work in
+              Progress, Internet-Draft, draft-ietf-keytrans-
+              architecture-03, 25 February 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-
+              keytrans-architecture-03>.
+
+   [MCP-AUTH] "Model Context Protocol Authorization", n.d.,
+              <https://modelcontextprotocol.io/specification/2025-03-
+              26/basic/authorization>.
+
+   [MCP-DISCOVERY]
+              "Model Context Protocol Registry", n.d.,
+              <https://modelcontextprotocol.io/development/
+              roadmap#registry>.
+
+   [OAUTH-BEARER-RFC]
+              Jones, M. and D. Hardt, "The OAuth 2.0 Authorization
+              Framework: Bearer Token Usage", RFC 6750,
+              DOI 10.17487/RFC6750, October 2012,
+              <https://www.rfc-editor.org/rfc/rfc6750>.
+
+   [OAUTH2-RFC]
+              Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
+              RFC 6749, DOI 10.17487/RFC6749, October 2012,
+              <https://www.rfc-editor.org/rfc/rfc6749>.
+
+   [OPENAPI3-AUTH]
+              "OpenAPI 3.0 Authentication", n.d.,
+              <https://swagger.io/docs/specification/v3_0/
+              authentication/>.
+
+   [PRIVACYPASS-HTTP-AUTH-RFC]
+              Pauly, T., Valdez, S., and C. A. Wood, "The Privacy Pass
+              HTTP Authentication Scheme", RFC 9577,
+              DOI 10.17487/RFC9577, June 2024,
+              <https://www.rfc-editor.org/rfc/rfc9577>.
+
+   [PRIVACYPASS-IN-TLS]
+              Pauly, T. and S. Hendrickson, "Including Privacy Pass
+              Tokens in TLS Handshakes", Work in Progress, Internet-
+              Draft, draft-pauly-privacypass-for-tls-00, 3 March 2025,
+              <https://datatracker.ietf.org/doc/html/draft-pauly-
+              privacypass-for-tls-00>.
+
+   [PRIVATE-PROOF-API]
+              "Explainer by Googlers Private Proof API", n.d.,
+              <https://explainers-by-googlers.github.io/private-proof/>.
+
+   [PRIVATE-STATE-TOKEN]
+              "W3C Private State Token API", n.d.,
+              <https://wicg.github.io/trust-token-api/>.
+
+   [REQ-MTLS] Hoyland, J., "TLS Flag - Request mTLS", Work in Progress,
+              Internet-Draft, draft-jhoyla-req-mtls-flag-02, 28 February
+              2025, <https://datatracker.ietf.org/doc/html/draft-jhoyla-
+              req-mtls-flag-02>.
+
+Acknowledgments
+
+   TODO acknowledge.
+
+Author's Address
+
+   Thibault Meunier
+   Cloudflare
+   Email: ot-ietf@thibault.uk

@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>Web bot auth Glossary</title>
+<meta content="Thibault Meunier" name="author">
+<meta content="
+       Automated traffic authentication provides a unique set of security challenges, constraints, and possibilities
+that affect every user of the Internet. This document seeks to collect use cases within the space,
+with a specific focus on AI related technologies. 
+    " name="description">
+<meta content="xml2rfc 3.28.1" name="generator">
+<meta content="not-yet" name="keyword">
+<meta content="draft-meunier-web-bot-auth-glossary-somehow-latest" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.28.1
+    Python 3.12.10
+    ConfigArgParse 1.7
+    google-i18n-address 3.1.1
+    intervaltree 3.1.0
+    Jinja2 3.1.6
+    lxml 5.3.0
+    platformdirs 4.3.7
+    pycountry 24.6.1
+    PyYAML 6.0.2
+    requests 2.32.3
+    setuptools 70.3.0
+    wcwidth 0.2.13
+-->
+<link href="draft-meunier-web-bot-auth-glossary-somehow.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Lora SemiBold'), local('Lora-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light dark;
+  --background-color: #fff;
+  --text-color: #222;
+  --title-color: #191919;
+  --link-color: #2a6496;
+  --highlight-color: #f9f9f9;
+  --line-color: #eee;
+  --pilcrow-weak: #ddd;
+  --pilcrow-strong: #bbb;
+  --small-font-size: 14.5px;
+  --font-mono: 'Oxygen Mono', monospace;
+  --font-title: "Sofia Sans Semi Condensed", sans-serif;
+  scrollbar-color: #bbb #eee;
+}
+body {
+  max-width: 600px;
+  margin: 75px auto;
+  padding: 0 5px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font: 16px/22px "Lora", serif;
+  scroll-behavior: smooth;
+}
+
+.ears {
+  display: none;
+}
+
+/* headings */
+section {
+  clear: both;
+}
+.section-number {
+  padding-right: 0.5em;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+  font-weight: 680;
+  margin: 0.8em 0 0.3em;
+  font-size-adjust: 0.5;
+  color: var(--title-color);
+}
+h1#title {
+  font-size: 32px;
+  line-height: 40px;
+  clear: both;
+}
+h1#title, h1#rfcnum {
+  margin: 1.5em 0 0.2em;
+}
+h1#rfcnum + h1#title {
+  margin: 0.2em 0;
+}
+
+h1, h2, h3 {
+  font-size: 22px;
+  line-height: 27px;
+}
+h4, h5, h6 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* general structure */
+.author {
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+#abstract+p {
+  font-size: 18px;
+  line-height: 24px;
+}
+#abstract+p code, #abstract+p samp, #abstract+p tt {
+  font-size: 16px;
+  line-height: 0;
+}
+
+p {
+  padding: 0;
+  margin: 0.5em 0;
+  text-align: left;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+/* font-family isn't space-separated, but =~ will have to do */
+svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
+  font-family: var(--font-mono);
+}
+.alignCenter.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  border: none;
+  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+     support flexbox yet.
+  */
+  display: table;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 0.5em 2em;
+  & :is(ol, ul) {
+    margin-left: 1em;
+  }
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+  & li {
+    margin-top: 0.5em;
+  }
+}
+:is(ul, ol).compact, .ulCompact, .olCompact {
+  margin: 0 0 0 2em;
+  & li {
+    margin: 0;
+    & :first-child { margin-top: 0; }
+    & :last-child { margin-bottom: 0; }
+  }
+}
+
+/* definition lists */
+dl {
+  clear: left;
+  --indent: 3ch;
+  /* --indent: attr(indent ch); not supported in any browser, but we can dream */
+  &.olPercent {
+    --indent: 5ch;
+    & > dt {
+      min-width: calc(var(--indent) - 2ch);
+    }
+  }
+  &.olPercent > dt {
+    float: none;
+  }
+
+  dl > dd > & {
+    margin-top: 0.5em;
+    margin-bottom: 0;
+  }
+}
+dl:not(.dlNewline) > dt {
+  float: left;
+  margin-right: 2ch;
+  min-width: 8ch;
+}
+dl > dd {
+  margin-bottom: .8em;
+  margin-left: var(--indent) !important; /* stupid element overrides */
+  min-height: 2ex;
+}
+:is(dl.compact, .dlCompact) > dd {
+  margin-bottom: 0;
+  & > :is(:first-child, .break:first-child + *) {
+    margin-top: 0;
+  }
+  & > :is(:last-child) {
+    margin-bottom: 0;
+  }
+}
+:is(dd, span).break {
+  display: none;
+}
+
+/* links */
+a, a[href].selfRef:hover {
+  text-decoration: none;
+}
+a[href] {
+  color: var(--link-color);
+}
+a[href].selfRef, .iref + a[href].internal {
+  color: var(--text-color);
+}
+a[href]:hover {
+  text-decoration: underline;
+}
+a[href].selfRef:hover {
+  background-color: var(--highlight-color);
+}
+a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
+  white-space: nowrap;
+}
+
+/* Figures */
+tt, code, pre {
+  background-color: var(--highlight-color);
+  font: 14px/22px var(--font-mono);
+}
+tt, code {
+  /* changing the font for inline elements leads to different ascender
+     and descender heights; as we want to retain baseline alignment,
+     remove leading to avoid altering the final height of lines
+     note: this fails if these blocks take an entire line,
+     a different solution would be great */
+  line-height: 0;
+}
+:is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
+  font-size: 84%;
+}
+pre {
+  border: 1px solid var(--line-color);
+  font-size: 13.5px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  margin: 5px;
+  padding: 5px;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0.5em 0;
+  padding: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption, caption {
+  font-style: italic;
+  margin: 0.5em 1.5em;
+  text-align: left;
+  caption-side: bottom;
+}
+@media screen {
+  /* Auto-collapse boilerplate. */
+  :is(#status-of-memo, #copyright) p {
+    margin: -2px 0;
+    max-height: 0;
+    transition: max-height 2s ease, margin 0.5s ease 0.5s;
+    overflow: hidden;
+  }
+  :is(#status-of-memo, #copyright):hover p,
+  :is(#status-of-memo, #copyright) h2:target ~ p {
+    margin: 0.5em 0;
+    max-height: 500px;
+    overflow: auto;
+  }
+  pre, svg {
+    display: inline-block;
+    /* In the horizontal direction, sometimes people make over-sized figures.
+       Scrollbars for those is therefore necessary: auto adds them as necessary..
+       In the vertical direction, the line-height can combine with the font
+       asender/descender height to produce scrollbars: hidden avoids that. */
+    overflow: auto hidden;
+  }
+  pre {
+    max-width: 100%;
+    width: calc(100% - 22px - 1em);
+  }
+  svg {
+    max-width: calc(100% - 22px - 1em);
+  }
+  figure pre {
+    display: block;
+    width: calc(100% - 25px);
+  }
+  :is(pre, svg) + .pilcrow {
+    display: inline-block;
+    vertical-align: text-bottom;
+    padding-bottom: 8px;
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 0 2em;
+  font-style: italic;
+}
+blockquote {
+  margin: 1em 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  width: auto;
+  max-width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+}
+table.right {
+  margin-left: auto;
+}
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+table.left {
+  margin-right: auto;
+}
+table .text-left {
+  text-align: left;
+}
+table .text-center {
+  text-align: center;
+}
+table .text-right {
+  text-align: right;
+}
+
+thead, tbody {
+  border: 1px solid var(--line-color);
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px 10px;
+}
+th {
+  background-color: var(--line-color);
+}
+:is(tr:nth-child(2n), thead+tbody > tr:nth-child(2n+1)) > td {
+  background-color: var(--background-color);
+}
+:is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
+  background-color: var(--highlight-color);
+}
+table caption {
+  margin: 0;
+  padding: 3px 0 3px 1em;
+}
+table p {
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  margin-left: 3px;
+  opacity: 0.2;
+  user-select: none;
+  &[href] {
+    color: var(--pilcrow-weak);
+    &:hover { text-decoration: none; }
+  }
+}
+@media not print {
+  :hover > a.pilcrow {
+    opacity: 1;
+  }
+  a.pilcrow[href]:hover {
+    color: var(--pilcrow-strong);
+    background-color: transparent;
+  }
+}
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid var(--line-color);
+}
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size: var(--small-font-size);
+}
+.role {
+  font-variant: all-small-caps;
+}
+sub, sup {
+  line-height: 1;
+  font-size: 80%;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: var(--small-font-size);
+  line-height: 18px;
+  --identifier-width: 15ch;
+  & dt {
+    width: var(--identifier-width);
+    min-width: var(--identifier-width);
+    clear: left;
+    float: left;
+    text-align: right;
+    margin-right: 1ch;
+  }
+  & dd {
+    margin: 0;
+    margin-left: calc(1em + var(--identifier-width)) !important;
+    min-width: 5em;
+  }
+  & .authors {
+    & .author {
+      display: inline-block;
+      margin-right: 1.5em;
+    }
+    & .org {
+      font-style: italic;
+    }
+  }
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #999;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+
+  & nav {
+    & ul {
+      margin: 0 0.5em 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    & li {
+      line-height: 1.3em;
+      margin: 2px 0;
+      padding-left: 1.2em;
+      text-indent: -1.2em;
+    }
+  }
+  & a.xref {
+    white-space: normal;
+  }
+}
+
+.references {
+  & > dt {
+    text-align: right;
+    font-weight: bold;
+    min-width: 10ch;
+    margin-right: 1.5ch;
+    &:target::before {
+      content: "⇒";
+      margin: 0 10px 0 -25px;
+    }
+  }
+  & > dd {
+    margin-left: 12ch !important;
+    overflow: visible;
+    & .refInstance {
+      margin-bottom: 0.8em;
+    }
+    & .ascii {
+      margin-bottom: 0.25em;
+    }
+  }
+}
+
+#rfc\.index\.index + ul {
+  margin-left: 0;
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  max-width: 20em;
+  margin: 1em auto 1em 0;
+
+  & .nameRole {
+    font-weight: 700;
+    margin-left: 0;
+  }
+  & .label {
+    margin: 0.5em 0;
+  }
+  & .type {
+    display: none;
+  }
+  & .alternative-contact {
+    margin: 0.5em 0 0.25em 0;
+  }
+  & .non-ascii {
+    margin: 0 0 0 2em;
+  }
+  & div.left {
+    text-align: left;
+  }
+  & div.right {
+    text-align: right;
+  }
+}
+
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+@media (min-width: 500px) {
+  #authors-addresses > section {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  #authors-addresses > section > h2 {
+    column-span: all;
+  }
+  /* hack for break-inside: avoid-column */
+  #authors-addresses address {
+    display: inline-block;
+    break-inside: avoid-column;
+  }
+}
+
+/* Comments */
+.rfcEditorRemove p:first-of-type {
+  font-style: italic;
+}
+.cref {
+  background-color: rgba(249, 232, 105, 0.3);
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+
+@media screen {
+  #toc nav {
+    font-family: var(--font-title);
+    font-weight: 360;
+    & > ul { margin-bottom: 2em; }
+    & ul {
+      margin: 0 0 0 4px;
+      & :is(p, li) {
+        margin: 2px 0;
+      }
+    }
+  }
+  #toc a.toplink {
+    float: right;
+  }
+}
+@media not screen {
+  #toc a.toplink {
+    display: none;
+  }
+}
+
+
+/* TOC layout for smaller screens */
+@media screen and (max-width: 929px) {
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 1px 0 0 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    opacity: 0.6;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 2px 0 2px 6px;
+    padding-right: 1em;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 190px;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+    &::before { /* css hamburger */
+      float: right;
+      position: relative;
+      width: 1em;
+      height: 1px;
+      left: -164px;
+      margin: 8px 0 0 0;
+      background: white none repeat scroll 0 0;
+      box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+      content: "";
+    }
+  }
+  #toc nav {
+    display: none;
+    background-color: var(--background-color);
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+  #toc.active {
+    opacity: 1;
+    & nav { display: block; }
+  }
+  /* Make the collapsed ToC header render white on gray also when it's a link */
+  #toc h2 a,
+  #toc h2 a:is(:link, :focus, :hover),
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+  #toc a.toplink {
+    margin: 2px 0.5em 0;
+  }
+}
+
+/* TOC layout for wide screens */
+@media screen and (min-width: 930px) {
+  body {
+    padding-right: 360px;
+    padding-right: calc(min(180px + 20%, 500px));
+  }
+  #toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 480px);
+    width: 312px;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 2em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+  #toc a.toplink {
+    margin: 8px 0.5em 0;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre, .vcard {
+    page-break-inside: avoid;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  :is(h2, h3, h4, h5, h6)+*, dd {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+}
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+}
+
+/* Dark mode. */
+@media (prefers-color-scheme: dark) {
+:root {
+  --background-color: #121212;
+  --text-color: #f0f0f0;
+  --title-color: #fff;
+  --link-color: #4da4f0;
+  --highlight-color: #282828;
+  --line-color: #444;
+  --pilcrow-weak: #444;
+  --pilcrow-strong: #666;
+  scrollbar-color: #777 #333;
+}
+}
+
+/* SVG Trick: a prefix match works because only black and white are allowed */
+svg :is([stroke="black"], [stroke^="#000"]) {
+  stroke: var(--text-color);
+}
+svg :is([stroke="white"], [stroke^="#fff"]) {
+  stroke: var(--background-color);
+}
+svg :is([fill="black"], [fill^="#000"], :not([fill])) {
+  fill: var(--text-color);
+}
+svg :is([fill="white"], [fill^="#fff"]) {
+  fill: var(--background-color);
+}
+</style>
+
+</head>
+<body class="xml2rfc">
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">Agent Glossary</td>
+<td class="right">April 2025</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Meunier</td>
+<td class="center">Expires 25 October 2025</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">WG Working Group</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-meunier-web-bot-auth-glossary-somehow-latest</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2025-04-23" class="published">23 April 2025</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Informational</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2025-10-25">25 October 2025</time></dd>
+<dt class="label-authors">Author:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">T. Meunier</div>
+<div class="org">Cloudflare</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">Web bot auth Glossary</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">Automated traffic authentication provides a unique set of security challenges, constraints, and possibilities
+that affect every user of the Internet. This document seeks to collect use cases within the space,
+with a specific focus on AI related technologies.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+</section>
+<section class="note rfcEditorRemove" id="section-note.1">
+      <h2 id="name-about-this-document">
+<a href="#name-about-this-document" class="section-name selfRef">About This Document</a>
+      </h2>
+<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">
+        The latest revision of this draft can be found at <span><a href="https://thibmeu.github.io/draft-meunier-glossary-somehow/draft-meunier-web-bot-auth-glossary-somehow.html">https://thibmeu.github.io/draft-meunier-glossary-somehow/draft-meunier-web-bot-auth-glossary-somehow.html</a></span>.
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-meunier-web-bot-auth-glossary-somehow/">https://datatracker.ietf.org/doc/draft-meunier-web-bot-auth-glossary-somehow/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+<p id="section-note.1-3">
+        Discussion of this document takes place on the
+        WG Working Group mailing list (<span><a href="mailto:WG@example.com">mailto:WG@example.com</a></span>),
+        which is archived at <span><a href="https://example.com/WG">https://example.com/WG</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+<p id="section-note.1-4">Source for this draft and an issue tracker can be found at
+        <span><a href="https://github.com/thibmeu/draft-meunier-glossary-somehow">https://github.com/thibmeu/draft-meunier-glossary-somehow</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 25 October 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2025 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-motivation" class="internal xref">Motivation</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-architecture" class="internal xref">Architecture</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-overview" class="internal xref">Overview</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
+                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-use-cases" class="internal xref">Use cases</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.1">
+                    <p id="section-toc.1-1.4.2.2.2.1.1"><a href="#section-4.2.1" class="auto internal xref">4.2.1</a>.  <a href="#name-identifying-a-company" class="internal xref">Identifying a company</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.2">
+                    <p id="section-toc.1-1.4.2.2.2.2.1"><a href="#section-4.2.2" class="auto internal xref">4.2.2</a>.  <a href="#name-identification-of-a-known-a" class="internal xref">Identification of a known account</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.3">
+                    <p id="section-toc.1-1.4.2.2.2.3.1"><a href="#section-4.2.3" class="auto internal xref">4.2.3</a>.  <a href="#name-ability-to-rate-limit-gate-" class="internal xref">Ability to rate limit/gate access based on selective disclosure</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
+                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-security-goals-and-threat-m" class="internal xref">Security goals and threat model</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4">
+                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-public-vs-private-presentat" class="internal xref">Public vs private presentation</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.5">
+                <p id="section-toc.1-1.4.2.5.1"><a href="#section-4.5" class="auto internal xref">4.5</a>.  <a href="#name-single-vs-multi-show" class="internal xref">Single vs multi show</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.6">
+                <p id="section-toc.1-1.4.2.6.1"><a href="#section-4.6" class="auto internal xref">4.6</a>.  <a href="#name-transport" class="internal xref">Transport</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.7">
+                <p id="section-toc.1-1.4.2.7.1"><a href="#section-4.7" class="auto internal xref">4.7</a>.  <a href="#name-round-trip" class="internal xref">Round trip</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-key-management-and-discover" class="internal xref">Key management and discovery</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-catalog" class="internal xref">Catalog</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-submission-out-of-band" class="internal xref">Submission / out-of-band</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-in-flight" class="internal xref">In-flight</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4">
+                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-format" class="internal xref">Format</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-privacy-considerations" class="internal xref">Privacy Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
+                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-1-1.1">
+          <p id="section-1-1.1.1">Thibault: this is taken from http message signature draft<a href="#section-1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-1-2">Agents are increasingly used in business and user workflows, including AI assistants,
+search indexing, content aggregation, and automated testing. These agents need to reliably identify
+themselves to origins for several reasons:<a href="#section-1-2" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-1-3">
+<li id="section-1-3.1">
+          <p id="section-1-3.1.1">Regulatory compliance requiring transparency of automated systems<a href="#section-1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-1-3.2">
+          <p id="section-1-3.2.1">Origin resource management and access control<a href="#section-1-3.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-1-3.3">
+          <p id="section-1-3.3.1">Protection against impersonation and reputation management<a href="#section-1-3.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-1-3.4">
+          <p id="section-1-3.4.1">Service level differentiation between human and automated traffic<a href="#section-1-3.4.1" class="pilcrow">¶</a></p>
+</li>
+      </ol>
+<p id="section-1-4">Current identification methods such as IP allowlisting, User-Agent strings, or shared API keys have
+significant limitations in security, scalability, manageability, and fairness. This document
+presents these use cases, as well as possible paths to address them.<a href="#section-1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="motivation">
+<section id="section-2">
+      <h2 id="name-motivation">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-motivation" class="section-name selfRef">Motivation</a>
+      </h2>
+<p id="section-2-1">There is an increase in agent traffic on the Internet. Many agents
+choose to identify their traffic today via IP Address lists and/or unique
+User-Agents. This is often done to demonstrate trust and safety claims, support
+allowlisting/denylisting the traffic in a granular manor, and enable sites to
+monitor and rate limit per agent operator. However, these mechanisms have drawbacks:<a href="#section-2-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-2-2">
+<li id="section-2-2.1">
+          <p id="section-2-2.1.1">User-Agent, when used alone, can be spoofed meaning anyone may attempt to
+act as that agent. It is also overloaded - an agent may be using Chromium and
+wish to present itself as such to ensure rendering works, yet it still wants to
+differentiate its traffic to the site.<a href="#section-2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-2-2.2">
+          <p id="section-2-2.2.1">IP blocks alone can present a confusing story. IPs on cloud plaforms have
+layers of ownership - the platform owns the IP and registers it in their
+published IP blocks, only to be re-published by the agent with little to bind
+the publication to the actual service provider that may be renting infra. Purchasing
+dedicated IP blocks is expensive, time consuming, and requires significant
+specialist knowledge to set up. These IP blocks may have prior reputation
+history that needs to be carefully inspected and managed before purchase and
+use.<a href="#section-2-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-2-2.3">
+          <p id="section-2-2.3.1">An agent may go to every website on the Internet and share a secret with
+them like a Bearer from  <span>[<a href="#OAUTH-BEARER-RFC" class="cite xref">OAUTH-BEARER-RFC</a>]</span>. This is impractical to scale for any
+agent beyond select partnerships, and insecure, as key rotation is challenging
+and becomes less secure as the consumers scale.<a href="#section-2-2.3.1" class="pilcrow">¶</a></p>
+</li>
+      </ol>
+<p id="section-2-3">Using well-established cryptography, we can instead define a simple and secure
+mechanism that empowers small and large agents to share their identity.<a href="#section-2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="conventions-and-definitions">
+<section id="section-3">
+      <h2 id="name-conventions-and-definitions">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
+      </h2>
+<p id="section-3-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+"<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
+described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
+appear in all capitals, as shown here.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-3-2">
+        <dt id="section-3-2.1">Agent</dt>
+        <dd style="margin-left: 1.5em" id="section-3-2.2">
+          <p id="section-3-2.2.1">autonomous entities that perceive the environment and can take actions on behalf of users.<a href="#section-3-2.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-2.3">Origin</dt>
+        <dd style="margin-left: 1.5em" id="section-3-2.4">
+          <p id="section-3-2.4.1">Host resources, which are of interest to agents.<a href="#section-3-2.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-2.5">Bot</dt>
+        <dd style="margin-left: 1.5em" id="section-3-2.6">
+          <p id="section-3-2.6.1">same as agent, but not hiding their identity (web crawling, ddos) and usually larger scale. Think Google web crawler, Facebook link shortner, Microsoft email scanner.<a href="#section-3-2.6.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-2.7">Application Firewall</dt>
+        <dd style="margin-left: 1.5em" id="section-3-2.8">
+          <p id="section-3-2.8.1">control incoming traffic to an origin based on a set of rules. This may include but is not limited to IP filtering, User-Agent match, or cryptographic signature verification.<a href="#section-3-2.8.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-2.9">Forward proxy</dt>
+        <dd style="margin-left: 1.5em" id="section-3-2.10">
+          <p id="section-3-2.10.1">Presents request on behalf of users. I include the act of understanding a users request from a prompt and making all necessary requests in a different format. Agents are forward proxy for eyeballs, Cloudflare MASQUE relay is a forward proxy for agents. Think Private Relay, Workers, OHTTP.<a href="#section-3-2.10.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-2.11">Eyeball</dt>
+        <dd style="margin-left: 1.5em" id="section-3-2.12">
+          <p id="section-3-2.12.1">ultimate beneficiary of the content.<a href="#section-3-2.12.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-2.13">Browser</dt>
+        <dd style="margin-left: 1.5em" id="section-3-2.14">
+          <p id="section-3-2.14.1">Software acting as a gateway to the web. These are agents with a lot more human gating for actions. Examples are Chrome desktop, Firefox mobile, Safari webview.<a href="#section-3-2.14.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-2.15">Human</dt>
+        <dd style="margin-left: 1.5em" id="section-3-2.16">
+          <p id="section-3-2.16.1">a physical person, like you and me.<a href="#section-3-2.16.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-2.17">Rate limit</dt>
+        <dd style="margin-left: 1.5em" id="section-3-2.18">
+          <p id="section-3-2.18.1">limiting access to a resource. An origin can decide to rate limit all connections from an individual agent, from a specific operator, or to a specific resource. This may be a fixed number of request, a budget, a time, location, legal.<a href="#section-3-2.18.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-2.19">Unlinkability</dt>
+        <dd style="margin-left: 1.5em" id="section-3-2.20">
+          <p id="section-3-2.20.1">Cryptographic guarantee making two requests undistinguishable from one another.<a href="#section-3-2.20.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-2.21">Account</dt>
+        <dd style="margin-left: 1.5em" id="section-3-2.22">
+          <p id="section-3-2.22.1">Persistent identifier of a client to an origin. This requires a registration phase.<a href="#section-3-2.22.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-2.23">Registration</dt>
+        <dd style="margin-left: 1.5em" id="section-3-2.24">
+          <p id="section-3-2.24.1">creation of an identity. That identity may be private, with anonymous credentials for instance. It can involve one time payment, subscription, an account with user name/password, an age, a legal jurisdiction, others<a href="#section-3-2.24.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="architecture">
+<section id="section-4">
+      <h2 id="name-architecture">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-architecture" class="section-name selfRef">Architecture</a>
+      </h2>
+<p id="section-4-1">The architecture involves multiple actors: a credential issuer that requires an c ertain criteria to be passed via an attester, the client which an be a bot or human-mediated agent which IP is not known, and the web origin placed behind a reverse proxy that may be fronting its infrastructure. The issuer provides cryptographic credentials to the client, which are then attached to requests and optionally verified by proxies before reaching the origin. This chain allows for authentication without necessarily revealing identifying details to each intermediate.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<div id="overview">
+<section id="section-4.1">
+        <h3 id="name-overview">
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-overview" class="section-name selfRef">Overview</a>
+        </h3>
+<div id="section-4.1-1">
+          <div class="alignLeft art-svg artwork" id="section-4.1-1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="240" width="512" viewBox="0 0 512 240" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+              <path d="M 8,112 L 8,144" fill="none" stroke="black"></path>
+              <path d="M 96,112 L 96,144" fill="none" stroke="black"></path>
+              <path d="M 176,32 L 176,64" fill="none" stroke="black"></path>
+              <path d="M 176,192 L 176,224" fill="none" stroke="black"></path>
+              <path d="M 264,192 L 264,224" fill="none" stroke="black"></path>
+              <path d="M 304,32 L 304,64" fill="none" stroke="black"></path>
+              <path d="M 416,32 L 416,64" fill="none" stroke="black"></path>
+              <path d="M 416,192 L 416,224" fill="none" stroke="black"></path>
+              <path d="M 466,72 L 466,112" fill="none" stroke="black"></path>
+              <path d="M 462,72 L 462,112" fill="none" stroke="black"></path>
+              <path d="M 466,144 L 466,184" fill="none" stroke="black"></path>
+              <path d="M 462,144 L 462,184" fill="none" stroke="black"></path>
+              <path d="M 504,32 L 504,64" fill="none" stroke="black"></path>
+              <path d="M 504,192 L 504,224" fill="none" stroke="black"></path>
+              <path d="M 176,32 L 304,32" fill="none" stroke="black"></path>
+              <path d="M 416,32 L 504,32" fill="none" stroke="black"></path>
+              <path d="M 136,48 L 168,48" fill="none" stroke="black"></path>
+              <path d="M 312,48 L 408,48" fill="none" stroke="black"></path>
+              <path d="M 176,64 L 304,64" fill="none" stroke="black"></path>
+              <path d="M 416,64 L 504,64" fill="none" stroke="black"></path>
+              <path d="M 8,112 L 96,112" fill="none" stroke="black"></path>
+              <path d="M 8,144 L 96,144" fill="none" stroke="black"></path>
+              <path d="M 176,192 L 264,192" fill="none" stroke="black"></path>
+              <path d="M 416,192 L 504,192" fill="none" stroke="black"></path>
+              <path d="M 136,208 L 168,208" fill="none" stroke="black"></path>
+              <path d="M 272,208 L 408,208" fill="none" stroke="black"></path>
+              <path d="M 176,224 L 264,224" fill="none" stroke="black"></path>
+              <path d="M 416,224 L 504,224" fill="none" stroke="black"></path>
+              <path d="M 96,128 L 136,208" fill="none" stroke="black"></path>
+              <path d="M 96,128 L 136,48" fill="none" stroke="black"></path>
+              <polygon class="arrowhead" points="472,184 460,178.4 460,189.6" fill="black" transform="rotate(90,464,184)"></polygon>
+              <polygon class="arrowhead" points="472,72 460,66.4 460,77.6" fill="black" transform="rotate(270,464,72)"></polygon>
+              <polygon class="arrowhead" points="416,208 404,202.4 404,213.6" fill="black" transform="rotate(0,408,208)"></polygon>
+              <polygon class="arrowhead" points="416,48 404,42.4 404,53.6" fill="black" transform="rotate(0,408,48)"></polygon>
+              <polygon class="arrowhead" points="176,208 164,202.4 164,213.6" fill="black" transform="rotate(0,168,208)"></polygon>
+              <polygon class="arrowhead" points="176,48 164,42.4 164,53.6" fill="black" transform="rotate(0,168,48)"></polygon>
+              <g class="text">
+                <text x="216" y="52">Reverse</text>
+                <text x="272" y="52">Proxy</text>
+                <text x="460" y="52">Origin</text>
+                <text x="52" y="132">Client</text>
+                <text x="464" y="132">Trust</text>
+                <text x="220" y="212">Attester</text>
+                <text x="460" y="212">Issuer</text>
+              </g>
+            </svg><a href="#section-4.1-1.1" class="pilcrow">¶</a>
+</div>
+</div>
+</section>
+</div>
+<div id="use-cases">
+<section id="section-4.2">
+        <h3 id="name-use-cases">
+<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-use-cases" class="section-name selfRef">Use cases</a>
+        </h3>
+<p id="section-4.2-1">We divide the use cases in three categories.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<div id="use-case-company">
+<section id="section-4.2.1">
+          <h4 id="name-identifying-a-company">
+<a href="#section-4.2.1" class="section-number selfRef">4.2.1. </a><a href="#name-identifying-a-company" class="section-name selfRef">Identifying a company</a>
+          </h4>
+<p id="section-4.2.1-1">This is required by origins to know where the traffic is coming from
+This is also a demand of honest companies that want to identify themselves but have a hard time doing it at the moment.<a href="#section-4.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.1-2">You can think of web crawlers wanting to authenticate against origins, security companies that want to perform scans, or AI crawlers that are looking to identify against a set of partners.<a href="#section-4.2.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="use-case-known-account">
+<section id="section-4.2.2">
+          <h4 id="name-identification-of-a-known-a">
+<a href="#section-4.2.2" class="section-number selfRef">4.2.2. </a><a href="#name-identification-of-a-known-a" class="section-name selfRef">Identification of a known account</a>
+          </h4>
+<p id="section-4.2.2-1">An individual should be able to identify against a provider it has an existing relationship with in the form of an account.
+This can be because the individual has a subscription, or others.<a href="#section-4.2.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="use-case-selective-disclosure">
+<section id="section-4.2.3">
+          <h4 id="name-ability-to-rate-limit-gate-">
+<a href="#section-4.2.3" class="section-number selfRef">4.2.3. </a><a href="#name-ability-to-rate-limit-gate-" class="section-name selfRef">Ability to rate limit/gate access based on selective disclosure</a>
+          </h4>
+<p id="section-4.2.3-1">Not all use case require an account, or can be solely done by a company.
+Origins may want to rate limit individuals, without identifying them.
+Service providers would like to ensure that their users are not abusive without necessarily coordinating with each and every origins or insting client traffics.
+In addition, origins may want to know a limited set of informations about a user such as thenir location, which they used to infer by deriving it from others, like IP, ASN, timing, browser fingerprint.<a href="#section-4.2.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="security-goals-and-threat-model">
+<section id="section-4.3">
+        <h3 id="name-security-goals-and-threat-m">
+<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-security-goals-and-threat-m" class="section-name selfRef">Security goals and threat model</a>
+        </h3>
+<p id="section-4.3-1">The security model includes several actors: credential issuers, attesters, clients (bots or agents), reverse proxies, and origin servers. The primary goals are to prevent impersonation, allow for credential revocation, support delegation and rotation, and maintain trust boundaries. Mechanisms must be resilient to replay attacks and Sybil attacks, and should ensure that credential issuance is auditable and accountable.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-4.3-2.1">
+            <p id="section-4.3-2.1.1">TODO: consider adding deployment models<a href="#section-4.3-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="public-vs-private-presentation">
+<section id="section-4.4">
+        <h3 id="name-public-vs-private-presentat">
+<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-public-vs-private-presentat" class="section-name selfRef">Public vs private presentation</a>
+        </h3>
+<p id="section-4.4-1">If the Issuer is also the Origin or its reverse proxy, it is possible to use shared secrets for verification. In cases where the issuer and verifier are different entities, asymmetric cryptography becomes necessary, allowing the bot to prove authenticity using a public key infrastructure.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="single-vs-multi-show">
+<section id="section-4.5">
+        <h3 id="name-single-vs-multi-show">
+<a href="#section-4.5" class="section-number selfRef">4.5. </a><a href="#name-single-vs-multi-show" class="section-name selfRef">Single vs multi show</a>
+        </h3>
+<p id="section-4.5-1">Some credentials may be designed for one-time use only (for anti replay or privacy reasons), while others can support multiple presentations through the use of cryptographic derivation techniques.
+This distinction affects privacy, scalability, and implementation complexity.<a href="#section-4.5-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="transport">
+<section id="section-4.6">
+        <h3 id="name-transport">
+<a href="#section-4.6" class="section-number selfRef">4.6. </a><a href="#name-transport" class="section-name selfRef">Transport</a>
+        </h3>
+<p id="section-4.6-1">Authentication tokens may be exchanged at different protocol layers and through different transports.
+Each may have different deployment, performance, and security guarantees.<a href="#section-4.6-1" class="pilcrow">¶</a></p>
+<p id="section-4.6-2">For TLS, we have seen <span>[<a href="#REQ-MTLS" class="cite xref">REQ-MTLS</a>]</span> and <span>[<a href="#PRIVACYPASS-IN-TLS" class="cite xref">PRIVACYPASS-IN-TLS</a>]</span> respectively addressing <a href="#use-case-company" class="auto internal xref">Section 4.2.1</a> and <a href="#use-case-selective-disclosure" class="auto internal xref">Section 4.2.3</a>.<a href="#section-4.6-2" class="pilcrow">¶</a></p>
+<p id="section-4.6-3">For HTTP, we see <span>[<a href="#HTTP-MESSAGE-SIGNATURE-FOR-BOTS" class="cite xref">HTTP-MESSAGE-SIGNATURE-FOR-BOTS</a>]</span> and PRIVACYPASS-HTTP-AUTH-RFC respectively addressing <a href="#use-case-company" class="auto internal xref">Section 4.2.1</a> and <a href="#use-case-selective-disclosure" class="auto internal xref">Section 4.2.3</a>. <span>[<a href="#OAUTH-BEARER-RFC" class="cite xref">OAUTH-BEARER-RFC</a>]</span> fits as well for <a href="#use-case-known-account" class="auto internal xref">Section 4.2.2</a>.<a href="#section-4.6-3" class="pilcrow">¶</a></p>
+<p id="section-4.6-4">Other methods have been seen such as leveraging a dedicated format on top of a JavaScript API. This is the case for W3C <span>[<a href="#PRIVATE-STATE-TOKEN" class="cite xref">PRIVATE-STATE-TOKEN</a>]</span> or the more recent <span>[<a href="#PRIVATE-PROOF-API" class="cite xref">PRIVATE-PROOF-API</a>]</span>.<a href="#section-4.6-4" class="pilcrow">¶</a></p>
+<p id="section-4.6-5">Focusing on AI specifically, it's worth mentioning two proponent protocol definition efforts:<a href="#section-4.6-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.6-6.1">
+            <p id="section-4.6-6.1.1"><span>[<a href="#A2A-AUTH" class="cite xref">A2A-AUTH</a>]</span> which follows <span>[<a href="#OPENAPI3-AUTH" class="cite xref">OPENAPI3-AUTH</a>]</span>. This means it allows for Basic, Bearer, API Keys, and <span>[<a href="#OAUTH2-RFC" class="cite xref">OAUTH2-RFC</a>]</span>. OpenAPI mentions using <span>[<a href="#HTTP-AUTHSCHEME" class="cite xref">HTTP-AUTHSCHEME</a>]</span> registry, but there does not seem to be a definition for recent schemes such as <span>[<a href="#PRIVACYPASS-HTTP-AUTH-RFC" class="cite xref">PRIVACYPASS-HTTP-AUTH-RFC</a>]</span>, CONCEALED-AUTH-RFC, or <span>[<a href="#DPOP-AUTH-RFC" class="cite xref">DPOP-AUTH-RFC</a>]</span>.<a href="#section-4.6-6.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.6-6.2">
+            <p id="section-4.6-6.2.1"><span>[<a href="#MCP-AUTH" class="cite xref">MCP-AUTH</a>]</span> uses <span>[<a href="#OAUTH2-RFC" class="cite xref">OAUTH2-RFC</a>]</span> as a resource server, and does not support WWW-Authenticate headers. This is currently being debated on GitHub.<a href="#section-4.6-6.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="round-trip">
+<section id="section-4.7">
+        <h3 id="name-round-trip">
+<a href="#section-4.7" class="section-number selfRef">4.7. </a><a href="#name-round-trip" class="section-name selfRef">Round trip</a>
+        </h3>
+<p id="section-4.7-1">We thrive to minimise the number of round trips. Even though a nonce may be provided, it add delays and compute<a href="#section-4.7-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="key-management-and-discovery">
+<section id="section-5">
+      <h2 id="name-key-management-and-discover">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-key-management-and-discover" class="section-name selfRef">Key management and discovery</a>
+      </h2>
+<div id="catalog">
+<section id="section-5.1">
+        <h3 id="name-catalog">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-catalog" class="section-name selfRef">Catalog</a>
+        </h3>
+<p id="section-5.1-1">Like there are registries to resolve IP address metadata, there are going to be registries to
+identify the owner of public key material.
+These are mentioned by <span>[<a href="#A2A-DISCOVERY" class="cite xref">A2A-DISCOVERY</a>]</span> and <span>[<a href="#MCP-DISCOVERY" class="cite xref">MCP-DISCOVERY</a>]</span>.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2">The primary goal of these catalog is to associate metadata to public key, and to discover them. They <span class="bcp14">SHOULD</span> have some sort of tamper resistent, to prevent the provider of a catalog to provide from information.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1-3">As an analogy, one can think of <span>[<a href="#CERTIFICATE-TRANSPARENCY-RFC" class="cite xref">CERTIFICATE-TRANSPARENCY-RFC</a>]</span>, or the more recent effort in <span>[<a href="#KEY-TRANSPARENCY-ARCHITECTURE" class="cite xref">KEY-TRANSPARENCY-ARCHITECTURE</a>]</span>.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="submission-out-of-band">
+<section id="section-5.2">
+        <h3 id="name-submission-out-of-band">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-submission-out-of-band" class="section-name selfRef">Submission / out-of-band</a>
+        </h3>
+<p id="section-5.2-1">Sumbission is also going to happen out of band. This is both for a practical reason that it's simpler than setting up a catalog, or for privacy reason.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="in-flight">
+<section id="section-5.3">
+        <h3 id="name-in-flight">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-in-flight" class="section-name selfRef">In-flight</a>
+        </h3>
+<p id="section-5.3-1">Discovery may happen in-flight, that is when a request arrives from a client to an origin.
+This could be considered a trust on first use. While the level of trust is low, it could be viable for certain use cases.
+Such discovery could be via an HTTP header containing a domain name with a well-known, a URL, a certificate, others.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="format">
+<section id="section-5.4">
+        <h3 id="name-format">
+<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-format" class="section-name selfRef">Format</a>
+        </h3>
+<p id="section-5.4-1">There is a multitude of Key and directory format. This include and is not limited to JWKS, CWKS, Privacy Pass, Agent Card, or HTTP Message Signatures.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-6">
+      <h2 id="name-security-considerations">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-6-1">TODO Security<a href="#section-6-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="privacy-considerations">
+<section id="section-7">
+      <h2 id="name-privacy-considerations">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-privacy-considerations" class="section-name selfRef">Privacy Considerations</a>
+      </h2>
+<p id="section-7-1">See <span>[<a href="#RFC6973" class="cite xref">RFC6973</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-7-2.1">
+          <p id="section-7-2.1.1">TODO: anonymity set, correlation, it depends on the issuer and origin. origins <span class="bcp14">SHOULD</span> thrive to ask the minimum that's required<a href="#section-7-2.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-8">
+      <h2 id="name-iana-considerations">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<p id="section-8-1">This document has no IANA actions.<a href="#section-8-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="sec-combined-references">
+<section id="section-9">
+      <h2 id="name-references">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-references" class="section-name selfRef">References</a>
+      </h2>
+<div id="sec-normative-references">
+<section id="section-9.1">
+        <h3 id="name-normative-references">
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
+<dl class="references">
+<dt id="RFC2119">[RFC2119]</dt>
+        <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6973">[RFC6973]</dt>
+        <dd>
+<span class="refAuthor">Cooper, A.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Aboba, B.</span>, <span class="refAuthor">Peterson, J.</span>, <span class="refAuthor">Morris, J.</span>, <span class="refAuthor">Hansen, M.</span>, and <span class="refAuthor">R. Smith</span>, <span class="refTitle">"Privacy Considerations for Internet Protocols"</span>, <span class="seriesInfo">RFC 6973</span>, <span class="seriesInfo">DOI 10.17487/RFC6973</span>, <time datetime="2013-07" class="refDate">July 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6973">https://www.rfc-editor.org/rfc/rfc6973</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+      <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="sec-informative-references">
+<section id="section-9.2">
+        <h3 id="name-informative-references">
+<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
+<dl class="references">
+<dt id="A2A-AUTH">[A2A-AUTH]</dt>
+        <dd>
+<span class="refTitle">"A2A protocol Authentication"</span>, <span>n.d.</span>, <span>&lt;<a href="https://google.github.io/A2A/#/documentation?id=authentication-and-authorization">https://google.github.io/A2A/#/documentation?id=authentication-and-authorization</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="A2A-DISCOVERY">[A2A-DISCOVERY]</dt>
+        <dd>
+<span class="refTitle">"A2A protocol Agent discovery"</span>, <span>n.d.</span>, <span>&lt;<a href="https://google.github.io/A2A/#/topics/agent_discovery">https://google.github.io/A2A/#/topics/agent_discovery</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CERTIFICATE-TRANSPARENCY-RFC">[CERTIFICATE-TRANSPARENCY-RFC]</dt>
+        <dd>
+<span class="refAuthor">Laurie, B.</span>, <span class="refAuthor">Langley, A.</span>, and <span class="refAuthor">E. Kasper</span>, <span class="refTitle">"Certificate Transparency"</span>, <span class="seriesInfo">RFC 6962</span>, <span class="seriesInfo">DOI 10.17487/RFC6962</span>, <time datetime="2013-06" class="refDate">June 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6962">https://www.rfc-editor.org/rfc/rfc6962</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CONCEALED-AUTH-RFC">[CONCEALED-AUTH-RFC]</dt>
+        <dd>
+<span class="refAuthor">Schinazi, D.</span>, <span class="refAuthor">Oliver, D.</span>, and <span class="refAuthor">J. Hoyland</span>, <span class="refTitle">"The Concealed HTTP Authentication Scheme"</span>, <span class="seriesInfo">RFC 9729</span>, <span class="seriesInfo">DOI 10.17487/RFC9729</span>, <time datetime="2025-02" class="refDate">February 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9729">https://www.rfc-editor.org/rfc/rfc9729</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="DPOP-AUTH-RFC">[DPOP-AUTH-RFC]</dt>
+        <dd>
+<span class="refAuthor">Fett, D.</span>, <span class="refAuthor">Campbell, B.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Lodderstedt, T.</span>, <span class="refAuthor">Jones, M.</span>, and <span class="refAuthor">D. Waite</span>, <span class="refTitle">"OAuth 2.0 Demonstrating Proof of Possession (DPoP)"</span>, <span class="seriesInfo">RFC 9449</span>, <span class="seriesInfo">DOI 10.17487/RFC9449</span>, <time datetime="2023-09" class="refDate">September 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9449">https://www.rfc-editor.org/rfc/rfc9449</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="HTTP-AUTHSCHEME">[HTTP-AUTHSCHEME]</dt>
+        <dd>
+<span class="refTitle">"IANA HTTP Authentication Scheme Registry"</span>, <span>n.d.</span>, <span>&lt;<a href="https://www.iana.org/assignments/http-authschemes/http-authschemes.xhtml">https://www.iana.org/assignments/http-authschemes/http-authschemes.xhtml</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="HTTP-MESSAGE-SIGNATURE-FOR-BOTS">[HTTP-MESSAGE-SIGNATURE-FOR-BOTS]</dt>
+        <dd>
+<span class="refAuthor">Meunier, T.</span>, <span class="refTitle">"HTTP Message Signatures for automated traffic Architecture"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-meunier-web-bot-auth-architecture-00</span>, <time datetime="2025-04-15" class="refDate">15 April 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-meunier-web-bot-auth-architecture-00">https://datatracker.ietf.org/doc/html/draft-meunier-web-bot-auth-architecture-00</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="KEY-TRANSPARENCY-ARCHITECTURE">[KEY-TRANSPARENCY-ARCHITECTURE]</dt>
+        <dd>
+<span class="refAuthor">McMillion, B.</span>, <span class="refTitle">"Key Transparency Architecture"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-keytrans-architecture-03</span>, <time datetime="2025-02-25" class="refDate">25 February 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-keytrans-architecture-03">https://datatracker.ietf.org/doc/html/draft-ietf-keytrans-architecture-03</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="MCP-AUTH">[MCP-AUTH]</dt>
+        <dd>
+<span class="refTitle">"Model Context Protocol Authorization"</span>, <span>n.d.</span>, <span>&lt;<a href="https://modelcontextprotocol.io/specification/2025-03-26/basic/authorization">https://modelcontextprotocol.io/specification/2025-03-26/basic/authorization</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="MCP-DISCOVERY">[MCP-DISCOVERY]</dt>
+        <dd>
+<span class="refTitle">"Model Context Protocol Registry"</span>, <span>n.d.</span>, <span>&lt;<a href="https://modelcontextprotocol.io/development/roadmap#registry">https://modelcontextprotocol.io/development/roadmap#registry</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="OAUTH-BEARER-RFC">[OAUTH-BEARER-RFC]</dt>
+        <dd>
+<span class="refAuthor">Jones, M.</span> and <span class="refAuthor">D. Hardt</span>, <span class="refTitle">"The OAuth 2.0 Authorization Framework: Bearer Token Usage"</span>, <span class="seriesInfo">RFC 6750</span>, <span class="seriesInfo">DOI 10.17487/RFC6750</span>, <time datetime="2012-10" class="refDate">October 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6750">https://www.rfc-editor.org/rfc/rfc6750</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="OAUTH2-RFC">[OAUTH2-RFC]</dt>
+        <dd>
+<span class="refAuthor">Hardt, D., Ed.</span>, <span class="refTitle">"The OAuth 2.0 Authorization Framework"</span>, <span class="seriesInfo">RFC 6749</span>, <span class="seriesInfo">DOI 10.17487/RFC6749</span>, <time datetime="2012-10" class="refDate">October 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6749">https://www.rfc-editor.org/rfc/rfc6749</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="OPENAPI3-AUTH">[OPENAPI3-AUTH]</dt>
+        <dd>
+<span class="refTitle">"OpenAPI 3.0 Authentication"</span>, <span>n.d.</span>, <span>&lt;<a href="https://swagger.io/docs/specification/v3_0/authentication/">https://swagger.io/docs/specification/v3_0/authentication/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="PRIVACYPASS-HTTP-AUTH-RFC">[PRIVACYPASS-HTTP-AUTH-RFC]</dt>
+        <dd>
+<span class="refAuthor">Pauly, T.</span>, <span class="refAuthor">Valdez, S.</span>, and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"The Privacy Pass HTTP Authentication Scheme"</span>, <span class="seriesInfo">RFC 9577</span>, <span class="seriesInfo">DOI 10.17487/RFC9577</span>, <time datetime="2024-06" class="refDate">June 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9577">https://www.rfc-editor.org/rfc/rfc9577</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="PRIVACYPASS-IN-TLS">[PRIVACYPASS-IN-TLS]</dt>
+        <dd>
+<span class="refAuthor">Pauly, T.</span> and <span class="refAuthor">S. Hendrickson</span>, <span class="refTitle">"Including Privacy Pass Tokens in TLS Handshakes"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-pauly-privacypass-for-tls-00</span>, <time datetime="2025-03-03" class="refDate">3 March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-pauly-privacypass-for-tls-00">https://datatracker.ietf.org/doc/html/draft-pauly-privacypass-for-tls-00</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="PRIVATE-PROOF-API">[PRIVATE-PROOF-API]</dt>
+        <dd>
+<span class="refTitle">"Explainer by Googlers Private Proof API"</span>, <span>n.d.</span>, <span>&lt;<a href="https://explainers-by-googlers.github.io/private-proof/">https://explainers-by-googlers.github.io/private-proof/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="PRIVATE-STATE-TOKEN">[PRIVATE-STATE-TOKEN]</dt>
+        <dd>
+<span class="refTitle">"W3C Private State Token API"</span>, <span>n.d.</span>, <span>&lt;<a href="https://wicg.github.io/trust-token-api/">https://wicg.github.io/trust-token-api/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="REQ-MTLS">[REQ-MTLS]</dt>
+      <dd>
+<span class="refAuthor">Hoyland, J.</span>, <span class="refTitle">"TLS Flag - Request mTLS"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-jhoyla-req-mtls-flag-02</span>, <time datetime="2025-02-28" class="refDate">28 February 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-jhoyla-req-mtls-flag-02">https://datatracker.ietf.org/doc/html/draft-jhoyla-req-mtls-flag-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+</section>
+</div>
+<div id="acknowledgments">
+<section id="appendix-A">
+      <h2 id="name-acknowledgments">
+<a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
+      </h2>
+<p id="appendix-A-1">TODO acknowledge.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-B">
+      <h2 id="name-authors-address">
+<a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Thibault Meunier</span></div>
+<div dir="auto" class="left"><span class="org">Cloudflare</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:ot-ietf@thibault.uk" class="email">ot-ietf@thibault.uk</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
