@@ -2,7 +2,7 @@
 
 
 
-WG Working Group                                              T. Meunier
+Network Working Group                                         T. Meunier
 Internet-Draft                                                Cloudflare
 Intended status: Informational                             23 April 2025
 Expires: 25 October 2025
@@ -27,10 +27,6 @@ About This Document
    meunier-web-bot-auth-glossary-somehow.html.  Status information for
    this document may be found at https://datatracker.ietf.org/doc/draft-
    meunier-web-bot-auth-glossary-somehow/.
-
-   Discussion of this document takes place on the WG Working Group
-   mailing list (mailto:WG@example.com), which is archived at
-   https://example.com/WG.
 
    Source for this draft and an issue tracker can be found at
    https://github.com/thibmeu/draft-meunier-glossary-somehow.
@@ -78,22 +74,22 @@ Table of Contents
        4.2.2.  Identification of a known account
        4.2.3.  Ability to rate limit/gate access based on selective
                disclosure
-     4.3.  Security goals and threat model
-     4.4.  Public vs private presentation
-     4.5.  Single vs multi show
-     4.6.  Transport
-     4.7.  Round trip
-   5.  Key management and discovery
-     5.1.  Catalog
-     5.2.  Submission / out-of-band
-     5.3.  In-flight
-     5.4.  Format
-   6.  Security Considerations
-   7.  Privacy Considerations
-   8.  IANA Considerations
-   9.  References
-     9.1.  Normative References
-     9.2.  Informative References
+   5.  Security goals and threat model
+     5.1.  Public vs private presentation
+     5.2.  Single vs multi show
+     5.3.  Transport
+     5.4.  Round trip
+   6.  Key management and discovery
+     6.1.  Catalog
+     6.2.  Submission / out-of-band
+     6.3.  In-flight
+     6.4.  Format
+   7.  Security Considerations
+   8.  Privacy Considerations
+   9.  IANA Considerations
+   10. References
+     10.1.  Normative References
+     10.2.  Informative References
    Acknowledgments
    Author's Address
 
@@ -265,7 +261,7 @@ Table of Contents
    thenir location, which they used to infer by deriving it from others,
    like IP, ASN, timing, browser fingerprint.
 
-4.3.  Security goals and threat model
+5.  Security goals and threat model
 
    The security model includes several actors: credential issuers,
    attesters, clients (bots or agents), reverse proxies, and origin
@@ -277,7 +273,7 @@ Table of Contents
 
       TODO: consider adding deployment models
 
-4.4.  Public vs private presentation
+5.1.  Public vs private presentation
 
    If the Issuer is also the Origin or its reverse proxy, it is possible
    to use shared secrets for verification.  In cases where the issuer
@@ -285,7 +281,7 @@ Table of Contents
    necessary, allowing the bot to prove authenticity using a public key
    infrastructure.
 
-4.5.  Single vs multi show
+5.2.  Single vs multi show
 
    Some credentials may be designed for one-time use only (for anti
    replay or privacy reasons), while others can support multiple
@@ -293,7 +289,7 @@ Table of Contents
    This distinction affects privacy, scalability, and implementation
    complexity.
 
-4.6.  Transport
+5.3.  Transport
 
    Authentication tokens may be exchanged at different protocol layers
    and through different transports.  Each may have different
@@ -323,14 +319,14 @@ Table of Contents
       support WWW-Authenticate headers.  This is currently being debated
       on GitHub.
 
-4.7.  Round trip
+5.4.  Round trip
 
    We thrive to minimise the number of round trips.  Even though a nonce
    may be provided, it add delays and compute
 
-5.  Key management and discovery
+6.  Key management and discovery
 
-5.1.  Catalog
+6.1.  Catalog
 
    Like there are registries to resolve IP address metadata, there are
    going to be registries to identify the owner of public key material.
@@ -344,13 +340,13 @@ Table of Contents
    As an analogy, one can think of [CERTIFICATE-TRANSPARENCY-RFC], or
    the more recent effort in [KEY-TRANSPARENCY-ARCHITECTURE].
 
-5.2.  Submission / out-of-band
+6.2.  Submission / out-of-band
 
    Sumbission is also going to happen out of band.  This is both for a
    practical reason that it's simpler than setting up a catalog, or for
    privacy reason.
 
-5.3.  In-flight
+6.3.  In-flight
 
    Discovery may happen in-flight, that is when a request arrives from a
    client to an origin.  This could be considered a trust on first use.
@@ -358,32 +354,32 @@ Table of Contents
    cases.  Such discovery could be via an HTTP header containing a
    domain name with a well-known, a URL, a certificate, others.
 
-5.4.  Format
+6.4.  Format
 
    There is a multitude of Key and directory format.  This include and
    is not limited to JWKS, CWKS, Privacy Pass, Agent Card, or HTTP
    Message Signatures.
 
-6.  Security Considerations
+7.  Security Considerations
 
    TODO Security
 
    Quote [RFC9518] and [RFC8890]
 
-7.  Privacy Considerations
+8.  Privacy Considerations
 
    See [RFC6973].
 
       TODO: anonymity set, correlation, it depends on the issuer and
       origin. origins SHOULD thrive to ask the minimum that's required
 
-8.  IANA Considerations
+9.  IANA Considerations
 
    This document has no IANA actions.
 
-9.  References
+10.  References
 
-9.1.  Normative References
+10.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -408,7 +404,7 @@ Table of Contents
               Internet Standards", RFC 9518, DOI 10.17487/RFC9518,
               December 2023, <https://www.rfc-editor.org/rfc/rfc9518>.
 
-9.2.  Informative References
+10.2.  Informative References
 
    [A2A-AUTH] "A2A protocol Authentication", n.d.,
               <https://google.github.io/
