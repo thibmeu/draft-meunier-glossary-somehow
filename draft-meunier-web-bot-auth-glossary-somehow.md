@@ -208,7 +208,7 @@ Origins may want to rate limit individuals, without identifying them.
 Service providers would like to ensure that their users are not abusive without necessarily coordinating with each and every origins or insting client traffics.
 In addition, origins may want to know a limited set of informations about a user such as thenir location, which they used to infer by deriving it from others, like IP, ASN, timing, browser fingerprint.
 
-## Security goals and threat model
+# Security goals and threat model
 
 The security model includes several actors: credential issuers, attesters, clients (bots or agents), reverse proxies, and origin servers. The primary goals are to prevent impersonation, allow for credential revocation, support delegation and rotation, and maintain trust boundaries. Mechanisms must be resilient to replay attacks and Sybil attacks, and should ensure that credential issuance is auditable and accountable.
 
