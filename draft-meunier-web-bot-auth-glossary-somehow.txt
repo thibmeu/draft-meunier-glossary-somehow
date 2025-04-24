@@ -74,6 +74,7 @@ Table of Contents
        4.2.2.  Identification of a known account
        4.2.3.  Ability to rate limit/gate access based on selective
                disclosure
+       4.2.4.  A multi-tenant system
    5.  Security goals and threat model
      5.1.  Public vs private presentation
      5.2.  Single vs multi show
@@ -260,6 +261,42 @@ Table of Contents
    want to know a limited set of informations about a user such as
    thenir location, which they used to infer by deriving it from others,
    like IP, ASN, timing, browser fingerprint.
+
+4.2.4.  A multi-tenant system
+
+   The model above is a bit abstract.  Let's consider the current AI
+   space, where a human request might go through a web browser, or
+   through an agent making request.  The human is not making request,
+   it's its client (the browser or the agent) making one.  Bots can do
+   the same.  These request go to the origin possibly via a reverse
+   proxy that handles TLS termination, DDoS mitigation, caching, others.
+
+                      .-------------------------------------.
+                      |    Company           +---------+    |
+                      |                      | Bot     +--------------.
+                      |                      +---------+    |         |
+                      |  +---------+                        |         |
+                      |  |         +----------------------------------+
+               .-------->| Agent   |         +---------+    |         |   +---------------+        +--------+
++-------+      |      |  |         +-------->| Browser +--------------+-->| Reverse Proxy +------->| Origin |
+| Human +------+      |  +---------+         +---------+    |         |   +---------------+        +--------+
++-------+      |      |                                     |         |
+               |      '-------------------------------------'         |
+               |                                                      |
+               |                             +---------+              |
+               '---------------------------->| Browser |--------------|
+                                             +---------+              |
+                                                                      |
+                                             +---------+              |
+                                             | Bot     +--------------'
+                                             +---------+
+
+   Specifically in the case of AI company, the attester/issuer can be
+   the AI company, the Reverse proxy/origin, or even a new third party
+   that provides valuable insights.
+
+   From an origin perspective, it's interesting to identify the company,
+   rate limit individual users, and identify them if needed.
 
 5.  Security goals and threat model
 

@@ -1171,6 +1171,9 @@ with a specific focus on AI related technologies.<a href="#section-abstract-1" c
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.3">
                     <p id="section-toc.1-1.4.2.2.2.3.1"><a href="#section-4.2.3" class="auto internal xref">4.2.3</a>.  <a href="#name-ability-to-rate-limit-gate-" class="internal xref">Ability to rate limit/gate access based on selective disclosure</a></p>
 </li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.4">
+                    <p id="section-toc.1-1.4.2.2.2.4.1"><a href="#section-4.2.4" class="auto internal xref">4.2.4</a>.  <a href="#name-a-multi-tenant-system" class="internal xref">A multi-tenant system</a></p>
+</li>
                 </ul>
 </li>
             </ul>
@@ -1480,6 +1483,93 @@ This can be because the individual has a subscription, or others.<a href="#secti
 Origins may want to rate limit individuals, without identifying them.
 Service providers would like to ensure that their users are not abusive without necessarily coordinating with each and every origins or insting client traffics.
 In addition, origins may want to know a limited set of informations about a user such as thenir location, which they used to infer by deriving it from others, like IP, ASN, timing, browser fingerprint.<a href="#section-4.2.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="a-multi-tenant-system">
+<section id="section-4.2.4">
+          <h4 id="name-a-multi-tenant-system">
+<a href="#section-4.2.4" class="section-number selfRef">4.2.4. </a><a href="#name-a-multi-tenant-system" class="section-name selfRef">A multi-tenant system</a>
+          </h4>
+<p id="section-4.2.4-1">The model above is a bit abstract. Let's consider the current AI space, where a human request might go through a web browser, or through an agent making request.
+The human is not making request, it's its client (the browser or the agent) making one. Bots can do the same.
+These request go to the origin possibly via a reverse proxy that handles TLS termination, DDoS mitigation, caching, others.<a href="#section-4.2.4-1" class="pilcrow">¶</a></p>
+<div id="section-4.2.4-2">
+            <div class="alignLeft art-svg artwork" id="section-4.2.4-2.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="336" width="880" viewBox="0 0 880 336" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                <path d="M 8,144 L 8,176" fill="none" stroke="black"></path>
+                <path d="M 72,144 L 72,176" fill="none" stroke="black"></path>
+                <path d="M 128,128 L 128,240" fill="none" stroke="black"></path>
+                <path d="M 184,32 L 184,120" fill="none" stroke="black"></path>
+                <path d="M 184,136 L 184,192" fill="none" stroke="black"></path>
+                <path d="M 208,96 L 208,160" fill="none" stroke="black"></path>
+                <path d="M 288,96 L 288,160" fill="none" stroke="black"></path>
+                <path d="M 368,48 L 368,80" fill="none" stroke="black"></path>
+                <path d="M 368,128 L 368,160" fill="none" stroke="black"></path>
+                <path d="M 368,224 L 368,256" fill="none" stroke="black"></path>
+                <path d="M 368,288 L 368,320" fill="none" stroke="black"></path>
+                <path d="M 448,48 L 448,80" fill="none" stroke="black"></path>
+                <path d="M 448,128 L 448,160" fill="none" stroke="black"></path>
+                <path d="M 448,224 L 448,256" fill="none" stroke="black"></path>
+                <path d="M 448,288 L 448,320" fill="none" stroke="black"></path>
+                <path d="M 488,32 L 488,56" fill="none" stroke="black"></path>
+                <path d="M 488,72 L 488,104" fill="none" stroke="black"></path>
+                <path d="M 488,152 L 488,192" fill="none" stroke="black"></path>
+                <path d="M 568,64 L 568,304" fill="none" stroke="black"></path>
+                <path d="M 600,128 L 600,160" fill="none" stroke="black"></path>
+                <path d="M 728,128 L 728,160" fill="none" stroke="black"></path>
+                <path d="M 800,128 L 800,160" fill="none" stroke="black"></path>
+                <path d="M 872,128 L 872,160" fill="none" stroke="black"></path>
+                <path d="M 184,32 L 488,32" fill="none" stroke="black"></path>
+                <path d="M 368,48 L 448,48" fill="none" stroke="black"></path>
+                <path d="M 448,64 L 568,64" fill="none" stroke="black"></path>
+                <path d="M 368,80 L 448,80" fill="none" stroke="black"></path>
+                <path d="M 208,96 L 288,96" fill="none" stroke="black"></path>
+                <path d="M 288,112 L 568,112" fill="none" stroke="black"></path>
+                <path d="M 128,128 L 200,128" fill="none" stroke="black"></path>
+                <path d="M 368,128 L 448,128" fill="none" stroke="black"></path>
+                <path d="M 600,128 L 728,128" fill="none" stroke="black"></path>
+                <path d="M 800,128 L 872,128" fill="none" stroke="black"></path>
+                <path d="M 8,144 L 72,144" fill="none" stroke="black"></path>
+                <path d="M 288,144 L 360,144" fill="none" stroke="black"></path>
+                <path d="M 448,144 L 592,144" fill="none" stroke="black"></path>
+                <path d="M 728,144 L 792,144" fill="none" stroke="black"></path>
+                <path d="M 72,160 L 128,160" fill="none" stroke="black"></path>
+                <path d="M 208,160 L 288,160" fill="none" stroke="black"></path>
+                <path d="M 368,160 L 448,160" fill="none" stroke="black"></path>
+                <path d="M 600,160 L 728,160" fill="none" stroke="black"></path>
+                <path d="M 800,160 L 872,160" fill="none" stroke="black"></path>
+                <path d="M 8,176 L 72,176" fill="none" stroke="black"></path>
+                <path d="M 184,192 L 488,192" fill="none" stroke="black"></path>
+                <path d="M 368,224 L 448,224" fill="none" stroke="black"></path>
+                <path d="M 128,240 L 360,240" fill="none" stroke="black"></path>
+                <path d="M 456,240 L 560,240" fill="none" stroke="black"></path>
+                <path d="M 368,256 L 448,256" fill="none" stroke="black"></path>
+                <path d="M 368,288 L 448,288" fill="none" stroke="black"></path>
+                <path d="M 448,304 L 568,304" fill="none" stroke="black"></path>
+                <path d="M 368,320 L 448,320" fill="none" stroke="black"></path>
+                <polygon class="arrowhead" points="800,144 788,138.4 788,149.6" fill="black" transform="rotate(0,792,144)"></polygon>
+                <polygon class="arrowhead" points="600,144 588,138.4 588,149.6" fill="black" transform="rotate(0,592,144)"></polygon>
+                <polygon class="arrowhead" points="368,240 356,234.4 356,245.6" fill="black" transform="rotate(0,360,240)"></polygon>
+                <polygon class="arrowhead" points="368,144 356,138.4 356,149.6" fill="black" transform="rotate(0,360,144)"></polygon>
+                <polygon class="arrowhead" points="208,128 196,122.4 196,133.6" fill="black" transform="rotate(0,200,128)"></polygon>
+                <g class="text">
+                  <text x="248" y="52">Company</text>
+                  <text x="392" y="68">Bot</text>
+                  <text x="240" y="132">Agent</text>
+                  <text x="488" y="132">|</text>
+                  <text x="408" y="148">Browser</text>
+                  <text x="640" y="148">Reverse</text>
+                  <text x="696" y="148">Proxy</text>
+                  <text x="836" y="148">Origin</text>
+                  <text x="40" y="164">Human</text>
+                  <text x="408" y="244">Browser</text>
+                  <text x="392" y="308">Bot</text>
+                </g>
+              </svg><a href="#section-4.2.4-2.1" class="pilcrow">¶</a>
+</div>
+</div>
+<p id="section-4.2.4-3">Specifically in the case of AI company, the attester/issuer can be the AI company, the Reverse proxy/origin, or even a new third party that provides valuable insights.<a href="#section-4.2.4-3" class="pilcrow">¶</a></p>
+<p id="section-4.2.4-4">From an origin perspective, it's interesting to identify the company, rate limit individual users, and identify them if needed.<a href="#section-4.2.4-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
