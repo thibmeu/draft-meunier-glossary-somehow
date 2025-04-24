@@ -208,6 +208,38 @@ Origins may want to rate limit individuals, without identifying them.
 Service providers would like to ensure that their users are not abusive without necessarily coordinating with each and every origins or insting client traffics.
 In addition, origins may want to know a limited set of informations about a user such as thenir location, which they used to infer by deriving it from others, like IP, ASN, timing, browser fingerprint.
 
+### A multi-tenant system
+
+The model above is a bit abstract. Let's consider the current AI space, where a human request might go through a web browser, or through an agent making request.
+The human is not making request, it's its client (the browser or the agent) making one. Bots can do the same.
+These request go to the origin possibly via a reverse proxy that handles TLS termination, DDoS mitigation, caching, others.
+
+~~~aasvg
+                      .-------------------------------------.
+                      |    Company           +---------+    |
+                      |                      | Bot     +--------------.
+                      |                      +---------+    |         |
+                      |  +---------+                        |         |
+                      |  |         +----------------------------------+
+               .-------->| Agent   |         +---------+    |         |   +---------------+        +--------+
++-------+      |      |  |         +-------->| Browser +--------------+-->| Reverse Proxy +------->| Origin |
+| Human +------+      |  +---------+         +---------+    |         |   +---------------+        +--------+
++-------+      |      |                                     |         |
+               |      '-------------------------------------'         |
+               |                                                      |
+               |                             +---------+              |
+               '---------------------------->| Browser |--------------|
+                                             +---------+              |
+                                                                      |
+                                             +---------+              |
+                                             | Bot     +--------------'
+                                             +---------+
+~~~
+
+Specifically in the case of AI company, the attester/issuer can be the AI company, the Reverse proxy/origin, or even a new third party that provides valuable insights.
+
+From an origin perspective, it's interesting to identify the company, rate limit individual users, and identify them if needed.
+
 # Security goals and threat model
 
 The security model includes several actors: credential issuers, attesters, clients (bots or agents), reverse proxies, and origin servers. The primary goals are to prevent impersonation, allow for credential revocation, support delegation and rotation, and maintain trust boundaries. Mechanisms must be resilient to replay attacks and Sybil attacks, and should ensure that credential issuance is auditable and accountable.
