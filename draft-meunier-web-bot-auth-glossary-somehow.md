@@ -234,11 +234,11 @@ Examples:
 - Search engine with a fixed number of request such as {{PRIVACY-PASS-KAGI}},
 - Selective disclosure of a credential attribute (location, age) such as {{PRIVATE-PROOF-API}}.
 
-### A multi-tenant system
+### AI agent use example
 
-The model above is a bit abstract. Let's consider the current AI space, where a human request might go through a web browser, or through an agent making request.
-The human is not making request, it's its client (the browser or the agent) making one. Bots can do the same.
-These request go to the origin possibly via a reverse proxy that handles TLS termination, DDoS mitigation, caching, others.
+Let's consider a modelisation of the AI space, where a human request might go through a web browser, or through an agent making request.
+The human is not making request directly, it does so via its client: browser, agent, cli, others. Bots can do the same, especially with the proliferation of powerful browser orchestration.
+These request go to the origin possibly via a reverse proxy that handles TLS termination, DDoS mitigation, caching, etc.
 
 ~~~aasvg
                       .-------------------------------------.
@@ -262,15 +262,13 @@ These request go to the origin possibly via a reverse proxy that handles TLS ter
                                              +---------+
 ~~~
 
-Specifically in the case of AI company, the attester/issuer can be the AI company, the Reverse proxy/origin, or even a new third party that provides valuable insights.
+In the case of AI company, the attester/issuer can be the AI company, the Reverse proxy, the origin, or even a new third party that provides valuable signals.
 
-From an origin perspective, it's interesting to identify the company, rate limit individual users, and identify them if needed.
+From an origin perspective, it's interesting to identify the company, rate limit individual users, and authorize them if needed.
 
 # Security goals and threat model
 
-The security model includes several actors: credential issuers, attesters, clients (bots or agents), reverse proxies, and origin servers. The primary goals are to prevent impersonation, allow for credential revocation, support delegation and rotation, and maintain trust boundaries. Mechanisms must be resilient to replay attacks and Sybil attacks, and should ensure that credential issuance is auditable and accountable.
-
-> TODO: consider adding deployment models
+The security model includes several actors: credential issuers, attesters, clients (bots or agents), reverse proxies, and origin servers. The primary goals are to prevent impersonation, allow for credential revocation, support delegation and rotation, and maintain trust boundaries.
 
 
 ## Public vs private presentation
@@ -301,7 +299,7 @@ Focusing on AI specifically, it's worth mentioning two proponent protocol defini
 
 ## Round trip
 
-We thrive to minimise the number of round trips. Even though a nonce may be provided, it add delays and compute
+Protocols should thrive to minimise the number of round trips between a client and the issuer, and between clients and the origin.
 
 # Key management and discovery
 
@@ -317,12 +315,13 @@ As an analogy, one can think of {{CERTIFICATE-TRANSPARENCY-RFC}}, or the more re
 
 ## Submission / out-of-band
 
-Sumbission is also going to happen out of band. This is both for a practical reason that it's simpler than setting up a catalog, or for privacy reason.
+Sumbission is also going to happen out of band. This is both for a practical reason -- it is simpler than setting up a catalog --, and for privacy reason given you don't have to expose information through a catalog.
 
 ## In-flight
 
 Discovery may happen in-flight, that is when a request arrives from a client to an origin.
 This could be considered a trust on first use. While the level of trust is low, it could be viable for certain use cases.
+
 Such discovery could be via an HTTP header containing a domain name with a well-known, a URL, a certificate, others.
 
 ## Format
