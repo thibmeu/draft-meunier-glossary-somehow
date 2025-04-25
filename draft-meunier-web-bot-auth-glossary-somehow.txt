@@ -4,8 +4,8 @@
 
 Network Working Group                                         T. Meunier
 Internet-Draft                                                Cloudflare
-Intended status: Informational                             24 April 2025
-Expires: 26 October 2025
+Intended status: Informational                             25 April 2025
+Expires: 27 October 2025
 
 
                          Web bot auth Glossary
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 October 2025.
+   This Internet-Draft will expire on 27 October 2025.
 
 Copyright Notice
 
@@ -241,15 +241,29 @@ Table of Contents
    This is also a demand of honest companies that want to identify
    themselves but have a hard time doing it at the moment.
 
-   You can think of web crawlers wanting to authenticate against
-   origins, security companies that want to perform scans, or AI
-   crawlers that are looking to identify against a set of partners.
+   Examples:
+
+   *  Web crawlers wanting to authenticate against origins such as
+      search engines,
+
+   *  Security companies that want to perform scans to identify
+      malicious URLs,
+
+   *  AI augmented queries that are looking to identify against a set of
+      newspapers.
 
 4.2.2.  Identification of a known account
 
    An individual should be able to identify against a provider it has an
    existing relationship with in the form of an account.  This can be
    because the individual has a subscription, or others.
+
+   Examples:
+
+   *  Authenticating and authorizing a known user against a particular
+      resources, such as a newspaper they have a subscription for,
+
+   *  Most authorisation use cases for [MCP-AUTH] and [A2A-AUTH].
 
 4.2.3.  Ability to rate limit/gate access based on selective disclosure
 
@@ -261,6 +275,19 @@ Table of Contents
    want to know a limited set of informations about a user such as
    thenir location, which they used to infer by deriving it from others,
    like IP, ASN, timing, browser fingerprint.
+
+   Examples:
+
+   *  Add a signal to limit visual CAPTCHA challenge such as
+      [PRIVATE-ACCESS-TOKEN],
+
+   *  Gating access to a resource for longstanding users such as [LOX],
+
+   *  Search engine with a fixed number of request such as
+      [PRIVACY-PASS-KAGI],
+
+   *  Selective disclosure of a credential attribute (location, age)
+      such as [PRIVATE-PROOF-API].
 
 4.2.4.  A multi-tenant system
 
@@ -487,6 +514,10 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-
               keytrans-architecture-03>.
 
+   [LOX]      "Lox: Protecting the Social Graph in Bridge Distribution",
+              n.d., <https://petsymposium.org/2023/files/papers/issue1/
+              popets-2023-0029.pdf>.
+
    [MCP-AUTH] "Model Context Protocol Authorization", n.d.,
               <https://modelcontextprotocol.io/specification/2025-03-
               26/basic/authorization>.
@@ -512,6 +543,10 @@ Table of Contents
               <https://swagger.io/docs/specification/v3_0/
               authentication/>.
 
+   [PRIVACY-PASS-KAGI]
+              "Introducing Privacy Pass authentication for Kagi Search",
+              n.d., <https://blog.kagi.com/kagi-privacy-pass>.
+
    [PRIVACYPASS-HTTP-AUTH-RFC]
               Pauly, T., Valdez, S., and C. A. Wood, "The Privacy Pass
               HTTP Authentication Scheme", RFC 9577,
@@ -524,6 +559,10 @@ Table of Contents
               Draft, draft-pauly-privacypass-for-tls-00, 3 March 2025,
               <https://datatracker.ietf.org/doc/html/draft-pauly-
               privacypass-for-tls-00>.
+
+   [PRIVATE-ACCESS-TOKEN]
+              "Challenge: Private Access Tokens", n.d.,
+              <https://developer.apple.com/news/?id=huqjyh7k>.
 
    [PRIVATE-PROOF-API]
               "Explainer by Googlers Private Proof API", n.d.,
