@@ -88,7 +88,7 @@ with a specific focus on AI related technologies.
 
 # Introduction
 
-> Thibault: this is taken from http message signature draft
+> _Thibault: this is mostly taken from {{HTTP-MESSAGE-SIGNATURE-FOR-BOTS}}_
 
 Agents are increasingly used in business and user workflows, including AI assistants,
 search indexing, content aggregation, and automated testing. These agents need to reliably identify
@@ -287,13 +287,13 @@ Each may have different deployment, performance, and security guarantees.
 
 For TLS, we have seen {{REQ-MTLS}} and {{PRIVACYPASS-IN-TLS}} respectively addressing {{use-case-company}} and {{use-case-selective-disclosure}}.
 
-For HTTP, we see {{HTTP-MESSAGE-SIGNATURE-FOR-BOTS}} and PRIVACYPASS-HTTP-AUTH-RFC respectively addressing {{use-case-company}} and {{use-case-selective-disclosure}}. {{OAUTH-BEARER-RFC}} fits as well for {{use-case-known-account}}.
+For HTTP, we see {{HTTP-MESSAGE-SIGNATURE-FOR-BOTS}} or {{DPOP-AUTH-RFC}}, and {{PRIVACYPASS-HTTP-AUTH-RFC}} respectively addressing {{use-case-company}} and {{use-case-selective-disclosure}}. {{OAUTH-BEARER-RFC}} fits as well for {{use-case-known-account}}.
 
 Other methods have been seen such as leveraging a dedicated format on top of a JavaScript API. This is the case for W3C {{PRIVATE-STATE-TOKEN}} or the more recent {{PRIVATE-PROOF-API}}.
 
 Focusing on AI specifically, it's worth mentioning two proponent protocol definition efforts:
 
-- {{A2A-AUTH}} which follows {{OPENAPI3-AUTH}}. This means it allows for Basic, Bearer, API Keys, and {{OAUTH2-RFC}}. OpenAPI mentions using {{HTTP-AUTHSCHEME}} registry, but there does not seem to be a definition for recent schemes such as {{PRIVACYPASS-HTTP-AUTH-RFC}}, CONCEALED-AUTH-RFC, or {{DPOP-AUTH-RFC}}.
+- {{A2A-AUTH}} which follows {{OPENAPI3-AUTH}}. This means it allows for Basic, Bearer, API Keys, and {{OAUTH2-RFC}}. OpenAPI mentions using {{HTTP-AUTHSCHEME}} registry, but there does not seem to be a definition for recent schemes such as {{PRIVACYPASS-HTTP-AUTH-RFC}}, {{CONCEALED-AUTH-RFC}}, or {{DPOP-AUTH-RFC}}.
 - {{MCP-AUTH}} uses {{OAUTH2-RFC}} as a resource server, and does not support WWW-Authenticate headers. This is currently being debated on GitHub.
 
 
