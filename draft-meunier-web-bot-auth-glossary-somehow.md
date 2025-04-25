@@ -46,6 +46,9 @@ informative:
     target: https://www.iana.org/assignments/http-authschemes/http-authschemes.xhtml
   HTTP-MESSAGE-SIGNATURE-FOR-BOTS: I-D.draft-meunier-web-bot-auth-architecture
   KEY-TRANSPARENCY-ARCHITECTURE: I-D.draft-ietf-keytrans-architecture
+  LOX:
+    title: "Lox: Protecting the Social Graph in Bridge Distribution"
+    target: https://petsymposium.org/2023/files/papers/issue1/popets-2023-0029.pdf
   MCP-AUTH:
     title: Model Context Protocol Authorization
     target: https://modelcontextprotocol.io/specification/2025-03-26/basic/authorization
@@ -59,6 +62,12 @@ informative:
     target: https://swagger.io/docs/specification/v3_0/authentication/
   PRIVACYPASS-HTTP-AUTH-RFC: RFC9577
   PRIVACYPASS-IN-TLS: I-D.draft-pauly-privacypass-for-tls
+  PRIVACY-PASS-KAGI:
+    title: Introducing Privacy Pass authentication for Kagi Search
+    target: https://blog.kagi.com/kagi-privacy-pass
+  PRIVATE-ACCESS-TOKEN:
+    title: "Challenge: Private Access Tokens"
+    target: https://developer.apple.com/news/?id=huqjyh7k
   PRIVATE-PROOF-API:
     title: Explainer by Googlers Private Proof API
     target: https://explainers-by-googlers.github.io/private-proof/
@@ -194,12 +203,22 @@ We divide the use cases in three categories.
 This is required by origins to know where the traffic is coming from
 This is also a demand of honest companies that want to identify themselves but have a hard time doing it at the moment.
 
-You can think of web crawlers wanting to authenticate against origins, security companies that want to perform scans, or AI crawlers that are looking to identify against a set of partners.
+Examples:
+
+- Web crawlers wanting to authenticate against origins such as search engines,
+- Security companies that want to perform scans to identify malicious URLs,
+- AI augmented queries that are looking to identify against a set of newspapers.
 
 ### Identification of a known account {#use-case-known-account}
 
 An individual should be able to identify against a provider it has an existing relationship with in the form of an account.
 This can be because the individual has a subscription, or others.
+
+Examples:
+
+- Authenticating and authorizing a known user against a particular resources, such as a newspaper they have a subscription for,
+- Most authorisation use cases for {{MCP-AUTH}} and {{A2A-AUTH}}.
+
 
 ### Ability to rate limit/gate access based on selective disclosure {#use-case-selective-disclosure}
 
@@ -207,6 +226,13 @@ Not all use case require an account, or can be solely done by a company.
 Origins may want to rate limit individuals, without identifying them.
 Service providers would like to ensure that their users are not abusive without necessarily coordinating with each and every origins or insting client traffics.
 In addition, origins may want to know a limited set of informations about a user such as thenir location, which they used to infer by deriving it from others, like IP, ASN, timing, browser fingerprint.
+
+Examples:
+
+- Add a signal to limit visual CAPTCHA challenge such as {{PRIVATE-ACCESS-TOKEN}},
+- Gating access to a resource for longstanding users such as {{LOX}},
+- Search engine with a fixed number of request such as {{PRIVACY-PASS-KAGI}},
+- Selective disclosure of a credential attribute (location, age) such as {{PRIVATE-PROOF-API}}.
 
 ### A multi-tenant system
 
