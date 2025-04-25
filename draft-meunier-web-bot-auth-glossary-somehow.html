@@ -1172,7 +1172,7 @@ with a specific focus on AI related technologies.<a href="#section-abstract-1" c
                     <p id="section-toc.1-1.4.2.2.2.3.1"><a href="#section-4.2.3" class="auto internal xref">4.2.3</a>.  <a href="#name-ability-to-rate-limit-gate-" class="internal xref">Ability to rate limit/gate access based on selective disclosure</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.4">
-                    <p id="section-toc.1-1.4.2.2.2.4.1"><a href="#section-4.2.4" class="auto internal xref">4.2.4</a>.  <a href="#name-a-multi-tenant-system" class="internal xref">A multi-tenant system</a></p>
+                    <p id="section-toc.1-1.4.2.2.2.4.1"><a href="#section-4.2.4" class="auto internal xref">4.2.4</a>.  <a href="#name-ai-agent-use-example" class="internal xref">AI agent use example</a></p>
 </li>
                 </ul>
 </li>
@@ -1520,14 +1520,14 @@ In addition, origins may want to know a limited set of informations about a user
           </ul>
 </section>
 </div>
-<div id="a-multi-tenant-system">
+<div id="ai-agent-use-example">
 <section id="section-4.2.4">
-          <h4 id="name-a-multi-tenant-system">
-<a href="#section-4.2.4" class="section-number selfRef">4.2.4. </a><a href="#name-a-multi-tenant-system" class="section-name selfRef">A multi-tenant system</a>
+          <h4 id="name-ai-agent-use-example">
+<a href="#section-4.2.4" class="section-number selfRef">4.2.4. </a><a href="#name-ai-agent-use-example" class="section-name selfRef">AI agent use example</a>
           </h4>
-<p id="section-4.2.4-1">The model above is a bit abstract. Let's consider the current AI space, where a human request might go through a web browser, or through an agent making request.
-The human is not making request, it's its client (the browser or the agent) making one. Bots can do the same.
-These request go to the origin possibly via a reverse proxy that handles TLS termination, DDoS mitigation, caching, others.<a href="#section-4.2.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.4-1">Let's consider a modelisation of the AI space, where a human request might go through a web browser, or through an agent making request.
+The human is not making request directly, it does so via its client: browser, agent, cli, others. Bots can do the same, especially with the proliferation of powerful browser orchestration.
+These request go to the origin possibly via a reverse proxy that handles TLS termination, DDoS mitigation, caching, etc.<a href="#section-4.2.4-1" class="pilcrow">¶</a></p>
 <div id="section-4.2.4-2">
             <div class="alignLeft art-svg artwork" id="section-4.2.4-2.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="336" width="880" viewBox="0 0 880 336" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
@@ -1603,8 +1603,8 @@ These request go to the origin possibly via a reverse proxy that handles TLS ter
               </svg><a href="#section-4.2.4-2.1" class="pilcrow">¶</a>
 </div>
 </div>
-<p id="section-4.2.4-3">Specifically in the case of AI company, the attester/issuer can be the AI company, the Reverse proxy/origin, or even a new third party that provides valuable insights.<a href="#section-4.2.4-3" class="pilcrow">¶</a></p>
-<p id="section-4.2.4-4">From an origin perspective, it's interesting to identify the company, rate limit individual users, and identify them if needed.<a href="#section-4.2.4-4" class="pilcrow">¶</a></p>
+<p id="section-4.2.4-3">In the case of AI company, the attester/issuer can be the AI company, the Reverse proxy, the origin, or even a new third party that provides valuable signals.<a href="#section-4.2.4-3" class="pilcrow">¶</a></p>
+<p id="section-4.2.4-4">From an origin perspective, it's interesting to identify the company, rate limit individual users, and authorize them if needed.<a href="#section-4.2.4-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1616,12 +1616,7 @@ These request go to the origin possibly via a reverse proxy that handles TLS ter
       <h2 id="name-security-goals-and-threat-m">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-goals-and-threat-m" class="section-name selfRef">Security goals and threat model</a>
       </h2>
-<p id="section-5-1">The security model includes several actors: credential issuers, attesters, clients (bots or agents), reverse proxies, and origin servers. The primary goals are to prevent impersonation, allow for credential revocation, support delegation and rotation, and maintain trust boundaries. Mechanisms must be resilient to replay attacks and Sybil attacks, and should ensure that credential issuance is auditable and accountable.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-5-2.1">
-          <p id="section-5-2.1.1">TODO: consider adding deployment models<a href="#section-5-2.1.1" class="pilcrow">¶</a></p>
-</li>
-      </ul>
+<p id="section-5-1">The security model includes several actors: credential issuers, attesters, clients (bots or agents), reverse proxies, and origin servers. The primary goals are to prevent impersonation, allow for credential revocation, support delegation and rotation, and maintain trust boundaries.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <div id="public-vs-private-presentation">
 <section id="section-5.1">
         <h3 id="name-public-vs-private-presentat">
@@ -1665,7 +1660,7 @@ Each may have different deployment, performance, and security guarantees.<a href
         <h3 id="name-round-trip">
 <a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-round-trip" class="section-name selfRef">Round trip</a>
         </h3>
-<p id="section-5.4-1">We thrive to minimise the number of round trips. Even though a nonce may be provided, it add delays and compute<a href="#section-5.4-1" class="pilcrow">¶</a></p>
+<p id="section-5.4-1">Protocols should thrive to minimise the number of round trips between a client and the issuer, and between clients and the origin.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1692,7 +1687,7 @@ These are mentioned by <span>[<a href="#A2A-DISCOVERY" class="cite xref">A2A-DIS
         <h3 id="name-submission-out-of-band">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-submission-out-of-band" class="section-name selfRef">Submission / out-of-band</a>
         </h3>
-<p id="section-6.2-1">Sumbission is also going to happen out of band. This is both for a practical reason that it's simpler than setting up a catalog, or for privacy reason.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-1">Sumbission is also going to happen out of band. This is both for a practical reason -- it is simpler than setting up a catalog --, and for privacy reason given you don't have to expose information through a catalog.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="in-flight">
@@ -1701,8 +1696,8 @@ These are mentioned by <span>[<a href="#A2A-DISCOVERY" class="cite xref">A2A-DIS
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-in-flight" class="section-name selfRef">In-flight</a>
         </h3>
 <p id="section-6.3-1">Discovery may happen in-flight, that is when a request arrives from a client to an origin.
-This could be considered a trust on first use. While the level of trust is low, it could be viable for certain use cases.
-Such discovery could be via an HTTP header containing a domain name with a well-known, a URL, a certificate, others.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+This could be considered a trust on first use. While the level of trust is low, it could be viable for certain use cases.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-2">Such discovery could be via an HTTP header containing a domain name with a well-known, a URL, a certificate, others.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="format">

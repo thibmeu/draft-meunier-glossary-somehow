@@ -74,7 +74,7 @@ Table of Contents
        4.2.2.  Identification of a known account
        4.2.3.  Ability to rate limit/gate access based on selective
                disclosure
-       4.2.4.  A multi-tenant system
+       4.2.4.  AI agent use example
    5.  Security goals and threat model
      5.1.  Public vs private presentation
      5.2.  Single vs multi show
@@ -289,14 +289,15 @@ Table of Contents
    *  Selective disclosure of a credential attribute (location, age)
       such as [PRIVATE-PROOF-API].
 
-4.2.4.  A multi-tenant system
+4.2.4.  AI agent use example
 
-   The model above is a bit abstract.  Let's consider the current AI
-   space, where a human request might go through a web browser, or
-   through an agent making request.  The human is not making request,
-   it's its client (the browser or the agent) making one.  Bots can do
-   the same.  These request go to the origin possibly via a reverse
-   proxy that handles TLS termination, DDoS mitigation, caching, others.
+   Let's consider a modelisation of the AI space, where a human request
+   might go through a web browser, or through an agent making request.
+   The human is not making request directly, it does so via its client:
+   browser, agent, cli, others.  Bots can do the same, especially with
+   the proliferation of powerful browser orchestration.  These request
+   go to the origin possibly via a reverse proxy that handles TLS
+   termination, DDoS mitigation, caching, etc.
 
                       .-------------------------------------.
                       |    Company           +---------+    |
@@ -318,12 +319,12 @@ Table of Contents
                                              | Bot     +--------------'
                                              +---------+
 
-   Specifically in the case of AI company, the attester/issuer can be
-   the AI company, the Reverse proxy/origin, or even a new third party
-   that provides valuable insights.
+   In the case of AI company, the attester/issuer can be the AI company,
+   the Reverse proxy, the origin, or even a new third party that
+   provides valuable signals.
 
    From an origin perspective, it's interesting to identify the company,
-   rate limit individual users, and identify them if needed.
+   rate limit individual users, and authorize them if needed.
 
 5.  Security goals and threat model
 
@@ -331,11 +332,7 @@ Table of Contents
    attesters, clients (bots or agents), reverse proxies, and origin
    servers.  The primary goals are to prevent impersonation, allow for
    credential revocation, support delegation and rotation, and maintain
-   trust boundaries.  Mechanisms must be resilient to replay attacks and
-   Sybil attacks, and should ensure that credential issuance is
-   auditable and accountable.
-
-      TODO: consider adding deployment models
+   trust boundaries.
 
 5.1.  Public vs private presentation
 
@@ -385,8 +382,8 @@ Table of Contents
 
 5.4.  Round trip
 
-   We thrive to minimise the number of round trips.  Even though a nonce
-   may be provided, it add delays and compute
+   Protocols should thrive to minimise the number of round trips between
+   a client and the issuer, and between clients and the origin.
 
 6.  Key management and discovery
 
@@ -407,16 +404,19 @@ Table of Contents
 6.2.  Submission / out-of-band
 
    Sumbission is also going to happen out of band.  This is both for a
-   practical reason that it's simpler than setting up a catalog, or for
-   privacy reason.
+   practical reason -- it is simpler than setting up a catalog --, and
+   for privacy reason given you don't have to expose information through
+   a catalog.
 
 6.3.  In-flight
 
    Discovery may happen in-flight, that is when a request arrives from a
    client to an origin.  This could be considered a trust on first use.
    While the level of trust is low, it could be viable for certain use
-   cases.  Such discovery could be via an HTTP header containing a
-   domain name with a well-known, a URL, a certificate, others.
+   cases.
+
+   Such discovery could be via an HTTP header containing a domain name
+   with a well-known, a URL, a certificate, others.
 
 6.4.  Format
 
