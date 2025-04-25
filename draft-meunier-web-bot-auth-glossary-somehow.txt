@@ -96,7 +96,8 @@ Table of Contents
 
 1.  Introduction
 
-      Thibault: this is taken from http message signature draft
+      _Thibault: this is mostly taken from
+      [HTTP-MESSAGE-SIGNATURE-FOR-BOTS]_
 
    Agents are increasingly used in business and user workflows,
    including AI assistants, search indexing, content aggregation, and
@@ -359,9 +360,10 @@ Table of Contents
    For TLS, we have seen [REQ-MTLS] and [PRIVACYPASS-IN-TLS]
    respectively addressing Section 4.2.1 and Section 4.2.3.
 
-   For HTTP, we see [HTTP-MESSAGE-SIGNATURE-FOR-BOTS] and PRIVACYPASS-
-   HTTP-AUTH-RFC respectively addressing Section 4.2.1 and
-   Section 4.2.3.  [OAUTH-BEARER-RFC] fits as well for Section 4.2.2.
+   For HTTP, we see [HTTP-MESSAGE-SIGNATURE-FOR-BOTS] or
+   [DPOP-AUTH-RFC], and [PRIVACYPASS-HTTP-AUTH-RFC] respectively
+   addressing Section 4.2.1 and Section 4.2.3.  [OAUTH-BEARER-RFC] fits
+   as well for Section 4.2.2.
 
    Other methods have been seen such as leveraging a dedicated format on
    top of a JavaScript API.  This is the case for W3C
@@ -374,7 +376,7 @@ Table of Contents
       for Basic, Bearer, API Keys, and [OAUTH2-RFC].  OpenAPI mentions
       using [HTTP-AUTHSCHEME] registry, but there does not seem to be a
       definition for recent schemes such as [PRIVACYPASS-HTTP-AUTH-RFC],
-      CONCEALED-AUTH-RFC, or [DPOP-AUTH-RFC].
+      [CONCEALED-AUTH-RFC], or [DPOP-AUTH-RFC].
 
    *  [MCP-AUTH] uses [OAUTH2-RFC] as a resource server, and does not
       support WWW-Authenticate headers.  This is currently being debated
