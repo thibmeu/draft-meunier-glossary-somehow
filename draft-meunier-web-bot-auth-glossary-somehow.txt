@@ -95,9 +95,6 @@ Table of Contents
 
 1.  Introduction
 
-      _Thibault: this is mostly taken from
-      [HTTP-MESSAGE-SIGNATURE-FOR-BOTS]_
-
    Agents are increasingly used in business and user workflows,
    including AI assistants, search indexing, content aggregation, and
    automated testing.  These agents need to reliably identify themselves
@@ -569,6 +566,10 @@ Table of Contents
               Internet-Draft, draft-jhoyla-req-mtls-flag-02, 28 February
               2025, <https://datatracker.ietf.org/doc/html/draft-jhoyla-
               req-mtls-flag-02>.
+
+   [VERIFIABLE-CREDENTIALS]
+              "Verifiable Credentials Data Model v1.1", n.d.,
+              <https://www.w3.org/TR/2022/REC-vc-data-model-20220303/>.
 
 Acknowledgments
 
