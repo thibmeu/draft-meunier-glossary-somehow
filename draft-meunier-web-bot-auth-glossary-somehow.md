@@ -12,7 +12,10 @@ v: 3
 # area: AREA
 # workgroup: WG Working Group
 keyword:
- - not-yet
+ - bot authentication
+ - web security
+ - glossary
+ - automated agents
 venue:
 #  group: WG
 #  type: Working Group
@@ -79,9 +82,10 @@ informative:
 
 --- abstract
 
-Automated traffic authentication provides a unique set of security challenges, constraints, and possibilities
-that affect every user of the Internet. This document seeks to collect use cases within the space,
-with a specific focus on AI related technologies.
+Automated traffic authentication presents unique security challenges,
+constraints, and opportunities that impact all Internet users. This document
+compiles terminology and examples within this space, with a specific focus on
+AI-related technologies.
 
 
 --- middle
@@ -90,18 +94,19 @@ with a specific focus on AI related technologies.
 
 > _Thibault: this is mostly taken from {{HTTP-MESSAGE-SIGNATURE-FOR-BOTS}}_
 
-Agents are increasingly used in business and user workflows, including AI assistants,
-search indexing, content aggregation, and automated testing. These agents need to reliably identify
-themselves to origins for several reasons:
+Agents are increasingly used in business and user workflows, including AI
+assistants, search indexing, content aggregation, and automated testing. These
+agents need to reliably identify themselves to origins for several reasons:
 
 1. Regulatory compliance requiring transparency of automated systems
 2. Origin resource management and access control
 3. Protection against impersonation and reputation management
 4. Service level differentiation between human and automated traffic
 
-Current identification methods such as IP allowlisting, User-Agent strings, or shared API keys have
-significant limitations in security, scalability, manageability, and fairness. This document
-presents these use cases, as well as possible paths to address them.
+Current identification methods such as IP allowlisting, User-Agent strings, or
+shared API keys have significant limitations in security, scalability,
+manageability, and fairness. This document presents these examples, as well as
+possible paths to address them.
 
 # Motivation
 
@@ -136,45 +141,97 @@ mechanism that empowers small and large agents to share their identity.
 
 {::boilerplate bcp14-tagged}
 
-Agent
+**Agent**
 : autonomous entities that perceive the environment and can take actions on behalf of users.
 
-Origin
-: Host resources, which are of interest to agents.
+**Bot**
+: A type of agent that operates automatically, often performing repetitive tasks. Bots may identify themselves or attempt to mimic human behavior.
 
-Bot
-: same as agent, but not hiding their identity (web crawling, ddos) and usually larger scale. Think Google web crawler, Facebook link shortner, Microsoft email scanner.
+**Origin (Server)**
+: The primary server hosting the web content or service that an agent intends to access.
 
-Application Firewall
+**Application Firewall**
 : control incoming traffic to an origin based on a set of rules. This may include but is not limited to IP filtering, User-Agent match, or cryptographic signature verification.
 
-Forward proxy
-: Presents request on behalf of users. I include the act of understanding a users request from a prompt and making all necessary requests in a different format. Agents are forward proxy for eyeballs, Cloudflare MASQUE relay is a forward proxy for agents. Think Private Relay, Workers, OHTTP.
+**Reverse proxy**
+: An intermediary server that forwards client requests to the origin server, often performing functions like load balancing, authentication, or caching.
 
-Eyeball
-: ultimate beneficiary of the content.
+**Browser**
+: A client application used to access web content. Browsers may also be orchestrated.
 
-Browser
-: Software acting as a gateway to the web. These are agents with a lot more human gating for actions. Examples are Chrome desktop, Firefox mobile, Safari webview.
+Human**
+: A physical person, like you and me.
 
-Human
-: a physical person, like you and me.
+**Rate limit**
+: A control mechanism that restricts access of an Agent to a resource provided
+  by an Origin Server. An Origin can decide to rate limit all connections from
+  an individual Client, from a specific Provider, or to a specific resource.
+  This may be a fixed number of request, a budget, a time, location, legal.
 
-Rate limit
-: limiting access to a resource. An origin can decide to rate limit all connections from an individual agent, from a specific operator, or to a specific resource. This may be a fixed number of request, a budget, a time, location, legal.
+**Unlinkability**
+: A property ensuring that multiple interactions or credentials from the same
+  agent cannot be correlated by the verifier.
 
-Unlinkability
-: Cryptographic guarantee making two requests undistinguishable from one another.
+**Account**
+: Persistent identifier of an agent to an origin. This requires a registration.
 
-Account
-: Persistent identifier of a client to an origin. This requires a registration phase.
+**Registration**
+: The creation of an identity. It can involve one time payment, a subscription,
+  an account with user name/password, an age, a legal jurisdiction, others.
 
-Registration
-: creation of an identity. That identity may be private, with anonymous credentials for instance. It can involve one time payment, subscription, an account with user name/password, an age, a legal jurisdiction, others
+# Web bot authentication categories
+
+We divide web bot authentication in three categories.
+
+## Identifying providers {#use-case-company}
+
+Organizations operating bots may need to authenticate their agents to access
+certain web resources. Authentication mechanisms can help distinguish legitimate
+bots from malicious ones.
+
+Examples:
+
+- Web crawlers wanting to authenticate against origins such as search engines,
+- Security companies that want to perform scans to identify malicious URLs,
+- AI augmented queries that are looking to identify against a set of newspapers.
+
+## User Account Identification {#use-case-known-account}
+
+Bots acting on behalf of registered users may require authentication to access
+user-specific data or services.
+
+Examples:
+
+- Authenticating and authorizing a known user against a particular resources,
+  such as a newspaper they have a subscription for,
+- Most authorisation use cases for {{MCP-AUTH}} and {{A2A-AUTH}}.
+
+
+## Attribute-Based Access {#use-case-selective-disclosure}
+
+In scenarios where full identification is unnecessary or undesirable, agents may
+present credentials that attest to specific attributes without revealing their
+identity.
+
+Examples:
+
+- Add a signal to limit visual CAPTCHA challenge such as {{PRIVATE-ACCESS-TOKEN}},
+- Gating access to a resource for longstanding users such as {{LOX}},
+- Search engine with a fixed number of request such as {{PRIVACY-PASS-KAGI}},
+- Selective disclosure of a credential attribute (location, age) such as
+  {{PRIVATE-PROOF-API}}.
+
 
 # Architecture
 
-The architecture involves multiple actors: a credential issuer that requires an certain criteria to be passed via an attester, the client which an be a bot or human-mediated agent which IP is not known, and the web origin placed behind a reverse proxy that may be fronting its infrastructure. The issuer provides cryptographic credentials to the client, which are then attached to requests and optionally verified by proxies before reaching the origin. This chain allows for authentication without necessarily revealing identifying details to each intermediate.
+The architecture involves multiple actors: a credential issuer that requires an
+certain criteria to be passed via an attester, the client which an be a bot or
+human-mediated agent which IP is not known, and the web origin placed behind a
+reverse proxy that may be fronting its infrastructure. The issuer provides
+cryptographic credentials to the client, which are then attached to requests and
+optionally verified by proxies before reaching the origin. This chain allows for
+authentication without necessarily revealing identifying details to each
+intermediate.
 
 ## Overview
 
@@ -194,51 +251,15 @@ The architecture involves multiple actors: a credential issuer that requires an 
                      +----------+                  +----------+
 ~~~
 
-## Auth categories
+## AI agent use example
 
-We divide web bot authentication in three categories.
-
-### Identifying a company {#use-case-company}
-
-This is required by origins to know where the traffic is coming from
-This is also a demand of honest companies that want to identify themselves but have a hard time doing it at the moment.
-
-Examples:
-
-- Web crawlers wanting to authenticate against origins such as search engines,
-- Security companies that want to perform scans to identify malicious URLs,
-- AI augmented queries that are looking to identify against a set of newspapers.
-
-### Identification of a known account {#use-case-known-account}
-
-An individual should be able to identify against a provider it has an existing relationship with in the form of an account.
-This can be because the individual has a subscription, or others.
-
-Examples:
-
-- Authenticating and authorizing a known user against a particular resources, such as a newspaper they have a subscription for,
-- Most authorisation use cases for {{MCP-AUTH}} and {{A2A-AUTH}}.
-
-
-### Ability to rate limit/gate access based on selective disclosure {#use-case-selective-disclosure}
-
-Not all use case require an account, or can be solely done by a company.
-Origins may want to rate limit individuals, without identifying them.
-Service providers would like to ensure that their users are not abusive without necessarily coordinating with each and every origins or insting client traffics.
-In addition, origins may want to know a limited set of informations about a user such as thenir location, which they used to infer by deriving it from others, like IP, ASN, timing, browser fingerprint.
-
-Examples:
-
-- Add a signal to limit visual CAPTCHA challenge such as {{PRIVATE-ACCESS-TOKEN}},
-- Gating access to a resource for longstanding users such as {{LOX}},
-- Search engine with a fixed number of request such as {{PRIVACY-PASS-KAGI}},
-- Selective disclosure of a credential attribute (location, age) such as {{PRIVATE-PROOF-API}}.
-
-### AI agent use example
-
-Let's consider a modelisation of the AI space, where a human request might go through a web browser, or through an agent making request.
-The human is not making request directly, it does so via its client: browser, agent, cli, others. Bots can do the same, especially with the proliferation of powerful browser orchestration.
-These request go to the origin possibly via a reverse proxy that handles TLS termination, DDoS mitigation, caching, etc.
+Let's consider a modelisation of the AI space, where a human request might go
+through a web browser, or through an agent making request.
+The human is not making request directly, it does so via its client: browser,
+agent, cli, others. Bots can do the same, especially with the proliferation of
+powerful browser orchestration.
+These request go to the origin possibly via a reverse proxy that handles TLS
+termination, DDoS mitigation, caching, etc.
 
 ~~~aasvg
                       .-------------------------------------.
@@ -262,71 +283,103 @@ These request go to the origin possibly via a reverse proxy that handles TLS ter
                                              +---------+
 ~~~
 
-In the case of AI company, the attester/issuer can be the AI company, the Reverse proxy, the origin, or even a new third party that provides valuable signals.
+In the case of AI company, the attester/issuer can be the AI company, the
+Reverse proxy, the origin, or even a new third party that provides valuable
+signals.
 
-From an origin perspective, it's interesting to identify the company, rate limit individual users, and authorize them if needed.
+From an origin perspective, it's interesting to identify the company, rate limit
+individual users, and authorize them if needed.
 
 # Security goals and threat model
 
-The security model includes several actors: credential issuers, attesters, clients (bots or agents), reverse proxies, and origin servers. The primary goals are to prevent impersonation, allow for credential revocation, support delegation and rotation, and maintain trust boundaries.
+The security model includes several actors: credential issuers, attesters,
+clients (bots or agents), reverse proxies, and origin servers. The primary goals
+are to prevent impersonation, allow for credential revocation, support
+delegation and rotation, and maintain trust boundaries.
 
 
 ## Public vs private presentation
 
-If the Issuer is also the Origin or its reverse proxy, it is possible to use shared secrets for verification. In cases where the issuer and verifier are different entities, asymmetric cryptography becomes necessary, allowing the bot to prove authenticity using a public key infrastructure.
+If the Issuer is also the Origin or its reverse proxy, it is possible to use
+shared secrets for verification. In cases where the issuer and verifier are
+different entities, asymmetric cryptography becomes necessary, allowing the bot
+to prove authenticity using a public key infrastructure.
 
 ## Single vs multi show
 
-Some credentials may be designed for one-time use only (for anti replay or privacy reasons), while others can support multiple presentations through the use of cryptographic derivation techniques.
+Some credentials may be designed for one-time use only (for anti replay or
+privacy reasons), while others can support multiple presentations through the
+use of cryptographic derivation techniques.
 This distinction affects privacy, scalability, and implementation complexity.
 
 ## Transport
 
-Authentication tokens may be exchanged at different protocol layers and through different transports.
+Authentication tokens may be exchanged at different protocol layers and through
+different transports.
 Each may have different deployment, performance, and security guarantees.
 
-For TLS, we have seen {{REQ-MTLS}} and {{PRIVACYPASS-IN-TLS}} respectively addressing {{use-case-company}} and {{use-case-selective-disclosure}}.
+For TLS, we have seen {{REQ-MTLS}} and {{PRIVACYPASS-IN-TLS}} respectively
+addressing {{use-case-company}} and {{use-case-selective-disclosure}}.
 
-For HTTP, we see {{HTTP-MESSAGE-SIGNATURE-FOR-BOTS}} or {{DPOP-AUTH-RFC}}, and {{PRIVACYPASS-HTTP-AUTH-RFC}} respectively addressing {{use-case-company}} and {{use-case-selective-disclosure}}. {{OAUTH-BEARER-RFC}} fits as well for {{use-case-known-account}}.
+For HTTP, we see {{HTTP-MESSAGE-SIGNATURE-FOR-BOTS}} or {{DPOP-AUTH-RFC}}, and
+{{PRIVACYPASS-HTTP-AUTH-RFC}} respectively addressing {{use-case-company}} and
+{{use-case-selective-disclosure}}. {{OAUTH-BEARER-RFC}} fits as well for
+{{use-case-known-account}}.
 
-Other methods have been seen such as leveraging a dedicated format on top of a JavaScript API. This is the case for W3C {{PRIVATE-STATE-TOKEN}} or the more recent {{PRIVATE-PROOF-API}}.
+Other methods have been seen such as leveraging a dedicated format on top of a
+JavaScript API. This is the case for W3C {{PRIVATE-STATE-TOKEN}} or the more
+recent {{PRIVATE-PROOF-API}}.
 
-Focusing on AI specifically, it's worth mentioning two proponent protocol definition efforts:
+Focusing on AI specifically, it's worth mentioning two proponent protocol
+definition efforts:
 
-- {{A2A-AUTH}} which follows {{OPENAPI3-AUTH}}. This means it allows for Basic, Bearer, API Keys, and {{OAUTH2-RFC}}. OpenAPI mentions using {{HTTP-AUTHSCHEME}} registry, but there does not seem to be a definition for recent schemes such as {{PRIVACYPASS-HTTP-AUTH-RFC}}, {{CONCEALED-AUTH-RFC}}, or {{DPOP-AUTH-RFC}}.
-- {{MCP-AUTH}} uses {{OAUTH2-RFC}} as a resource server, and does not support WWW-Authenticate headers. This is currently being debated on GitHub.
+- {{A2A-AUTH}} which follows {{OPENAPI3-AUTH}}. This means it allows for Basic,
+  Bearer, API Keys, and {{OAUTH2-RFC}}. OpenAPI mentions using {{HTTP-AUTHSCHEME}}
+  registry, but there does not seem to be a definition for recent schemes such as
+  {{PRIVACYPASS-HTTP-AUTH-RFC}}, {{CONCEALED-AUTH-RFC}}, or {{DPOP-AUTH-RFC}}.
+- {{MCP-AUTH}} uses {{OAUTH2-RFC}} as a resource server.
 
 
 ## Round trip
 
-Protocols should thrive to minimise the number of round trips between a client and the issuer, and between clients and the origin.
+Protocols should thrive to minimise the number of round trips between a client
+and the issuer, and between clients and the origin.
 
 # Key management and discovery
 
 ## Catalog
 
-Like there are registries to resolve IP address metadata, there are going to be registries to
-identify the owner of public key material.
+Like there are registries to resolve IP address metadata, there are going to be
+registries to identify the owner of public key material.
 These are mentioned by {{A2A-DISCOVERY}} and {{MCP-DISCOVERY}}.
 
-The primary goal of these catalog is to associate metadata to public key, and to discover them. They SHOULD have some sort of tamper resistent, to prevent the provider of a catalog to provide from information.
+The primary goal of these catalog is to associate metadata to public key, and to
+discover them. They SHOULD have some sort of tamper resistent, to prevent the
+provider of a catalog to provide from information.
 
-As an analogy, one can think of {{CERTIFICATE-TRANSPARENCY-RFC}}, or the more recent effort in {{KEY-TRANSPARENCY-ARCHITECTURE}}.
+As an analogy, one can think of {{CERTIFICATE-TRANSPARENCY-RFC}}, or the more
+recent effort in {{KEY-TRANSPARENCY-ARCHITECTURE}}.
 
 ## Submission / out-of-band
 
-Sumbission is also going to happen out of band. This is both for a practical reason -- it is simpler than setting up a catalog --, and for privacy reason given you don't have to expose information through a catalog.
+Sumbission is also going to happen out of band. This is both for a practical
+reason -- it is simpler than setting up a catalog --, and for privacy reason
+given you don't have to expose information through a catalog.
 
 ## In-flight
 
-Discovery may happen in-flight, that is when a request arrives from a client to an origin.
-This could be considered a trust on first use. While the level of trust is low, it could be viable for certain use cases.
+Discovery may happen in-flight, that is when a request arrives from a client to
+an origin.
+This could be considered a trust on first use. While the level of trust is low,
+it could be viable for certain use cases.
 
-Such discovery could be via an HTTP header containing a domain name with a well-known, a URL, a certificate, others.
+Such discovery could be via an HTTP header containing a domain name with a
+well-known, a URL, a certificate, others.
 
 ## Format
 
-There is a multitude of Key and directory format. This include and is not limited to JWKS, CWKS, Privacy Pass, Agent Card, or HTTP Message Signatures.
+There is a multitude of Key and directory format. This include and is not
+limited to JWKS, CWKS, Privacy Pass, Agent Card, or HTTP Message Signatures.
 
 
 # Security Considerations
@@ -343,7 +396,9 @@ Credential expiry
 
 See {{RFC6973}}.
 
-> TODO: anonymity set, correlation, it depends on the issuer and origin. origins SHOULD thrive to ask the minimum that's required
+Authentication mechanisms should minimize the collection and exposure of
+personal data. Techniques like selective disclosure and unlinkability help
+protect user privacy.
 
 
 # IANA Considerations
