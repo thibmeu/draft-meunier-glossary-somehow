@@ -4,8 +4,8 @@
 
 Network Working Group                                         T. Meunier
 Internet-Draft                                                Cloudflare
-Intended status: Informational                             25 April 2025
-Expires: 27 October 2025
+Intended status: Informational                             26 April 2025
+Expires: 28 October 2025
 
 
                          Web bot auth Glossary
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 October 2025.
+   This Internet-Draft will expire on 28 October 2025.
 
 Copyright Notice
 
@@ -69,7 +69,7 @@ Table of Contents
    3.  Conventions and Definitions
    4.  Architecture
      4.1.  Overview
-     4.2.  Use cases
+     4.2.  Auth categories
        4.2.1.  Identifying a company
        4.2.2.  Identification of a known account
        4.2.3.  Ability to rate limit/gate access based on selective
@@ -232,9 +232,9 @@ Table of Contents
                    '--->| Attester |----------------->|  Issuer  |
                         +----------+                  +----------+
 
-4.2.  Use cases
+4.2.  Auth categories
 
-   We divide the use cases in three categories.
+   We divide web bot authentication in three categories.
 
 4.2.1.  Identifying a company
 
@@ -431,6 +431,8 @@ Table of Contents
    TODO Security
 
    Quote [RFC9518] and [RFC8890]
+
+   Replay Credential expiry
 
 8.  Privacy Considerations
 
