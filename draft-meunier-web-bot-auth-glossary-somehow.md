@@ -32,6 +32,8 @@ author:
 
 normative:
   RFC6973:
+  RFC8890:
+  RFC9518:
 
 # I use names instead of quoting RFC because it's more readable for me at the moment
 informative:
@@ -180,6 +182,19 @@ mechanism that empowers small and large agents to share their identity.
 : The creation of an identity. It can involve one time payment, a subscription,
   an account with user name/password, an age, a legal jurisdiction, others.
 
+# should we quote privacy pass arch here, or use VC model with a Holder?
+**Issuer**:
+  An entity that generates and provides credentials to agents after the Attester
+  has verified certain attributes.
+
+**Attester**:
+  An entity that evaluates an agent's characteristics or behavior and provides
+  evidence to an Issuer to support credential issuance.
+
+**Verifier**:
+  An entity that validates the authenticity and integrity of a credential
+  presented by an agent.
+
 # Web bot authentication categories
 
 We divide web bot authentication in three categories.
@@ -306,7 +321,7 @@ shared secrets for verification. In cases where the issuer and verifier are
 different entities, asymmetric cryptography becomes necessary, allowing the bot
 to prove authenticity using a public key infrastructure.
 
-## Single vs multi show
+## Single vs multi show {#single-vs-multi-show}
 
 Some credentials may be designed for one-time use only (for anti replay or
 privacy reasons), while others can support multiple presentations through the
@@ -346,7 +361,7 @@ definition efforts:
 Protocols should thrive to minimise the number of round trips between a client
 and the issuer, and between clients and the origin.
 
-# Key management and discovery
+# Key management and discovery {#key-management}
 
 ## Catalog
 
@@ -385,21 +400,30 @@ limited to JWKS, CWKS, Privacy Pass, Agent Card, or HTTP Message Signatures.
 
 # Security Considerations
 
-TODO Security
+This glossary provides terminology for web bot authentication. While this
+document does not define or recommend specific protocols, terminology choices
+have direct security implications:
 
-Quote {{!RFC9518}} and {{!RFC8890}}
+**Impersonation Resistance**
+: Clearly defined roles are essential for preventing entities from falsely
+  claiming identities.
 
-Replay
-Credential expiry
+**Credential Replay and Theft**
+: Definitions such as {{single-vs-multi-show}} help describe key mechanisms that
+  mitigate the misuse of credentials if stolen.
+
+**Key Management**
+: {{key-management}} is key to protocol security, and has to be considered.
+
+In addition, protocols should consider decentralization {{RFC9518}} and end-user
+impact {{RFC8890}}.
 
 
 # Privacy Considerations
 
-See {{RFC6973}}.
-
 Authentication mechanisms should minimize the collection and exposure of
 personal data. Techniques like selective disclosure and unlinkability help
-protect user privacy.
+protect user privacy. Protocols should refer to {{RFC6973}}.
 
 
 # IANA Considerations
