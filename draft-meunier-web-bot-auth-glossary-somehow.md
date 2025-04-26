@@ -182,7 +182,7 @@ mechanism that empowers small and large agents to share their identity.
 : The creation of an identity. It can involve one time payment, a subscription,
   an account with user name/password, an age, a legal jurisdiction, others.
 
-# should we quote privacy pass arch here, or use VC model with a Holder?
+<!-- should we quote privacy pass arch here, or use VC model with a Holder? -->
 **Issuer**:
   An entity that generates and provides credentials to agents after the Attester
   has verified certain attributes.
