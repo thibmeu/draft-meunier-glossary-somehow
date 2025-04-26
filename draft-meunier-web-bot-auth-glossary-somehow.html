@@ -1307,7 +1307,7 @@ use.<a href="#section-2-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-2-2.3">
           <p id="section-2-2.3.1">An agent may go to every website on the Internet and share a secret with
-them like a Bearer from  <span>[<a href="#OAUTH-BEARER-RFC" class="cite xref">OAUTH-BEARER-RFC</a>]</span>. This is impractical to scale for any
+them like a Bearer from <span>[<a href="#OAUTH-BEARER-RFC" class="cite xref">OAUTH-BEARER-RFC</a>]</span>. This is impractical to scale for any
 agent beyond select partnerships, and insecure, as key rotation is challenging
 and becomes less secure as the consumers scale.<a href="#section-2-2.3.1" class="pilcrow">¶</a></p>
 </li>
@@ -1556,15 +1556,14 @@ intermediate.<a href="#section-6-1" class="pilcrow">¶</a></p>
         <h3 id="name-ai-agent-use-example">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-ai-agent-use-example" class="section-name selfRef">AI agent use example</a>
         </h3>
-<p id="section-6.2-1">Let's consider a modelisation of the AI space, where a human request might go
-through a web browser, or through an agent making request.
-The human is not making request directly, it does so via its client: browser,
-agent, cli, others. Bots can do the same, especially with the proliferation of
-powerful browser orchestration.
-These request go to the origin possibly via a reverse proxy that handles TLS
-termination, DDoS mitigation, caching, etc.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
-<div id="section-6.2-2">
-          <div class="alignLeft art-svg artwork" id="section-6.2-2.1">
+<p id="section-6.2-1">Humans and bots often interact with origins indirectly via clients like
+browsers, agents, or CLI tools. These clients handle requests, potentially
+traversing reverse proxies that manage TLS termination, DDoS protection, and
+caching.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-2">The rise of advanced browser orchestration blurs lines between human-driven and
+automated requests, making reliable bot identification increasingly complex.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
+<div id="section-6.2-3">
+          <div class="alignLeft art-svg artwork" id="section-6.2-3.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="336" width="880" viewBox="0 0 880 336" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
               <path d="M 8,144 L 8,176" fill="none" stroke="black"></path>
               <path d="M 72,144 L 72,176" fill="none" stroke="black"></path>
@@ -1635,14 +1634,13 @@ termination, DDoS mitigation, caching, etc.<a href="#section-6.2-1" class="pilcr
                 <text x="408" y="244">Browser</text>
                 <text x="392" y="308">Bot</text>
               </g>
-            </svg><a href="#section-6.2-2.1" class="pilcrow">¶</a>
+            </svg><a href="#section-6.2-3.1" class="pilcrow">¶</a>
 </div>
 </div>
-<p id="section-6.2-3">In the case of AI company, the attester/issuer can be the AI company, the
-Reverse proxy, the origin, or even a new third party that provides valuable
-signals.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
-<p id="section-6.2-4">From an origin perspective, it's interesting to identify the company, rate limit
-individual users, and authorize them if needed.<a href="#section-6.2-4" class="pilcrow">¶</a></p>
+<p id="section-6.2-4">The attester/issuer roles could be filled by the AI company, reverse proxy,
+origin, or a third party. Origins need mechanisms to identify organizations,
+rate-limit individuals, and authenticate users without relying solely on client
+IP or heuristics presented in <a href="#motivation" class="auto internal xref">Section 2</a>.<a href="#section-6.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
