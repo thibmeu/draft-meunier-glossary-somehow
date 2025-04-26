@@ -183,16 +183,16 @@ mechanism that empowers small and large agents to share their identity.
   an account with user name/password, an age, a legal jurisdiction, others.
 
 <!-- should we quote privacy pass arch here, or use VC model with a Holder? -->
-**Issuer**:
-  An entity that generates and provides credentials to agents after the Attester
+**Issuer**
+: An entity that generates and provides credentials to agents after the Attester
   has verified certain attributes.
 
-**Attester**:
-  An entity that evaluates an agent's characteristics or behavior and provides
+**Attester**
+: An entity that evaluates an agent's characteristics or behavior and provides
   evidence to an Issuer to support credential issuance.
 
-**Verifier**:
-  An entity that validates the authenticity and integrity of a credential
+**Verifier**
+: An entity that validates the authenticity and integrity of a credential
   presented by an agent.
 
 # Web bot authentication categories
