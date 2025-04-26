@@ -160,7 +160,7 @@ mechanism that empowers small and large agents to share their identity.
 **Browser**
 : A client application used to access web content. Browsers may also be orchestrated.
 
-Human**
+**Human**
 : A physical person, like you and me.
 
 **Rate limit**
