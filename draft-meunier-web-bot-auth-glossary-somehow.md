@@ -89,8 +89,8 @@ informative:
 
 Automated traffic authentication presents unique security challenges,
 constraints, and opportunities that impact all Internet users. This document
-compiles terminology and examples within this space, with a specific focus on
-AI-related technologies.
+seeks to collect terminology and examples within the space, with a specific
+focus on AI related technologies.
 
 
 --- middle
