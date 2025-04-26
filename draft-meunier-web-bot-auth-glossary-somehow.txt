@@ -178,7 +178,7 @@ Table of Contents
    *Browser*  A client application used to access web content.  Browsers
       may also be orchestrated.
 
-   Human**  A physical person, like you and me.
+   *Human*  A physical person, like you and me.
 
    *Rate limit*  A control mechanism that restricts access of an Agent
       to a resource provided by an Origin Server.  An Origin can decide
