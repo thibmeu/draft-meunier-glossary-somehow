@@ -111,7 +111,7 @@ shared API keys have significant limitations in security, scalability,
 manageability, and fairness. This document presents these examples, as well as
 possible paths to address them.
 
-# Motivation
+# Motivation {#motivation}
 
 There is an increase in agent traffic on the Internet. Many agents
 choose to identify their traffic today via IP Address lists and/or unique
@@ -269,13 +269,13 @@ intermediate.
 
 ## AI agent use example
 
-Let's consider a modelisation of the AI space, where a human request might go
-through a web browser, or through an agent making request.
-The human is not making request directly, it does so via its client: browser,
-agent, cli, others. Bots can do the same, especially with the proliferation of
-powerful browser orchestration.
-These request go to the origin possibly via a reverse proxy that handles TLS
-termination, DDoS mitigation, caching, etc.
+Humans and bots often interact with origins indirectly via clients like
+browsers, agents, or CLI tools. These clients handle requests, potentially
+traversing reverse proxies that manage TLS termination, DDoS protection, and
+caching.
+
+The rise of advanced browser orchestration blurs lines between human-driven and
+automated requests, making reliable bot identification increasingly complex.
 
 ~~~aasvg
                       .-------------------------------------.
@@ -299,12 +299,11 @@ termination, DDoS mitigation, caching, etc.
                                              +---------+
 ~~~
 
-In the case of AI company, the attester/issuer can be the AI company, the
-Reverse proxy, the origin, or even a new third party that provides valuable
-signals.
+The attester/issuer roles could be filled by the AI company, reverse proxy,
+origin, or a third party. Origins need mechanisms to identify organizations,
+rate-limit individuals, and authenticate users without relying solely on client
+IP or heuristics presented in {{motivation}}.
 
-From an origin perspective, it's interesting to identify the company, rate limit
-individual users, and authorize them if needed.
 
 # Security goals and threat model
 
