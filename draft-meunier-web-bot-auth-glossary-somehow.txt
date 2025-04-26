@@ -13,10 +13,10 @@ Expires: 28 October 2025
 
 Abstract
 
-   Automated traffic authentication provides a unique set of security
-   challenges, constraints, and possibilities that affect every user of
-   the Internet.  This document seeks to collect use cases within the
-   space, with a specific focus on AI related technologies.
+   Automated traffic authentication presents unique security challenges,
+   constraints, and opportunities that impact all Internet users.  This
+   document compiles terminology and examples within this space, with a
+   specific focus on AI-related technologies.
 
 About This Document
 
@@ -67,30 +67,29 @@ Table of Contents
    1.  Introduction
    2.  Motivation
    3.  Conventions and Definitions
-   4.  Architecture
-     4.1.  Overview
-     4.2.  Auth categories
-       4.2.1.  Identifying a company
-       4.2.2.  Identification of a known account
-       4.2.3.  Ability to rate limit/gate access based on selective
-               disclosure
-       4.2.4.  AI agent use example
-   5.  Security goals and threat model
-     5.1.  Public vs private presentation
-     5.2.  Single vs multi show
-     5.3.  Transport
-     5.4.  Round trip
-   6.  Key management and discovery
-     6.1.  Catalog
-     6.2.  Submission / out-of-band
-     6.3.  In-flight
-     6.4.  Format
-   7.  Security Considerations
-   8.  Privacy Considerations
-   9.  IANA Considerations
-   10. References
-     10.1.  Normative References
-     10.2.  Informative References
+   4.  Web bot authentication categories
+     4.1.  Identifying providers
+     4.2.  User Account Identification
+     4.3.  Attribute-Based Access
+   5.  Architecture
+     5.1.  Overview
+     5.2.  AI agent use example
+   6.  Security goals and threat model
+     6.1.  Public vs private presentation
+     6.2.  Single vs multi show
+     6.3.  Transport
+     6.4.  Round trip
+   7.  Key management and discovery
+     7.1.  Catalog
+     7.2.  Submission / out-of-band
+     7.3.  In-flight
+     7.4.  Format
+   8.  Security Considerations
+   9.  Privacy Considerations
+   10. IANA Considerations
+   11. References
+     11.1.  Normative References
+     11.2.  Informative References
    Acknowledgments
    Author's Address
 
@@ -115,7 +114,7 @@ Table of Contents
    Current identification methods such as IP allowlisting, User-Agent
    strings, or shared API keys have significant limitations in security,
    scalability, manageability, and fairness.  This document presents
-   these use cases, as well as possible paths to address them.
+   these examples, as well as possible paths to address them.
 
 2.  Motivation
 
@@ -160,51 +159,100 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-   Agent  autonomous entities that perceive the environment and can take
-      actions on behalf of users.
+   *Agent*  autonomous entities that perceive the environment and can
+      take actions on behalf of users.
 
-   Origin  Host resources, which are of interest to agents.
+   *Bot*  A type of agent that operates automatically, often performing
+      repetitive tasks.  Bots may identify themselves or attempt to
+      mimic human behavior.
 
-   Bot  same as agent, but not hiding their identity (web crawling,
-      ddos) and usually larger scale.  Think Google web crawler,
-      Facebook link shortner, Microsoft email scanner.
+   *Origin (Server)*  The primary server hosting the web content or
+      service that an agent intends to access.
 
-   Application Firewall  control incoming traffic to an origin based on
-      a set of rules.  This may include but is not limited to IP
+   *Application Firewall*  control incoming traffic to an origin based
+      on a set of rules.  This may include but is not limited to IP
       filtering, User-Agent match, or cryptographic signature
       verification.
 
-   Forward proxy  Presents request on behalf of users.  I include the
-      act of understanding a users request from a prompt and making all
-      necessary requests in a different format.  Agents are forward
-      proxy for eyeballs, Cloudflare MASQUE relay is a forward proxy for
-      agents.  Think Private Relay, Workers, OHTTP.
+   *Reverse proxy*  An intermediary server that forwards client requests
+      to the origin server, often performing functions like load
+      balancing, authentication, or caching.
 
-   Eyeball  ultimate beneficiary of the content.
+   *Browser*  A client application used to access web content.  Browsers
+      may also be orchestrated.
 
-   Browser  Software acting as a gateway to the web.  These are agents
-      with a lot more human gating for actions.  Examples are Chrome
-      desktop, Firefox mobile, Safari webview.
+   Human**  A physical person, like you and me.
 
-   Human  a physical person, like you and me.
-
-   Rate limit  limiting access to a resource.  An origin can decide to
-      rate limit all connections from an individual agent, from a
-      specific operator, or to a specific resource.  This may be a fixed
+   *Rate limit*  A control mechanism that restricts access of an Agent
+      to a resource provided by an Origin Server.  An Origin can decide
+      to rate limit all connections from an individual Client, from a
+      specific Provider, or to a specific resource.  This may be a fixed
       number of request, a budget, a time, location, legal.
 
-   Unlinkability  Cryptographic guarantee making two requests
-      undistinguishable from one another.
+   *Unlinkability*  A property ensuring that multiple interactions or
+      credentials from the same agent cannot be correlated by the
+      verifier.
 
-   Account  Persistent identifier of a client to an origin.  This
-      requires a registration phase.
+   *Account*  Persistent identifier of an agent to an origin.  This
+      requires a registration.
 
-   Registration  creation of an identity.  That identity may be private,
-      with anonymous credentials for instance.  It can involve one time
-      payment, subscription, an account with user name/password, an age,
-      a legal jurisdiction, others
+   *Registration*  The creation of an identity.  It can involve one time
+      payment, a subscription, an account with user name/password, an
+      age, a legal jurisdiction, others.
 
-4.  Architecture
+4.  Web bot authentication categories
+
+   We divide web bot authentication in three categories.
+
+4.1.  Identifying providers
+
+   Organizations operating bots may need to authenticate their agents to
+   access certain web resources.  Authentication mechanisms can help
+   distinguish legitimate bots from malicious ones.
+
+   Examples:
+
+   *  Web crawlers wanting to authenticate against origins such as
+      search engines,
+
+   *  Security companies that want to perform scans to identify
+      malicious URLs,
+
+   *  AI augmented queries that are looking to identify against a set of
+      newspapers.
+
+4.2.  User Account Identification
+
+   Bots acting on behalf of registered users may require authentication
+   to access user-specific data or services.
+
+   Examples:
+
+   *  Authenticating and authorizing a known user against a particular
+      resources, such as a newspaper they have a subscription for,
+
+   *  Most authorisation use cases for [MCP-AUTH] and [A2A-AUTH].
+
+4.3.  Attribute-Based Access
+
+   In scenarios where full identification is unnecessary or undesirable,
+   agents may present credentials that attest to specific attributes
+   without revealing their identity.
+
+   Examples:
+
+   *  Add a signal to limit visual CAPTCHA challenge such as
+      [PRIVATE-ACCESS-TOKEN],
+
+   *  Gating access to a resource for longstanding users such as [LOX],
+
+   *  Search engine with a fixed number of request such as
+      [PRIVACY-PASS-KAGI],
+
+   *  Selective disclosure of a credential attribute (location, age)
+      such as [PRIVATE-PROOF-API].
+
+5.  Architecture
 
    The architecture involves multiple actors: a credential issuer that
    requires an certain criteria to be passed via an attester, the client
@@ -216,7 +264,7 @@ Table of Contents
    authentication without necessarily revealing identifying details to
    each intermediate.
 
-4.1.  Overview
+5.1.  Overview
 
                         +---------------+             +----------+
                    .--->| Reverse Proxy |------------>|  Origin  |
@@ -232,65 +280,7 @@ Table of Contents
                    '--->| Attester |----------------->|  Issuer  |
                         +----------+                  +----------+
 
-4.2.  Auth categories
-
-   We divide web bot authentication in three categories.
-
-4.2.1.  Identifying a company
-
-   This is required by origins to know where the traffic is coming from
-   This is also a demand of honest companies that want to identify
-   themselves but have a hard time doing it at the moment.
-
-   Examples:
-
-   *  Web crawlers wanting to authenticate against origins such as
-      search engines,
-
-   *  Security companies that want to perform scans to identify
-      malicious URLs,
-
-   *  AI augmented queries that are looking to identify against a set of
-      newspapers.
-
-4.2.2.  Identification of a known account
-
-   An individual should be able to identify against a provider it has an
-   existing relationship with in the form of an account.  This can be
-   because the individual has a subscription, or others.
-
-   Examples:
-
-   *  Authenticating and authorizing a known user against a particular
-      resources, such as a newspaper they have a subscription for,
-
-   *  Most authorisation use cases for [MCP-AUTH] and [A2A-AUTH].
-
-4.2.3.  Ability to rate limit/gate access based on selective disclosure
-
-   Not all use case require an account, or can be solely done by a
-   company.  Origins may want to rate limit individuals, without
-   identifying them.  Service providers would like to ensure that their
-   users are not abusive without necessarily coordinating with each and
-   every origins or insting client traffics.  In addition, origins may
-   want to know a limited set of informations about a user such as
-   thenir location, which they used to infer by deriving it from others,
-   like IP, ASN, timing, browser fingerprint.
-
-   Examples:
-
-   *  Add a signal to limit visual CAPTCHA challenge such as
-      [PRIVATE-ACCESS-TOKEN],
-
-   *  Gating access to a resource for longstanding users such as [LOX],
-
-   *  Search engine with a fixed number of request such as
-      [PRIVACY-PASS-KAGI],
-
-   *  Selective disclosure of a credential attribute (location, age)
-      such as [PRIVATE-PROOF-API].
-
-4.2.4.  AI agent use example
+5.2.  AI agent use example
 
    Let's consider a modelisation of the AI space, where a human request
    might go through a web browser, or through an agent making request.
@@ -327,7 +317,7 @@ Table of Contents
    From an origin perspective, it's interesting to identify the company,
    rate limit individual users, and authorize them if needed.
 
-5.  Security goals and threat model
+6.  Security goals and threat model
 
    The security model includes several actors: credential issuers,
    attesters, clients (bots or agents), reverse proxies, and origin
@@ -335,7 +325,7 @@ Table of Contents
    credential revocation, support delegation and rotation, and maintain
    trust boundaries.
 
-5.1.  Public vs private presentation
+6.1.  Public vs private presentation
 
    If the Issuer is also the Origin or its reverse proxy, it is possible
    to use shared secrets for verification.  In cases where the issuer
@@ -343,7 +333,7 @@ Table of Contents
    necessary, allowing the bot to prove authenticity using a public key
    infrastructure.
 
-5.2.  Single vs multi show
+6.2.  Single vs multi show
 
    Some credentials may be designed for one-time use only (for anti
    replay or privacy reasons), while others can support multiple
@@ -351,19 +341,19 @@ Table of Contents
    This distinction affects privacy, scalability, and implementation
    complexity.
 
-5.3.  Transport
+6.3.  Transport
 
    Authentication tokens may be exchanged at different protocol layers
    and through different transports.  Each may have different
    deployment, performance, and security guarantees.
 
    For TLS, we have seen [REQ-MTLS] and [PRIVACYPASS-IN-TLS]
-   respectively addressing Section 4.2.1 and Section 4.2.3.
+   respectively addressing Section 4.1 and Section 4.3.
 
    For HTTP, we see [HTTP-MESSAGE-SIGNATURE-FOR-BOTS] or
    [DPOP-AUTH-RFC], and [PRIVACYPASS-HTTP-AUTH-RFC] respectively
-   addressing Section 4.2.1 and Section 4.2.3.  [OAUTH-BEARER-RFC] fits
-   as well for Section 4.2.2.
+   addressing Section 4.1 and Section 4.3.  [OAUTH-BEARER-RFC] fits as
+   well for Section 4.2.
 
    Other methods have been seen such as leveraging a dedicated format on
    top of a JavaScript API.  This is the case for W3C
@@ -378,18 +368,16 @@ Table of Contents
       definition for recent schemes such as [PRIVACYPASS-HTTP-AUTH-RFC],
       [CONCEALED-AUTH-RFC], or [DPOP-AUTH-RFC].
 
-   *  [MCP-AUTH] uses [OAUTH2-RFC] as a resource server, and does not
-      support WWW-Authenticate headers.  This is currently being debated
-      on GitHub.
+   *  [MCP-AUTH] uses [OAUTH2-RFC] as a resource server.
 
-5.4.  Round trip
+6.4.  Round trip
 
    Protocols should thrive to minimise the number of round trips between
    a client and the issuer, and between clients and the origin.
 
-6.  Key management and discovery
+7.  Key management and discovery
 
-6.1.  Catalog
+7.1.  Catalog
 
    Like there are registries to resolve IP address metadata, there are
    going to be registries to identify the owner of public key material.
@@ -403,14 +391,14 @@ Table of Contents
    As an analogy, one can think of [CERTIFICATE-TRANSPARENCY-RFC], or
    the more recent effort in [KEY-TRANSPARENCY-ARCHITECTURE].
 
-6.2.  Submission / out-of-band
+7.2.  Submission / out-of-band
 
    Sumbission is also going to happen out of band.  This is both for a
    practical reason -- it is simpler than setting up a catalog --, and
    for privacy reason given you don't have to expose information through
    a catalog.
 
-6.3.  In-flight
+7.3.  In-flight
 
    Discovery may happen in-flight, that is when a request arrives from a
    client to an origin.  This could be considered a trust on first use.
@@ -420,13 +408,13 @@ Table of Contents
    Such discovery could be via an HTTP header containing a domain name
    with a well-known, a URL, a certificate, others.
 
-6.4.  Format
+7.4.  Format
 
    There is a multitude of Key and directory format.  This include and
    is not limited to JWKS, CWKS, Privacy Pass, Agent Card, or HTTP
    Message Signatures.
 
-7.  Security Considerations
+8.  Security Considerations
 
    TODO Security
 
@@ -434,20 +422,21 @@ Table of Contents
 
    Replay Credential expiry
 
-8.  Privacy Considerations
+9.  Privacy Considerations
 
    See [RFC6973].
 
-      TODO: anonymity set, correlation, it depends on the issuer and
-      origin. origins SHOULD thrive to ask the minimum that's required
+   Authentication mechanisms should minimize the collection and exposure
+   of personal data.  Techniques like selective disclosure and
+   unlinkability help protect user privacy.
 
-9.  IANA Considerations
+10.  IANA Considerations
 
    This document has no IANA actions.
 
-10.  References
+11.  References
 
-10.1.  Normative References
+11.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -472,7 +461,7 @@ Table of Contents
               Internet Standards", RFC 9518, DOI 10.17487/RFC9518,
               December 2023, <https://www.rfc-editor.org/rfc/rfc9518>.
 
-10.2.  Informative References
+11.2.  Informative References
 
    [A2A-AUTH] "A2A protocol Authentication", n.d.,
               <https://google.github.io/
