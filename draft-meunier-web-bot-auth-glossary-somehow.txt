@@ -67,29 +67,31 @@ Table of Contents
    1.  Introduction
    2.  Motivation
    3.  Conventions and Definitions
-   4.  Web bot authentication categories
-     4.1.  Identifying providers
-     4.2.  User Account Identification
-     4.3.  Attribute-Based Access
-   5.  Architecture
-     5.1.  Overview
-     5.2.  AI agent use example
-   6.  Security goals and threat model
-     6.1.  Public vs private presentation
-     6.2.  Single vs multi show
-     6.3.  Transport
-     6.4.  Round trip
-   7.  Key management and discovery
-     7.1.  Catalog
-     7.2.  Submission / out-of-band
-     7.3.  In-flight
-     7.4.  Format
-   8.  Security Considerations
-   9.  Privacy Considerations
-   10. IANA Considerations
-   11. References
-     11.1.  Normative References
-     11.2.  Informative References
+   4.  should we quote privacy pass arch here, or use VC model with a
+           Holder?
+   5.  Web bot authentication categories
+     5.1.  Identifying providers
+     5.2.  User Account Identification
+     5.3.  Attribute-Based Access
+   6.  Architecture
+     6.1.  Overview
+     6.2.  AI agent use example
+   7.  Security goals and threat model
+     7.1.  Public vs private presentation
+     7.2.  Single vs multi show
+     7.3.  Transport
+     7.4.  Round trip
+   8.  Key management and discovery
+     8.1.  Catalog
+     8.2.  Submission / out-of-band
+     8.3.  In-flight
+     8.4.  Format
+   9.  Security Considerations
+   10. Privacy Considerations
+   11. IANA Considerations
+   12. References
+     12.1.  Normative References
+     12.2.  Informative References
    Acknowledgments
    Author's Address
 
@@ -197,11 +199,24 @@ Table of Contents
       payment, a subscription, an account with user name/password, an
       age, a legal jurisdiction, others.
 
-4.  Web bot authentication categories
+4.  should we quote privacy pass arch here, or use VC model with a
+    Holder?
+
+   *Issuer*: An entity that generates and provides credentials to agents
+   after the Attester has verified certain attributes.
+
+   *Attester*: An entity that evaluates an agent's characteristics or
+   behavior and provides evidence to an Issuer to support credential
+   issuance.
+
+   *Verifier*: An entity that validates the authenticity and integrity
+   of a credential presented by an agent.
+
+5.  Web bot authentication categories
 
    We divide web bot authentication in three categories.
 
-4.1.  Identifying providers
+5.1.  Identifying providers
 
    Organizations operating bots may need to authenticate their agents to
    access certain web resources.  Authentication mechanisms can help
@@ -218,7 +233,7 @@ Table of Contents
    *  AI augmented queries that are looking to identify against a set of
       newspapers.
 
-4.2.  User Account Identification
+5.2.  User Account Identification
 
    Bots acting on behalf of registered users may require authentication
    to access user-specific data or services.
@@ -230,7 +245,7 @@ Table of Contents
 
    *  Most authorisation use cases for [MCP-AUTH] and [A2A-AUTH].
 
-4.3.  Attribute-Based Access
+5.3.  Attribute-Based Access
 
    In scenarios where full identification is unnecessary or undesirable,
    agents may present credentials that attest to specific attributes
@@ -249,7 +264,7 @@ Table of Contents
    *  Selective disclosure of a credential attribute (location, age)
       such as [PRIVATE-PROOF-API].
 
-5.  Architecture
+6.  Architecture
 
    The architecture involves multiple actors: a credential issuer that
    requires an certain criteria to be passed via an attester, the client
@@ -261,7 +276,7 @@ Table of Contents
    authentication without necessarily revealing identifying details to
    each intermediate.
 
-5.1.  Overview
+6.1.  Overview
 
                         +---------------+             +----------+
                    .--->| Reverse Proxy |------------>|  Origin  |
@@ -277,7 +292,7 @@ Table of Contents
                    '--->| Attester |----------------->|  Issuer  |
                         +----------+                  +----------+
 
-5.2.  AI agent use example
+6.2.  AI agent use example
 
    Let's consider a modelisation of the AI space, where a human request
    might go through a web browser, or through an agent making request.
@@ -314,7 +329,7 @@ Table of Contents
    From an origin perspective, it's interesting to identify the company,
    rate limit individual users, and authorize them if needed.
 
-6.  Security goals and threat model
+7.  Security goals and threat model
 
    The security model includes several actors: credential issuers,
    attesters, clients (bots or agents), reverse proxies, and origin
@@ -322,7 +337,7 @@ Table of Contents
    credential revocation, support delegation and rotation, and maintain
    trust boundaries.
 
-6.1.  Public vs private presentation
+7.1.  Public vs private presentation
 
    If the Issuer is also the Origin or its reverse proxy, it is possible
    to use shared secrets for verification.  In cases where the issuer
@@ -330,7 +345,7 @@ Table of Contents
    necessary, allowing the bot to prove authenticity using a public key
    infrastructure.
 
-6.2.  Single vs multi show
+7.2.  Single vs multi show
 
    Some credentials may be designed for one-time use only (for anti
    replay or privacy reasons), while others can support multiple
@@ -338,19 +353,19 @@ Table of Contents
    This distinction affects privacy, scalability, and implementation
    complexity.
 
-6.3.  Transport
+7.3.  Transport
 
    Authentication tokens may be exchanged at different protocol layers
    and through different transports.  Each may have different
    deployment, performance, and security guarantees.
 
    For TLS, we have seen [REQ-MTLS] and [PRIVACYPASS-IN-TLS]
-   respectively addressing Section 4.1 and Section 4.3.
+   respectively addressing Section 5.1 and Section 5.3.
 
    For HTTP, we see [HTTP-MESSAGE-SIGNATURE-FOR-BOTS] or
    [DPOP-AUTH-RFC], and [PRIVACYPASS-HTTP-AUTH-RFC] respectively
-   addressing Section 4.1 and Section 4.3.  [OAUTH-BEARER-RFC] fits as
-   well for Section 4.2.
+   addressing Section 5.1 and Section 5.3.  [OAUTH-BEARER-RFC] fits as
+   well for Section 5.2.
 
    Other methods have been seen such as leveraging a dedicated format on
    top of a JavaScript API.  This is the case for W3C
@@ -367,14 +382,14 @@ Table of Contents
 
    *  [MCP-AUTH] uses [OAUTH2-RFC] as a resource server.
 
-6.4.  Round trip
+7.4.  Round trip
 
    Protocols should thrive to minimise the number of round trips between
    a client and the issuer, and between clients and the origin.
 
-7.  Key management and discovery
+8.  Key management and discovery
 
-7.1.  Catalog
+8.1.  Catalog
 
    Like there are registries to resolve IP address metadata, there are
    going to be registries to identify the owner of public key material.
@@ -388,14 +403,14 @@ Table of Contents
    As an analogy, one can think of [CERTIFICATE-TRANSPARENCY-RFC], or
    the more recent effort in [KEY-TRANSPARENCY-ARCHITECTURE].
 
-7.2.  Submission / out-of-band
+8.2.  Submission / out-of-band
 
    Sumbission is also going to happen out of band.  This is both for a
    practical reason -- it is simpler than setting up a catalog --, and
    for privacy reason given you don't have to expose information through
    a catalog.
 
-7.3.  In-flight
+8.3.  In-flight
 
    Discovery may happen in-flight, that is when a request arrives from a
    client to an origin.  This could be considered a trust on first use.
@@ -405,35 +420,45 @@ Table of Contents
    Such discovery could be via an HTTP header containing a domain name
    with a well-known, a URL, a certificate, others.
 
-7.4.  Format
+8.4.  Format
 
    There is a multitude of Key and directory format.  This include and
    is not limited to JWKS, CWKS, Privacy Pass, Agent Card, or HTTP
    Message Signatures.
 
-8.  Security Considerations
+9.  Security Considerations
 
-   TODO Security
+   This glossary provides terminology for web bot authentication.  While
+   this document does not define or recommend specific protocols,
+   terminology choices have direct security implications:
 
-   Quote [RFC9518] and [RFC8890]
+   *Impersonation Resistance*  Clearly defined roles are essential for
+      preventing entities from falsely claiming identities.
 
-   Replay Credential expiry
+   *Credential Replay and Theft*  Definitions such as Section 7.2 help
+      describe key mechanisms that mitigate the misuse of credentials if
+      stolen.
 
-9.  Privacy Considerations
+   *Key Management*  Section 8 is key to protocol security, and has to
+      be considered.
 
-   See [RFC6973].
+   In addition, protocols should consider decentralization [RFC9518] and
+   end-user impact [RFC8890].
+
+10.  Privacy Considerations
 
    Authentication mechanisms should minimize the collection and exposure
    of personal data.  Techniques like selective disclosure and
-   unlinkability help protect user privacy.
+   unlinkability help protect user privacy.  Protocols should refer to
+   [RFC6973].
 
-10.  IANA Considerations
+11.  IANA Considerations
 
    This document has no IANA actions.
 
-11.  References
+12.  References
 
-11.1.  Normative References
+12.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -458,7 +483,7 @@ Table of Contents
               Internet Standards", RFC 9518, DOI 10.17487/RFC9518,
               December 2023, <https://www.rfc-editor.org/rfc/rfc9518>.
 
-11.2.  Informative References
+12.2.  Informative References
 
    [A2A-AUTH] "A2A protocol Authentication", n.d.,
               <https://google.github.io/
