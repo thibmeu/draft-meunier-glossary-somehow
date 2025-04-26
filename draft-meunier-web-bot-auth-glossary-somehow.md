@@ -78,6 +78,9 @@ informative:
     title: W3C Private State Token API
     target: https://wicg.github.io/trust-token-api/
   REQ-MTLS: I-D.draft-jhoyla-req-mtls-flag
+  VERIFIABLE-CREDENTIALS:
+    title: "Verifiable Credentials Data Model v1.1"
+    target: https://www.w3.org/TR/2022/REC-vc-data-model-20220303/
 
 
 --- abstract
@@ -91,8 +94,6 @@ AI-related technologies.
 --- middle
 
 # Introduction
-
-> _Thibault: this is mostly taken from {{HTTP-MESSAGE-SIGNATURE-FOR-BOTS}}_
 
 Agents are increasingly used in business and user workflows, including AI
 assistants, search indexing, content aggregation, and automated testing. These
