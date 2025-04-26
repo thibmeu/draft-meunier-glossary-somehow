@@ -1,6 +1,6 @@
 ---
 title: "Web bot auth Glossary"
-abbrev: "Agent Glossary"
+abbrev: "Web bot auth Glossary"
 category: info
 
 docname: draft-meunier-web-bot-auth-glossary-somehow-latest
@@ -194,9 +194,9 @@ The architecture involves multiple actors: a credential issuer that requires an 
                      +----------+                  +----------+
 ~~~
 
-## Use cases
+## Auth categories
 
-We divide the use cases in three categories.
+We divide web bot authentication in three categories.
 
 ### Identifying a company {#use-case-company}
 
@@ -334,6 +334,9 @@ There is a multitude of Key and directory format. This include and is not limite
 TODO Security
 
 Quote {{!RFC9518}} and {{!RFC8890}}
+
+Replay
+Credential expiry
 
 
 # Privacy Considerations
