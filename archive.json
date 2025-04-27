@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-24T01:47:02.760957+00:00",
+  "timestamp": "2025-04-27T01:52:11.928363+00:00",
   "repo": "thibmeu/draft-meunier-glossary-somehow",
   "labels": [
     {
@@ -49,6 +49,41 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOOd3gLc6z-7aE",
+      "title": "Add acknowledgements",
+      "url": "https://github.com/thibmeu/draft-meunier-glossary-somehow/issues/1",
+      "state": "OPEN",
+      "author": "thibmeu",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "thibmeu"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-04-25T10:11:54Z",
+      "updatedAt": "2025-04-25T10:11:54Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 2,
+      "id": "I_kwDOOd3gLc60IcUf",
+      "title": "Consider mentioning aipref and robots.txt if relevant",
+      "url": "https://github.com/thibmeu/draft-meunier-glossary-somehow/issues/2",
+      "state": "OPEN",
+      "author": "thibmeu",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-04-26T16:34:38Z",
+      "updatedAt": "2025-04-26T16:34:38Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
   "pulls": []
 }
