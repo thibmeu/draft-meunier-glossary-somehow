@@ -378,9 +378,9 @@ Sumbission is also going to happen out of band. This is both for a practical
 reason -- it is simpler than setting up a catalog --, and for privacy reason
 given you don't have to expose information through a catalog.
 
-## In-flight
+## On-path
 
-Discovery may happen in-flight, that is when a request arrives from a client to
+Discovery may happen on-path, that is when a request arrives from a client to
 an origin.
 This could be considered a trust on first use. While the level of trust is low,
 it could be viable for certain use cases.
