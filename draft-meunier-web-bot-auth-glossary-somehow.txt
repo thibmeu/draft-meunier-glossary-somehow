@@ -4,8 +4,8 @@
 
 Network Working Group                                         T. Meunier
 Internet-Draft                                                Cloudflare
-Intended status: Informational                             26 April 2025
-Expires: 28 October 2025
+Intended status: Informational                             28 April 2025
+Expires: 30 October 2025
 
 
                          Web bot auth Glossary
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 October 2025.
+   This Internet-Draft will expire on 30 October 2025.
 
 Copyright Notice
 
@@ -71,9 +71,8 @@ Table of Contents
      4.1.  Identifying providers
      4.2.  User Account Identification
      4.3.  Attribute-Based Access
-   5.  Architecture
-     5.1.  Overview
-     5.2.  AI agent use example
+   5.  Ecosystem overview
+     5.1.  AI agent use example
    6.  Security goals and threat model
      6.1.  Public vs private presentation
      6.2.  Single vs multi show
@@ -259,9 +258,9 @@ Table of Contents
    *  Selective disclosure of a credential attribute (location, age)
       such as [PRIVATE-PROOF-API].
 
-5.  Architecture
+5.  Ecosystem overview
 
-   The architecture involves multiple actors: a credential issuer that
+   The ecosystem involves multiple actors: a credential issuer that
    requires an certain criteria to be passed via an attester, the client
    which an be a bot or human-mediated agent which IP is not known, and
    the web origin placed behind a reverse proxy that may be fronting its
@@ -270,8 +269,6 @@ Table of Contents
    by proxies before reaching the origin.  This chain allows for
    authentication without necessarily revealing identifying details to
    each intermediate.
-
-5.1.  Overview
 
                         +---------------+             +----------+
                    .--->| Reverse Proxy |------------>|  Origin  |
@@ -287,7 +284,7 @@ Table of Contents
                    '--->| Attester |----------------->|  Issuer  |
                         +----------+                  +----------+
 
-5.2.  AI agent use example
+5.1.  AI agent use example
 
    Humans and bots often interact with origins indirectly via clients
    like browsers, agents, or CLI tools.  These clients handle requests,
