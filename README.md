@@ -4,10 +4,10 @@
 
 This is the working area for the individual Internet-Draft, "Web bot auth Glossary".
 
-* [Editor's Copy](https://thibmeu.github.io/draft-meunier-glossary-somehow/#go.draft-meunier-web-bot-auth-glossary-somehow.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-meunier-web-bot-auth-glossary-somehow)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-meunier-web-bot-auth-glossary-somehow)
-* [Compare Editor's Copy to Individual Draft](https://thibmeu.github.io/draft-meunier-glossary-somehow/#go.draft-meunier-web-bot-auth-glossary-somehow.diff)
+* [Editor's Copy](https://thibmeu.github.io/draft-meunier-glossary-somehow/#go.draft-meunier-web-bot-auth-glossary.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-meunier-web-bot-auth-glossary)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-meunier-web-bot-auth-glossary)
+* [Compare Editor's Copy to Individual Draft](https://thibmeu.github.io/draft-meunier-glossary-somehow/#go.draft-meunier-web-bot-auth-glossary.diff)
 
 
 ## Contributing
