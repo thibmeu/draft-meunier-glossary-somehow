@@ -441,6 +441,11 @@ Table of Contents
    unlinkability help protect user privacy.  Protocols should refer to
    [RFC6973].
 
+   Multiple protocols are also likely to be used in coordination: to
+   identify an orgnization, then to identify the User-Agent, and
+   possibly rate limit.  It is important to consider the privacy of
+   these layers together as well.
+
 10.  IANA Considerations
 
    This document has no IANA actions.
