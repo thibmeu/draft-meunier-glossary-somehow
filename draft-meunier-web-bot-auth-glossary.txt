@@ -155,7 +155,7 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-   *Agent*  autonomous entities that perceive the environment and can
+   *Agent*  An autonomous entityg that perceive the environment and can
       take actions on behalf of users.
 
    *Bot*  A type of agent that operates automatically, often performing
