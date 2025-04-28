@@ -145,7 +145,7 @@ mechanism that empowers small and large agents to share their identity.
 {::boilerplate bcp14-tagged}
 
 **Agent**
-: An autonomous entityg that perceive the environment and can take actions on behalf of users.
+: An autonomous entity that perceive the environment and can take actions on behalf of users.
 
 **Bot**
 : A type of agent that operates automatically, often performing repetitive tasks. Bots may identify themselves or attempt to mimic human behavior.
@@ -176,7 +176,7 @@ mechanism that empowers small and large agents to share their identity.
   agent cannot be correlated by the verifier.
 
 **Account**
-: Persistent identifier of an agent to an origin. This requires a registration.
+: Persistent identifier of an entity to an origin. This requires a registration.
 
 **Registration**
 : The creation of an identity. It can involve one time payment, a subscription,
