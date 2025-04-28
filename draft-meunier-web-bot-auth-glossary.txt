@@ -81,7 +81,7 @@ Table of Contents
    7.  Key management and discovery
      7.1.  Catalog
      7.2.  Submission / out-of-band
-     7.3.  In-flight
+     7.3.  On-path
      7.4.  Format
    8.  Security Considerations
    9.  Privacy Considerations
@@ -399,9 +399,9 @@ Table of Contents
    for privacy reason given you don't have to expose information through
    a catalog.
 
-7.3.  In-flight
+7.3.  On-path
 
-   Discovery may happen in-flight, that is when a request arrives from a
+   Discovery may happen on-path, that is when a request arrives from a
    client to an origin.  This could be considered a trust on first use.
    While the level of trust is low, it could be viable for certain use
    cases.
