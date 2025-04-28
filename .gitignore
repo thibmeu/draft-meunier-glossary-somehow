@@ -17,7 +17,7 @@
 /versioned/
 Gemfile.lock
 archive.json
-draft-meunier-web-bot-auth-glossary-somehow.xml
+draft-meunier-web-bot-auth-glossary.xml
 package-lock.json
 report.xml
 !requirements.txt
