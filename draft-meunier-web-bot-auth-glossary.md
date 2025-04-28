@@ -3,7 +3,7 @@ title: "Web bot auth Glossary"
 abbrev: "Web bot auth Glossary"
 category: info
 
-docname: draft-meunier-web-bot-auth-glossary-somehow-latest
+docname: draft-meunier-web-bot-auth-glossary-latest
 submissiontype: IETF
 number:
 date:
@@ -22,7 +22,7 @@ venue:
 #  mail: WG@example.com
 #  arch: https://example.com/WG
   github: "thibmeu/draft-meunier-glossary-somehow"
-  latest: "https://thibmeu.github.io/draft-meunier-glossary-somehow/draft-meunier-web-bot-auth-glossary-somehow.html"
+  latest: "https://thibmeu.github.io/draft-meunier-glossary/draft-meunier-web-bot-auth-glossary.html"
 
 author:
  -
