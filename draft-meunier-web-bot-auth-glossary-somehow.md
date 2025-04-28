@@ -238,9 +238,9 @@ Examples:
   {{PRIVATE-PROOF-API}}.
 
 
-# Architecture
+# Ecosystem overview
 
-The architecture involves multiple actors: a credential issuer that requires an
+The ecosystem involves multiple actors: a credential issuer that requires an
 certain criteria to be passed via an attester, the client which an be a bot or
 human-mediated agent which IP is not known, and the web origin placed behind a
 reverse proxy that may be fronting its infrastructure. The issuer provides
@@ -248,8 +248,6 @@ cryptographic credentials to the client, which are then attached to requests and
 optionally verified by proxies before reaching the origin. This chain allows for
 authentication without necessarily revealing identifying details to each
 intermediate.
-
-## Overview
 
 ~~~aasvg
                      +---------------+             +----------+
