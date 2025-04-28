@@ -155,7 +155,7 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-   *Agent*  An autonomous entityg that perceive the environment and can
+   *Agent*  An autonomous entity that perceive the environment and can
       take actions on behalf of users.
 
    *Bot*  A type of agent that operates automatically, often performing
@@ -189,7 +189,7 @@ Table of Contents
       credentials from the same agent cannot be correlated by the
       verifier.
 
-   *Account*  Persistent identifier of an agent to an origin.  This
+   *Account*  Persistent identifier of an entity to an origin.  This
       requires a registration.
 
    *Registration*  The creation of an identity.  It can involve one time
