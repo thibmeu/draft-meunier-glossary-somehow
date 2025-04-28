@@ -145,7 +145,7 @@ mechanism that empowers small and large agents to share their identity.
 {::boilerplate bcp14-tagged}
 
 **Agent**
-: autonomous entities that perceive the environment and can take actions on behalf of users.
+: An autonomous entityg that perceive the environment and can take actions on behalf of users.
 
 **Bot**
 : A type of agent that operates automatically, often performing repetitive tasks. Bots may identify themselves or attempt to mimic human behavior.
