@@ -421,6 +421,10 @@ Authentication mechanisms should minimize the collection and exposure of
 personal data. Techniques like selective disclosure and unlinkability help
 protect user privacy. Protocols should refer to {{RFC6973}}.
 
+Multiple protocols are also likely to be used in coordination: to identify an
+orgnization, then to identify the User-Agent, and possibly rate limit. It is
+important to consider the privacy of these layers together as well.
+
 
 # IANA Considerations
 
