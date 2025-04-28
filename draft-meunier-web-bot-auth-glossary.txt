@@ -260,19 +260,17 @@ Table of Contents
 
 5.  Ecosystem overview
 
-                        +---------------+             +----------+
-                   .--->| Reverse Proxy |------------>|  Origin  |
-                  /     +---------------+             +-----+----+
-                 /                                          ^
-                /                                           ║
-   +----------+/                                            ║
-   |  Client  +                                           Trust
-   +----------+\                                            ║
-                \                                           ║
-                 \                                          v
-                  \     +----------+                  +-----+----+
-                   '--->| Attester |----------------->|  Issuer  |
-                        +----------+                  +----------+
+                       +---------------+       +----------+
+                  .--->| Reverse Proxy |------>|  Origin  |
+                 /     +---------------+       +-----+----+
+                /                                    ^
+   +----------+/                                     ║
+   |  Client  +                                    Trust
+   +----------+\                                     ║
+                \                                    v
+                 \     +----------+            +-----+----+
+                  '--->| Attester |----------->|  Issuer  |
+                       +----------+            +----------+
 
    The ecosystem involves multiple actors: a credential issuer that
    requires an certain criteria to be passed via an attester, the client
