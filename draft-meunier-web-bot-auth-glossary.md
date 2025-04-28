@@ -106,7 +106,7 @@ agents need to reliably identify themselves to origins for several reasons:
 3. Protection against impersonation and reputation management
 4. Service level differentiation between human and automated traffic
 
-Current identification methods such as IP allowlisting, User-Agent strings, or
+Current identification methods such as IP allow-listing, User-Agent strings, or
 shared API keys have significant limitations in security, scalability,
 manageability, and fairness. This document presents these examples, as well as
 possible paths to address them.
@@ -114,9 +114,9 @@ possible paths to address them.
 # Motivation {#motivation}
 
 There is an increase in agent traffic on the Internet. Many agents
-choose to identify their traffic today via IP Address lists and/or unique
+choose to identify their traffic today via lists of IP Addresses and/or unique
 User-Agents. This is often done to demonstrate trust and safety claims, support
-allowlisting/denylisting the traffic in a granular manor, and enable sites to
+allow-listing/deny-listing the traffic in a granular manner, and enable sites to
 monitor and rate limit per agent operator. However, these mechanisms have drawbacks:
 
  1. User-Agent, when used alone, can be spoofed meaning anyone may attempt to
@@ -145,7 +145,7 @@ mechanism that empowers small and large agents to share their identity.
 {::boilerplate bcp14-tagged}
 
 **Agent**
-: An autonomous entity that perceive the environment and can take actions on behalf of users.
+: An autonomous entity that perceives the environment and can take actions on behalf of users.
 
 **Bot**
 : A type of agent that operates automatically, often performing repetitive tasks. Bots may identify themselves or attempt to mimic human behavior.
@@ -154,7 +154,7 @@ mechanism that empowers small and large agents to share their identity.
 : The primary server hosting the web content or service that an agent intends to access.
 
 **Application Firewall**
-: control incoming traffic to an origin based on a set of rules. This may include but is not limited to IP filtering, User-Agent match, or cryptographic signature verification.
+: Controls incoming traffic to an origin based on a set of rules. This may include but is not limited to IP filtering, User-Agent matching, or cryptographic signature verification.
 
 **Reverse proxy**
 : An intermediary server that forwards client requests to the origin server, often performing functions like load balancing, authentication, or caching.
@@ -166,10 +166,10 @@ mechanism that empowers small and large agents to share their identity.
 : A physical person, like you and me.
 
 **Rate limit**
-: A control mechanism that restricts access of an Agent to a resource provided
+: A control mechanism that restricts the access of an Agent to a resource provided
   by an Origin Server. An Origin can decide to rate limit all connections from
   an individual Client, from a specific Provider, or to a specific resource.
-  This may be a fixed number of request, a budget, a time, location, legal.
+  This may be a fixed number of requests, a budget, a time, a location, or legal requirements.
 
 **Unlinkability**
 : A property ensuring that multiple interactions or credentials from the same
@@ -209,7 +209,7 @@ Examples:
 
 - Web crawlers wanting to authenticate against origins such as search engines,
 - Security companies that want to perform scans to identify malicious URLs,
-- AI augmented queries that are looking to identify against a set of newspapers.
+- AI augmented queries that are looking to identify themselves to a set of newspapers.
 
 ## User Account Identification {#use-case-known-account}
 
@@ -218,9 +218,9 @@ user-specific data or services.
 
 Examples:
 
-- Authenticating and authorizing a known user against a particular resources,
-  such as a newspaper they have a subscription for,
-- Most authorisation use cases for {{MCP-AUTH}} and {{A2A-AUTH}}.
+- Authenticating and authorizing a known user against particular resources,
+  such as newspapers they have a subscription for,
+- Most authorization use cases for {{MCP-AUTH}} and {{A2A-AUTH}}.
 
 
 ## Attribute-Based Access {#use-case-selective-disclosure}
@@ -233,7 +233,7 @@ Examples:
 
 - Add a signal to limit visual CAPTCHA challenge such as {{PRIVATE-ACCESS-TOKEN}},
 - Gating access to a resource for longstanding users such as {{LOX}},
-- Search engine with a fixed number of request such as {{PRIVACY-PASS-KAGI}},
+- Using a search engine with a fixed number of requests such as {{PRIVACY-PASS-KAGI}},
 - Selective disclosure of a credential attribute (location, age) such as
   {{PRIVATE-PROOF-API}}.
 
@@ -256,23 +256,24 @@ Examples:
 ~~~
 
 The ecosystem involves multiple actors: a credential issuer that requires an
-certain criteria to be passed via an attester, the client which an be a bot or
-human-mediated agent which IP is not known, and the web origin placed behind a
+certain criteria to be passed via an attester, the client which can be a bot or
+human-mediated agent whose IP is unknown, and the web origin placed behind a
 reverse proxy that may be fronting its infrastructure. The issuer provides
-cryptographic credentials to the client, which are then attached to requests and
+cryptographic credentials to the client, which are then linked to requests and
 optionally verified by proxies before reaching the origin. This chain allows for
 authentication without necessarily revealing identifying details to each
 intermediate.
 
 ## AI agent use example
 
-Humans and bots often interact with origins indirectly via clients like
+Humans and bots often interact with origins indirectly via clients such as
 browsers, agents, or CLI tools. These clients handle requests, potentially
 traversing reverse proxies that manage TLS termination, DDoS protection, and
 caching.
 
-The rise of advanced browser orchestration blurs lines between human-driven and
-automated requests, making reliable bot identification increasingly complex.
+The rise of advanced browser orchestration blurs the line between human-driven and
+automated requests, making identifying traffic as automated or not increasingly
+ambiguous.
 
 ~~~aasvg
                 .------------------------------.
@@ -315,7 +316,7 @@ delegation and rotation, and maintain trust boundaries.
 If the Issuer is also the Origin or its reverse proxy, it is possible to use
 shared secrets for verification. In cases where the issuer and verifier are
 different entities, asymmetric cryptography becomes necessary, allowing the bot
-to prove authenticity using a public key infrastructure.
+to prove its identity using a public key infrastructure.
 
 ## Single vs multi show {#single-vs-multi-show}
 
@@ -346,7 +347,7 @@ Focusing on AI specifically, it's worth mentioning two proponent protocol
 definition efforts:
 
 - {{A2A-AUTH}} which follows {{OPENAPI3-AUTH}}. This means it allows for Basic,
-  Bearer, API Keys, and {{OAUTH2-RFC}}. OpenAPI mentions using {{HTTP-AUTHSCHEME}}
+  Bearer, API Keys, and {{OAUTH2-RFC}}. OpenAPI mentions using the {{HTTP-AUTHSCHEME}}
   registry, but there does not seem to be a definition for recent schemes such as
   {{PRIVACYPASS-HTTP-AUTH-RFC}}, {{CONCEALED-AUTH-RFC}}, or {{DPOP-AUTH-RFC}}.
 - {{MCP-AUTH}} uses {{OAUTH2-RFC}} as a resource server.
@@ -354,44 +355,44 @@ definition efforts:
 
 ## Round trip
 
-Protocols should thrive to minimise the number of round trips between a client
+Protocols should strive to minimise the number of round trips between a client
 and the issuer, and between clients and the origin.
 
 # Key management and discovery {#key-management}
 
 ## Catalog
 
-Like there are registries to resolve IP address metadata, there are going to be
+Just as there are registries to resolve IP address metadata, there are going to be
 registries to identify the owner of public key material.
 These are mentioned by {{A2A-DISCOVERY}} and {{MCP-DISCOVERY}}.
 
-The primary goal of these catalog is to associate metadata to public key, and to
-discover them. They SHOULD have some sort of tamper resistent, to prevent the
-provider of a catalog to provide from information.
+The primary goal of these catalogs is to associate metadata with a public key, and the
+discovery of the associated metadata. They SHOULD have some sort of tamper resistance, to prevent the
+provider of a catalog providing incorrect information.
 
 As an analogy, one can think of {{CERTIFICATE-TRANSPARENCY-RFC}}, or the more
 recent effort in {{KEY-TRANSPARENCY-ARCHITECTURE}}.
 
 ## Submission / out-of-band
 
-Sumbission is also going to happen out of band. This is both for a practical
-reason -- it is simpler than setting up a catalog --, and for privacy reason
+Submission is also going to happen out-of-band. This is both for a practical
+reason, it is simpler than setting up a catalog, and for privacy reasons,
 given you don't have to expose information through a catalog.
 
 ## On-path
 
 Discovery may happen on-path, that is when a request arrives from a client to
 an origin.
-This could be considered a trust on first use. While the level of trust is low,
+This could be considered a form of trust-on-first-use. While the level of trust is low,
 it could be viable for certain use cases.
 
 Such discovery could be via an HTTP header containing a domain name with a
-well-known, a URL, a certificate, others.
+well-known, a URL, a certificate, etc.
 
 ## Format
 
-There is a multitude of Key and directory format. This include and is not
-limited to JWKS, CWKS, Privacy Pass, Agent Card, or HTTP Message Signatures.
+There are a multitude of Key and directory formats. These include but are not
+limited to JWKS, CWKS, Privacy Pass, Agent Card, and HTTP Message Signatures.
 
 
 # Security Considerations
