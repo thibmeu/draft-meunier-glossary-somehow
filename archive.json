@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-27T01:52:11.928363+00:00",
+  "timestamp": "2025-04-29T01:48:16.582477+00:00",
   "repo": "thibmeu/draft-meunier-glossary-somehow",
   "labels": [
     {
@@ -83,7 +83,68 @@
       "updatedAt": "2025-04-26T16:34:38Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOOd3gLc60SDOR",
+      "title": "Consider using Authentication/Authorization more clearly",
+      "url": "https://github.com/thibmeu/draft-meunier-glossary-somehow/issues/3",
+      "state": "OPEN",
+      "author": "thibmeu",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [
+        "question"
+      ],
+      "body": "The draaft makes an effort to not use these terms. Should it asdd them to the definition and use them instead.",
+      "createdAt": "2025-04-28T11:28:19Z",
+      "updatedAt": "2025-04-28T11:28:19Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 4,
+      "id": "PR_kwDOOd3gLc6UKHES",
+      "title": "Edit pass",
+      "url": "https://github.com/thibmeu/draft-meunier-glossary-somehow/pull/4",
+      "state": "MERGED",
+      "author": "jhoyla",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Minor editorial changes",
+      "createdAt": "2025-04-28T12:18:36Z",
+      "updatedAt": "2025-04-28T12:28:00Z",
+      "baseRepository": "thibmeu/draft-meunier-glossary-somehow",
+      "baseRefName": "main",
+      "baseRefOid": "e11cc5871ff4b12c15fc7d9d025c92fd03eee497",
+      "headRepository": "jhoyla/draft-meunier-glossary-somehow",
+      "headRefName": "jhoyla/edit-pass",
+      "headRefOid": "632f0dbf2241d3f305a11133fecd214c2d058770",
+      "closedAt": "2025-04-28T12:28:00Z",
+      "mergedAt": "2025-04-28T12:28:00Z",
+      "mergedBy": "thibmeu",
+      "mergeCommit": {
+        "oid": "a325e4f5fdce6a6dd1db638d13916ec1332932e9"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOd3gLc6m1zBC",
+          "commit": {
+            "abbreviatedOid": "632f0db"
+          },
+          "author": "thibmeu",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "Looks OK. Thanks",
+          "createdAt": "2025-04-28T12:27:10Z",
+          "updatedAt": "2025-04-28T12:27:10Z",
+          "comments": []
+        }
+      ]
+    }
+  ]
 }
