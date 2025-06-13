@@ -4,8 +4,8 @@
 
 Network Working Group                                         T. Meunier
 Internet-Draft                                                Cloudflare
-Intended status: Informational                             28 April 2025
-Expires: 30 October 2025
+Intended status: Informational                              13 June 2025
+Expires: 15 December 2025
 
 
                          Web bot auth Glossary
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 October 2025.
+   This Internet-Draft will expire on 15 December 2025.
 
 Copyright Notice
 
@@ -258,6 +258,9 @@ Table of Contents
 
    *  Selective disclosure of a credential attribute (location, age)
       such as [PRIVATE-PROOF-API].
+
+   *  Redeeming previously issued credits as in
+      [ANONYMOUS-CREDIT-TOKENS].
 
 5.  Ecosystem overview
 
@@ -490,6 +493,11 @@ Table of Contents
               "A2A protocol Agent discovery", n.d.,
               <https://google.github.io/A2A/#/topics/agent_discovery>.
 
+   [ANONYMOUS-CREDIT-TOKENS]
+              "Anonymous Credit Tokens", n.d.,
+              <https://samuelschlesinger.github.io/ietf-anonymous-
+              credit-tokens/draft-schlesinger-cfrg-act.html>.
+
    [CERTIFICATE-TRANSPARENCY-RFC]
               Laurie, B., Langley, A., and E. Kasper, "Certificate
               Transparency", RFC 6962, DOI 10.17487/RFC6962, June 2013,
@@ -515,9 +523,9 @@ Table of Contents
    [HTTP-MESSAGE-SIGNATURE-FOR-BOTS]
               Meunier, T., "HTTP Message Signatures for automated
               traffic Architecture", Work in Progress, Internet-Draft,
-              draft-meunier-web-bot-auth-architecture-00, 15 April 2025,
+              draft-meunier-web-bot-auth-architecture-01, 7 May 2025,
               <https://datatracker.ietf.org/doc/html/draft-meunier-web-
-              bot-auth-architecture-00>.
+              bot-auth-architecture-01>.
 
    [KEY-TRANSPARENCY-ARCHITECTURE]
               McMillion, B., "Key Transparency Architecture", Work in
