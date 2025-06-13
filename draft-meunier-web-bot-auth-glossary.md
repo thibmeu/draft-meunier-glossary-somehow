@@ -76,6 +76,9 @@ informative:
   PRIVATE-PROOF-API:
     title: Explainer by Googlers Private Proof API
     target: https://explainers-by-googlers.github.io/private-proof/
+  ANONYMOUS-CREDIT-TOKENS:
+    title: Anonymous Credit Tokens
+    target: https://samuelschlesinger.github.io/ietf-anonymous-credit-tokens/draft-schlesinger-cfrg-act.html
   PRIVATE-STATE-TOKEN:
     title: W3C Private State Token API
     target: https://wicg.github.io/trust-token-api/
@@ -236,7 +239,7 @@ Examples:
 - Using a search engine with a fixed number of requests such as {{PRIVACY-PASS-KAGI}},
 - Selective disclosure of a credential attribute (location, age) such as
   {{PRIVATE-PROOF-API}}.
-
+- Redeeming previously issued credits as in {{ANONYMOUS-CREDIT-TOKENS}}.
 
 # Ecosystem overview
 
