@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-15T02:03:52.775418+00:00",
+  "timestamp": "2025-06-17T01:54:44.962241+00:00",
   "repo": "thibmeu/draft-meunier-glossary-somehow",
   "labels": [
     {
@@ -116,9 +116,24 @@
       ],
       "body": "Mentioned by @jhoyla\n\nWikipedia for [Principal](https://en.wikipedia.org/wiki/Principal_%28commercial_law%29)\n\n> In [commercial law](https://en.wikipedia.org/wiki/Commercial_law), a principal is a person, [legal](https://en.wikipedia.org/wiki/Legal_person) or [natural](https://en.wikipedia.org/wiki/Natural_person), who authorizes an [agent](https://en.wikipedia.org/wiki/Agent_%28law%29) to act to create one or more legal relationships with a [third party](https://en.wiktionary.org/wiki/third_party).",
       "createdAt": "2025-04-29T12:03:33Z",
-      "updatedAt": "2025-04-29T12:03:33Z",
+      "updatedAt": "2025-06-16T20:48:35Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "thibmeu",
+          "authorAssociation": "OWNER",
+          "body": "Interestingly, [ucan-wg/spec](https://github.com/ucan-wg/spec?tab=readme-ov-file#roles) uses Principal as well\n\nTheir definition\n> An agent identified by DID (listed in a UCAN's iss or aud field)\n\nfyi @expede: there seems to be overlap, even though the goals are slightly different",
+          "createdAt": "2025-06-16T07:07:30Z",
+          "updatedAt": "2025-06-16T07:11:13Z"
+        },
+        {
+          "author": "expede",
+          "authorAssociation": "NONE",
+          "body": "> Interestingly, [ucan-wg/spec](https://github.com/ucan-wg/spec?tab=readme-ov-file#roles) uses Principal as well\n\nYeah \"principal\" is an established term in auth \ud83d\udcaf \n\n> there seems to be overlap, even though the goals are slightly different\n\nNeat! \ud83d\udc40 ",
+          "createdAt": "2025-06-16T20:48:35Z",
+          "updatedAt": "2025-06-16T20:48:35Z"
+        }
+      ]
     }
   ],
   "pulls": [
