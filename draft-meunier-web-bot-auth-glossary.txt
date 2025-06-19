@@ -4,8 +4,8 @@
 
 Network Working Group                                         T. Meunier
 Internet-Draft                                                Cloudflare
-Intended status: Informational                              13 June 2025
-Expires: 15 December 2025
+Intended status: Informational                              19 June 2025
+Expires: 21 December 2025
 
 
                          Web bot auth Glossary
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 December 2025.
+   This Internet-Draft will expire on 21 December 2025.
 
 Copyright Notice
 
@@ -73,7 +73,8 @@ Table of Contents
      4.3.  Attribute-Based Access
    5.  Ecosystem overview
      5.1.  AI agent use example
-   6.  Security goals and threat model
+     5.2.  Web crawler example
+   6.  Deployment considerations
      6.1.  Public vs private presentation
      6.2.  Single vs multi show
      6.3.  Transport
@@ -254,7 +255,7 @@ Table of Contents
    *  Gating access to a resource for longstanding users such as [LOX],
 
    *  Using a search engine with a fixed number of requests such as
-      [PRIVACY-PASS-KAGI],
+      [PRIVACYPASS-KAGI],
 
    *  Selective disclosure of a credential attribute (location, age)
       such as [PRIVATE-PROOF-API].
@@ -265,7 +266,7 @@ Table of Contents
 5.  Ecosystem overview
 
                        +---------------+       +----------+
-                  .--->| Reverse Proxy |------>|  Origin  |
+                  .--->| Reverse Proxy +------>|  Origin  |
                  /     +---------------+       +-----+----+
                 /                                    ^
    +----------+/                                     ║
@@ -273,7 +274,7 @@ Table of Contents
    +----------+\                                     ║
                 \                                    v
                  \     +----------+            +-----+----+
-                  '--->| Attester |----------->|  Issuer  |
+                  '--->| Attester +----------->|  Issuer  |
                        +----------+            +----------+
 
    The ecosystem involves multiple actors: a credential issuer that
@@ -322,7 +323,40 @@ Table of Contents
    organizations, rate-limit individuals, and authenticate users without
    relying solely on client IP or heuristics presented in Section 2.
 
-6.  Security goals and threat model
+5.2.  Web crawler example
+
+   Search engines, web archivers, and security analysis tools operate
+   bots as part of their operations to scan and retrieve content from a
+   variety of sources.  These automated agents are commonly referred to
+   as crawlers.
+
+   While their traffic is automated, it is often seen as desirable by
+   origins.  Legitimate crawlers contribute to improved SEO, enhanced
+   security posture, and broader content reach through search indexing
+   and archiving.  Reliable authentication allows origins to
+   differentiate these beneficial crawlers from malicious actors.
+
+   In the framework provided in Section 5, the interaction for a web
+   crawler can be described as follows:
+
+ .--------------------------.
+|    Company  +---------+    |       +---------------+       +----------+
+|             | Crawler +----+------>| Reverse Proxy +------>|  Origin  |
+|             +---------+    |       +---------------+       +----------+
+ '--------------------------'
+
+   Similar to the Section 5.1, the attester/issuer roles could be filled
+   by the crawling company, a reverse proxy, the origin, or a third
+   party.  For instance, the crawling company itself is often the most
+   authoritative entity to attest to the legitimacy of its crawlers,
+   issuing cryptographic credentials that identify them.  Origins
+   require robust mechanisms to identify these organizations and
+   differentiate their traffic without solely relying on the limitations
+   of IP addresses or User-Agent heuristics presented in Section 2.
+   This enables them to apply granular access controls, rate limits, or
+   preferential treatment based on the verified identity of the crawler.
+
+6.  Deployment considerations
 
    The security model includes several actors: credential issuers,
    attesters, clients (bots or agents), reverse proxies, and origin
@@ -337,6 +371,26 @@ Table of Contents
    and verifier are different entities, asymmetric cryptography becomes
    necessary, allowing the bot to prove its identity using a public key
    infrastructure.
+
+   Such work is being carried out in the CFRG and Privacy Pass working
+   group with the following drafts
+
+   +==============+====================+===============================+
+   | Presentation |Cryptography        | Privacy Pass                  |
+   +==============+====================+===============================+
+   | Private      |[ARC]               | [PRIVACYPASS-ARC]             |
+   +--------------+--------------------+-------------------------------+
+   | Private      |[OPRF]              | [PRIVACYPASS-PROTOCOL]        |
+   +--------------+--------------------+-------------------------------+
+   | Public/      |[BBS]               | [PRIVACYPASS-BBS]             |
+   | Private      |                    |                               |
+   +--------------+--------------------+-------------------------------+
+   | Public       |[BLINDRSA]          | [PRIVACYPASS-PROTOCOL]        |
+   +--------------+--------------------+-------------------------------+
+   | Public       |[PARTIALLY-BLINDRSA]| [PRIVACYPASS-PUBLIC-METADATA] |
+   +--------------+--------------------+-------------------------------+
+
+                                  Table 1
 
 6.2.  Single vs multi show
 
@@ -410,7 +464,10 @@ Table of Contents
    Discovery may happen on-path, that is when a request arrives from a
    client to an origin.  This could be considered a form of trust-on-
    first-use.  While the level of trust is low, it could be viable for
-   certain use cases.
+   certain deployments for which knowing all agents a-priori is not
+   viable.  This could be due to their multiplicity, a frequent change
+   in involved actors, or an origin that is willing to review new
+   changes manually for instance.
 
    Such discovery could be via an HTTP header containing a domain name
    with a well-known, a URL, a certificate, etc.
@@ -498,6 +555,22 @@ Table of Contents
               <https://samuelschlesinger.github.io/ietf-anonymous-
               credit-tokens/draft-schlesinger-cfrg-act.html>.
 
+   [ARC]      Yun, C. and C. A. Wood, "Anonymous Rate-Limited
+              Credentials", Work in Progress, Internet-Draft, draft-yun-
+              cfrg-arc-00, 5 February 2025,
+              <https://datatracker.ietf.org/doc/html/draft-yun-cfrg-arc-
+              00>.
+
+   [BBS]      Looker, T., Kalos, V., Whitehead, A., and M. Lodder, "The
+              BBS Signature Scheme", Work in Progress, Internet-Draft,
+              draft-irtf-cfrg-bbs-signatures-08, 3 March 2025,
+              <https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-
+              bbs-signatures-08>.
+
+   [BLINDRSA] Denis, F., Jacobs, F., and C. A. Wood, "RSA Blind
+              Signatures", RFC 9474, DOI 10.17487/RFC9474, October 2023,
+              <https://www.rfc-editor.org/rfc/rfc9474>.
+
    [CERTIFICATE-TRANSPARENCY-RFC]
               Laurie, B., Langley, A., and E. Kasper, "Certificate
               Transparency", RFC 6962, DOI 10.17487/RFC6962, June 2013,
@@ -563,9 +636,30 @@ Table of Contents
               <https://swagger.io/docs/specification/v3_0/
               authentication/>.
 
-   [PRIVACY-PASS-KAGI]
-              "Introducing Privacy Pass authentication for Kagi Search",
-              n.d., <https://blog.kagi.com/kagi-privacy-pass>.
+   [OPRF]     Davidson, A., Faz-Hernandez, A., Sullivan, N., and C. A.
+              Wood, "Oblivious Pseudorandom Functions (OPRFs) Using
+              Prime-Order Groups", RFC 9497, DOI 10.17487/RFC9497,
+              December 2023, <https://www.rfc-editor.org/rfc/rfc9497>.
+
+   [PARTIALLY-BLINDRSA]
+              Amjad, G. A., Hendrickson, S., Wood, C. A., and K. W. L.
+              Yeo, "Partially Blind RSA Signatures", Work in Progress,
+              Internet-Draft, draft-irtf-cfrg-partially-blind-rsa-01, 1
+              April 2025, <https://datatracker.ietf.org/doc/html/draft-
+              irtf-cfrg-partially-blind-rsa-01>.
+
+   [PRIVACYPASS-ARC]
+              Yun, C. and C. A. Wood, "Privacy Pass Issuance Protocol
+              for Anonymous Rate-Limited Credentials", Work in Progress,
+              Internet-Draft, draft-yun-privacypass-arc-00, 5 February
+              2025, <https://datatracker.ietf.org/doc/html/draft-yun-
+              privacypass-arc-00>.
+
+   [PRIVACYPASS-BBS]
+              Ladd, W., "BBS for PrivacyPass", Work in Progress,
+              Internet-Draft, draft-ladd-privacypass-bbs-01, 26 February
+              2024, <https://datatracker.ietf.org/doc/html/draft-ladd-
+              privacypass-bbs-01>.
 
    [PRIVACYPASS-HTTP-AUTH-RFC]
               Pauly, T., Valdez, S., and C. A. Wood, "The Privacy Pass
@@ -579,6 +673,24 @@ Table of Contents
               Draft, draft-pauly-privacypass-for-tls-00, 3 March 2025,
               <https://datatracker.ietf.org/doc/html/draft-pauly-
               privacypass-for-tls-00>.
+
+   [PRIVACYPASS-KAGI]
+              "Introducing Privacy Pass authentication for Kagi Search",
+              n.d., <https://blog.kagi.com/kagi-privacy-pass>.
+
+   [PRIVACYPASS-PROTOCOL]
+              Celi, S., Davidson, A., Valdez, S., and C. A. Wood,
+              "Privacy Pass Issuance Protocols", RFC 9578,
+              DOI 10.17487/RFC9578, June 2024,
+              <https://www.rfc-editor.org/rfc/rfc9578>.
+
+   [PRIVACYPASS-PUBLIC-METADATA]
+              Hendrickson, S. and C. A. Wood, "Privacy Pass Issuance
+              Protocols with Public Metadata", Work in Progress,
+              Internet-Draft, draft-ietf-privacypass-public-metadata-
+              issuance-02, 27 May 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-
+              privacypass-public-metadata-issuance-02>.
 
    [PRIVATE-ACCESS-TOKEN]
               "Challenge: Private Access Tokens", n.d.,

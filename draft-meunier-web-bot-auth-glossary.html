@@ -12,15 +12,15 @@ constraints, and opportunities that impact all Internet users. This document
 seeks to collect terminology and examples within the space, with a specific
 focus on AI related technologies. 
     " name="description">
-<meta content="xml2rfc 3.28.1" name="generator">
+<meta content="xml2rfc 3.29.0" name="generator">
 <meta content="bot authentication" name="keyword">
 <meta content="web security" name="keyword">
 <meta content="glossary" name="keyword">
 <meta content="automated agents" name="keyword">
 <meta content="draft-meunier-web-bot-auth-glossary-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.28.1
-    Python 3.12.10
+  xml2rfc 3.29.0
+    Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
@@ -29,7 +29,7 @@ focus on AI related technologies.
     platformdirs 4.3.8
     pycountry 24.6.1
     PyYAML 6.0.2
-    requests 2.32.3
+    requests 2.32.4
     setuptools 80.9.0
     wcwidth 0.2.13
 -->
@@ -1054,7 +1054,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Meunier</td>
-<td class="center">Expires 15 December 2025</td>
+<td class="center">Expires 21 December 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1067,12 +1067,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-meunier-web-bot-auth-glossary-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-06-13" class="published">13 June 2025</time>
+<time datetime="2025-06-19" class="published">19 June 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-12-15">15 December 2025</time></dd>
+<dd class="expires"><time datetime="2025-12-21">21 December 2025</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1120,7 +1120,7 @@ focus on AI related technologies.<a href="#section-abstract-1" class="pilcrow">�
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 15 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 21 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1178,10 +1178,13 @@ focus on AI related technologies.<a href="#section-abstract-1" class="pilcrow">�
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
                 <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-ai-agent-use-example" class="internal xref">AI agent use example</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-web-crawler-example" class="internal xref">Web crawler example</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-security-goals-and-threat-m" class="internal xref">Security goals and threat model</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-deployment-considerations" class="internal xref">Deployment considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
                 <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-public-vs-private-presentat" class="internal xref">Public vs private presentation</a></p>
@@ -1467,7 +1470,7 @@ identity.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
             <p id="section-4.3-3.2.1">Gating access to a resource for longstanding users such as <span>[<a href="#LOX" class="cite xref">LOX</a>]</span>,<a href="#section-4.3-3.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-4.3-3.3">
-            <p id="section-4.3-3.3.1">Using a search engine with a fixed number of requests such as <span>[<a href="#PRIVACY-PASS-KAGI" class="cite xref">PRIVACY-PASS-KAGI</a>]</span>,<a href="#section-4.3-3.3.1" class="pilcrow">¶</a></p>
+            <p id="section-4.3-3.3.1">Using a search engine with a fixed number of requests such as <span>[<a href="#PRIVACYPASS-KAGI" class="cite xref">PRIVACYPASS-KAGI</a>]</span>,<a href="#section-4.3-3.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-4.3-3.4">
             <p id="section-4.3-3.4.1">Selective disclosure of a credential attribute (location, age) such as
@@ -1481,7 +1484,7 @@ identity.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="ecosystem-overview">
+<div id="ecosystem">
 <section id="section-5">
       <h2 id="name-ecosystem-overview">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-ecosystem-overview" class="section-name selfRef">Ecosystem overview</a>
@@ -1506,7 +1509,7 @@ identity.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
             <path d="M 168,32 L 296,32" fill="none" stroke="black"></path>
             <path d="M 360,32 L 448,32" fill="none" stroke="black"></path>
             <path d="M 128,48 L 160,48" fill="none" stroke="black"></path>
-            <path d="M 304,48 L 352,48" fill="none" stroke="black"></path>
+            <path d="M 296,48 L 352,48" fill="none" stroke="black"></path>
             <path d="M 168,64 L 296,64" fill="none" stroke="black"></path>
             <path d="M 360,64 L 448,64" fill="none" stroke="black"></path>
             <path d="M 8,96 L 96,96" fill="none" stroke="black"></path>
@@ -1514,7 +1517,7 @@ identity.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
             <path d="M 168,160 L 256,160" fill="none" stroke="black"></path>
             <path d="M 360,160 L 448,160" fill="none" stroke="black"></path>
             <path d="M 128,176 L 160,176" fill="none" stroke="black"></path>
-            <path d="M 264,176 L 352,176" fill="none" stroke="black"></path>
+            <path d="M 256,176 L 352,176" fill="none" stroke="black"></path>
             <path d="M 168,192 L 256,192" fill="none" stroke="black"></path>
             <path d="M 360,192 L 448,192" fill="none" stroke="black"></path>
             <path d="M 96,112 L 128,176" fill="none" stroke="black"></path>
@@ -1545,7 +1548,7 @@ cryptographic credentials to the client, which are then linked to requests and
 optionally verified by proxies before reaching the origin. This chain allows for
 authentication without necessarily revealing identifying details to each
 intermediate.<a href="#section-5-2" class="pilcrow">¶</a></p>
-<div id="ai-agent-use-example">
+<div id="ai-agent">
 <section id="section-5.1">
         <h3 id="name-ai-agent-use-example">
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-ai-agent-use-example" class="section-name selfRef">AI agent use example</a>
@@ -1641,12 +1644,75 @@ rate-limit individuals, and authenticate users without relying solely on client
 IP or heuristics presented in <a href="#motivation" class="auto internal xref">Section 2</a>.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
+<div id="crawler">
+<section id="section-5.2">
+        <h3 id="name-web-crawler-example">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-web-crawler-example" class="section-name selfRef">Web crawler example</a>
+        </h3>
+<p id="section-5.2-1">Search engines, web archivers, and security analysis tools operate bots as part
+of their operations to scan and retrieve content from a variety of sources.
+These automated agents are commonly referred to as crawlers.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">While their traffic is automated, it is often seen as desirable by origins.
+Legitimate crawlers contribute to improved SEO, enhanced security posture,
+and broader content reach through search indexing and archiving.
+Reliable authentication allows origins to differentiate these beneficial
+crawlers from malicious actors.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2-3">In the framework provided in <a href="#ecosystem" class="auto internal xref">Section 5</a>, the interaction for a web crawler
+can be described as follows:<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+<div id="section-5.2-4">
+          <div class="alignLeft art-svg artwork" id="section-5.2-4.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="112" width="592" viewBox="0 0 592 112" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+              <path d="M 8,48 L 8,80" fill="none" stroke="black"></path>
+              <path d="M 120,48 L 120,80" fill="none" stroke="black"></path>
+              <path d="M 200,48 L 200,80" fill="none" stroke="black"></path>
+              <path d="M 240,48 L 240,80" fill="none" stroke="black"></path>
+              <path d="M 304,48 L 304,80" fill="none" stroke="black"></path>
+              <path d="M 432,48 L 432,80" fill="none" stroke="black"></path>
+              <path d="M 496,48 L 496,80" fill="none" stroke="black"></path>
+              <path d="M 584,48 L 584,80" fill="none" stroke="black"></path>
+              <path d="M 24,32 L 224,32" fill="none" stroke="black"></path>
+              <path d="M 120,48 L 200,48" fill="none" stroke="black"></path>
+              <path d="M 304,48 L 432,48" fill="none" stroke="black"></path>
+              <path d="M 496,48 L 584,48" fill="none" stroke="black"></path>
+              <path d="M 200,64 L 296,64" fill="none" stroke="black"></path>
+              <path d="M 432,64 L 488,64" fill="none" stroke="black"></path>
+              <path d="M 120,80 L 200,80" fill="none" stroke="black"></path>
+              <path d="M 304,80 L 432,80" fill="none" stroke="black"></path>
+              <path d="M 496,80 L 584,80" fill="none" stroke="black"></path>
+              <path d="M 24,96 L 224,96" fill="none" stroke="black"></path>
+              <path d="M 24,32 C 15.16936,32 8,39.16936 8,48" fill="none" stroke="black"></path>
+              <path d="M 224,32 C 232.83064,32 240,39.16936 240,48" fill="none" stroke="black"></path>
+              <path d="M 24,96 C 15.16936,96 8,88.83064 8,80" fill="none" stroke="black"></path>
+              <path d="M 224,96 C 232.83064,96 240,88.83064 240,80" fill="none" stroke="black"></path>
+              <polygon class="arrowhead" points="496,64 484,58.4 484,69.6" fill="black" transform="rotate(0,488,64)"></polygon>
+              <polygon class="arrowhead" points="304,64 292,58.4 292,69.6" fill="black" transform="rotate(0,296,64)"></polygon>
+              <g class="text">
+                <text x="72" y="52">Company</text>
+                <text x="160" y="68">Crawler</text>
+                <text x="344" y="68">Reverse</text>
+                <text x="400" y="68">Proxy</text>
+                <text x="540" y="68">Origin</text>
+              </g>
+            </svg><a href="#section-5.2-4.1" class="pilcrow">¶</a>
+</div>
+</div>
+<p id="section-5.2-5">Similar to the <a href="#ai-agent" class="auto internal xref">Section 5.1</a>,
+the attester/issuer roles could be filled by the crawling company, a reverse proxy,
+the origin, or a third party. For instance, the crawling company itself is often
+the most authoritative entity to attest to the legitimacy of its crawlers,
+issuing cryptographic credentials that identify them.
+Origins require robust mechanisms to identify these organizations and differentiate
+their traffic without solely relying on the limitations of IP addresses or User-Agent
+heuristics presented in <a href="#motivation" class="auto internal xref">Section 2</a>. This enables them to apply granular access controls,
+rate limits, or preferential treatment based on the verified identity of the crawler.<a href="#section-5.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="security-goals-and-threat-model">
+</section>
+</div>
+<div id="deployment-considerations">
 <section id="section-6">
-      <h2 id="name-security-goals-and-threat-m">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-security-goals-and-threat-m" class="section-name selfRef">Security goals and threat model</a>
+      <h2 id="name-deployment-considerations">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-deployment-considerations" class="section-name selfRef">Deployment considerations</a>
       </h2>
 <p id="section-6-1">The security model includes several actors: credential issuers, attesters,
 clients (bots or agents), reverse proxies, and origin servers. The primary goals
@@ -1661,6 +1727,65 @@ delegation and rotation, and maintain trust boundaries.<a href="#section-6-1" cl
 shared secrets for verification. In cases where the issuer and verifier are
 different entities, asymmetric cryptography becomes necessary, allowing the bot
 to prove its identity using a public key infrastructure.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">Such work is being carried out in the CFRG and Privacy Pass working group
+with the following drafts<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<table class="center" id="table-1">
+          <caption><a href="#table-1" class="selfRef">Table 1</a></caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Presentation</th>
+              <th class="text-left" rowspan="1" colspan="1">Cryptography</th>
+              <th class="text-left" rowspan="1" colspan="1">Privacy Pass</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">Private</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#ARC" class="cite xref">ARC</a>]</span>
+</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#PRIVACYPASS-ARC" class="cite xref">PRIVACYPASS-ARC</a>]</span>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">Private</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#OPRF" class="cite xref">OPRF</a>]</span>
+</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#PRIVACYPASS-PROTOCOL" class="cite xref">PRIVACYPASS-PROTOCOL</a>]</span>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">Public/Private</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#BBS" class="cite xref">BBS</a>]</span>
+</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#PRIVACYPASS-BBS" class="cite xref">PRIVACYPASS-BBS</a>]</span>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">Public</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#BLINDRSA" class="cite xref">BLINDRSA</a>]</span>
+</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#PRIVACYPASS-PROTOCOL" class="cite xref">PRIVACYPASS-PROTOCOL</a>]</span>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">Public</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#PARTIALLY-BLINDRSA" class="cite xref">PARTIALLY-BLINDRSA</a>]</span>
+</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#PRIVACYPASS-PUBLIC-METADATA" class="cite xref">PRIVACYPASS-PUBLIC-METADATA</a>]</span>
+</td>
+            </tr>
+          </tbody>
+        </table>
 </section>
 </div>
 <div id="single-vs-multi-show">
@@ -1755,7 +1880,9 @@ given you don't have to expose information through a catalog.<a href="#section-7
 <p id="section-7.3-1">Discovery may happen on-path, that is when a request arrives from a client to
 an origin.
 This could be considered a form of trust-on-first-use. While the level of trust is low,
-it could be viable for certain use cases.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+it could be viable for certain deployments for which knowing all agents a-priori is
+not viable. This could be due to their multiplicity, a frequent change in involved actors,
+or an origin that is willing to review new changes manually for instance.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
 <p id="section-7.3-2">Such discovery could be via an HTTP header containing a domain name with a
 well-known, a URL, a certificate, etc.<a href="#section-7.3-2" class="pilcrow">¶</a></p>
 </section>
@@ -1875,6 +2002,18 @@ important to consider the privacy of these layers together as well.<a href="#sec
         <dd>
 <span class="refTitle">"Anonymous Credit Tokens"</span>, <span>n.d.</span>, <span>&lt;<a href="https://samuelschlesinger.github.io/ietf-anonymous-credit-tokens/draft-schlesinger-cfrg-act.html">https://samuelschlesinger.github.io/ietf-anonymous-credit-tokens/draft-schlesinger-cfrg-act.html</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="ARC">[ARC]</dt>
+        <dd>
+<span class="refAuthor">Yun, C.</span> and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Anonymous Rate-Limited Credentials"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-yun-cfrg-arc-00</span>, <time datetime="2025-02-05" class="refDate">5 February 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-yun-cfrg-arc-00">https://datatracker.ietf.org/doc/html/draft-yun-cfrg-arc-00</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="BBS">[BBS]</dt>
+        <dd>
+<span class="refAuthor">Looker, T.</span>, <span class="refAuthor">Kalos, V.</span>, <span class="refAuthor">Whitehead, A.</span>, and <span class="refAuthor">M. Lodder</span>, <span class="refTitle">"The BBS Signature Scheme"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-bbs-signatures-08</span>, <time datetime="2025-03-03" class="refDate">3 March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-08">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-08</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="BLINDRSA">[BLINDRSA]</dt>
+        <dd>
+<span class="refAuthor">Denis, F.</span>, <span class="refAuthor">Jacobs, F.</span>, and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"RSA Blind Signatures"</span>, <span class="seriesInfo">RFC 9474</span>, <span class="seriesInfo">DOI 10.17487/RFC9474</span>, <time datetime="2023-10" class="refDate">October 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9474">https://www.rfc-editor.org/rfc/rfc9474</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="CERTIFICATE-TRANSPARENCY-RFC">[CERTIFICATE-TRANSPARENCY-RFC]</dt>
         <dd>
 <span class="refAuthor">Laurie, B.</span>, <span class="refAuthor">Langley, A.</span>, and <span class="refAuthor">E. Kasper</span>, <span class="refTitle">"Certificate Transparency"</span>, <span class="seriesInfo">RFC 6962</span>, <span class="seriesInfo">DOI 10.17487/RFC6962</span>, <time datetime="2013-06" class="refDate">June 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6962">https://www.rfc-editor.org/rfc/rfc6962</a>&gt;</span>. </dd>
@@ -1923,9 +2062,21 @@ important to consider the privacy of these layers together as well.<a href="#sec
         <dd>
 <span class="refTitle">"OpenAPI 3.0 Authentication"</span>, <span>n.d.</span>, <span>&lt;<a href="https://swagger.io/docs/specification/v3_0/authentication/">https://swagger.io/docs/specification/v3_0/authentication/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="PRIVACY-PASS-KAGI">[PRIVACY-PASS-KAGI]</dt>
+<dt id="OPRF">[OPRF]</dt>
         <dd>
-<span class="refTitle">"Introducing Privacy Pass authentication for Kagi Search"</span>, <span>n.d.</span>, <span>&lt;<a href="https://blog.kagi.com/kagi-privacy-pass">https://blog.kagi.com/kagi-privacy-pass</a>&gt;</span>. </dd>
+<span class="refAuthor">Davidson, A.</span>, <span class="refAuthor">Faz-Hernandez, A.</span>, <span class="refAuthor">Sullivan, N.</span>, and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Oblivious Pseudorandom Functions (OPRFs) Using Prime-Order Groups"</span>, <span class="seriesInfo">RFC 9497</span>, <span class="seriesInfo">DOI 10.17487/RFC9497</span>, <time datetime="2023-12" class="refDate">December 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9497">https://www.rfc-editor.org/rfc/rfc9497</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="PARTIALLY-BLINDRSA">[PARTIALLY-BLINDRSA]</dt>
+        <dd>
+<span class="refAuthor">Amjad, G. A.</span>, <span class="refAuthor">Hendrickson, S.</span>, <span class="refAuthor">Wood, C. A.</span>, and <span class="refAuthor">K. W. L. Yeo</span>, <span class="refTitle">"Partially Blind RSA Signatures"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-partially-blind-rsa-01</span>, <time datetime="2025-04-01" class="refDate">1 April 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-partially-blind-rsa-01">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-partially-blind-rsa-01</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="PRIVACYPASS-ARC">[PRIVACYPASS-ARC]</dt>
+        <dd>
+<span class="refAuthor">Yun, C.</span> and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Privacy Pass Issuance Protocol for Anonymous Rate-Limited Credentials"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-yun-privacypass-arc-00</span>, <time datetime="2025-02-05" class="refDate">5 February 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-yun-privacypass-arc-00">https://datatracker.ietf.org/doc/html/draft-yun-privacypass-arc-00</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="PRIVACYPASS-BBS">[PRIVACYPASS-BBS]</dt>
+        <dd>
+<span class="refAuthor">Ladd, W.</span>, <span class="refTitle">"BBS for PrivacyPass"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ladd-privacypass-bbs-01</span>, <time datetime="2024-02-26" class="refDate">26 February 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ladd-privacypass-bbs-01">https://datatracker.ietf.org/doc/html/draft-ladd-privacypass-bbs-01</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="PRIVACYPASS-HTTP-AUTH-RFC">[PRIVACYPASS-HTTP-AUTH-RFC]</dt>
         <dd>
@@ -1934,6 +2085,18 @@ important to consider the privacy of these layers together as well.<a href="#sec
 <dt id="PRIVACYPASS-IN-TLS">[PRIVACYPASS-IN-TLS]</dt>
         <dd>
 <span class="refAuthor">Pauly, T.</span> and <span class="refAuthor">S. Hendrickson</span>, <span class="refTitle">"Including Privacy Pass Tokens in TLS Handshakes"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-pauly-privacypass-for-tls-00</span>, <time datetime="2025-03-03" class="refDate">3 March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-pauly-privacypass-for-tls-00">https://datatracker.ietf.org/doc/html/draft-pauly-privacypass-for-tls-00</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="PRIVACYPASS-KAGI">[PRIVACYPASS-KAGI]</dt>
+        <dd>
+<span class="refTitle">"Introducing Privacy Pass authentication for Kagi Search"</span>, <span>n.d.</span>, <span>&lt;<a href="https://blog.kagi.com/kagi-privacy-pass">https://blog.kagi.com/kagi-privacy-pass</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="PRIVACYPASS-PROTOCOL">[PRIVACYPASS-PROTOCOL]</dt>
+        <dd>
+<span class="refAuthor">Celi, S.</span>, <span class="refAuthor">Davidson, A.</span>, <span class="refAuthor">Valdez, S.</span>, and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Privacy Pass Issuance Protocols"</span>, <span class="seriesInfo">RFC 9578</span>, <span class="seriesInfo">DOI 10.17487/RFC9578</span>, <time datetime="2024-06" class="refDate">June 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9578">https://www.rfc-editor.org/rfc/rfc9578</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="PRIVACYPASS-PUBLIC-METADATA">[PRIVACYPASS-PUBLIC-METADATA]</dt>
+        <dd>
+<span class="refAuthor">Hendrickson, S.</span> and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Privacy Pass Issuance Protocols with Public Metadata"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-privacypass-public-metadata-issuance-02</span>, <time datetime="2025-05-27" class="refDate">27 May 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-privacypass-public-metadata-issuance-02">https://datatracker.ietf.org/doc/html/draft-ietf-privacypass-public-metadata-issuance-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="PRIVATE-ACCESS-TOKEN">[PRIVATE-ACCESS-TOKEN]</dt>
         <dd>
