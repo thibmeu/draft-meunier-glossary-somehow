@@ -368,10 +368,10 @@ with the following drafts
 | Presentation   | Cryptography           | Privacy Pass                    |
 |:---------------|:-----------------------|:--------------------------------|
 | Private        | {{ARC}}                | {{PRIVACYPASS-ARC}}             |
+| Private        | {{OPRF}}               | {{PRIVACYPASS-PROTOCOL}}        |
 | Public/Private | {{BBS}}                | {{PRIVACYPASS-BBS}}             |
 | Public         | {{BLINDRSA}}           | {{PRIVACYPASS-PROTOCOL}}        |
 | Public         | {{PARTIALLY-BLINDRSA}} | {{PRIVACYPASS-PUBLIC-METADATA}} |
-| Private        | {{VOPRF}}              | {{PRIVACYPASS-PROTOCOL}}        |
 
 ## Single vs multi show {#single-vs-multi-show}
 
