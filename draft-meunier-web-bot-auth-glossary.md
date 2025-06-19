@@ -43,6 +43,9 @@ informative:
   A2A-DISCOVERY:
     title: A2A protocol Agent discovery
     target: https://google.github.io/A2A/#/topics/agent_discovery
+  ARC: I-D.draft-yun-cfrg-arc-00
+  BBS: I-D.draft-irtf-cfrg-bbs-signatures-08
+  BLINDRSA: RFC9474
   CERTIFICATE-TRANSPARENCY-RFC: RFC6962
   CONCEALED-AUTH-RFC: RFC9729
   DPOP-AUTH-RFC: RFC9449
@@ -65,11 +68,17 @@ informative:
   OPENAPI3-AUTH:
     title: OpenAPI 3.0 Authentication
     target: https://swagger.io/docs/specification/v3_0/authentication/
+  OPRF: RFC9497
+  PARTIALLY-BLINDRSA: I-D.draft-irtf-cfrg-partially-blind-rsa-01
+  PRIVACYPASS-ARC: I-D.draft-yun-privacypass-arc-00
+  PRIVACYPASS-BBS: I-D.draft-ladd-privacypass-bbs-01
   PRIVACYPASS-HTTP-AUTH-RFC: RFC9577
   PRIVACYPASS-IN-TLS: I-D.draft-pauly-privacypass-for-tls
-  PRIVACY-PASS-KAGI:
+  PRIVACYPASS-KAGI:
     title: Introducing Privacy Pass authentication for Kagi Search
     target: https://blog.kagi.com/kagi-privacy-pass
+  PRIVACYPASS-PROTOCOL: RFC9578
+  PRIVACYPASS-PUBLIC-METADATA: I-D.draft-ietf-privacypass-public-metadata-issuance-02
   PRIVATE-ACCESS-TOKEN:
     title: "Challenge: Private Access Tokens"
     target: https://developer.apple.com/news/?id=huqjyh7k
@@ -236,7 +245,7 @@ Examples:
 
 - Add a signal to limit visual CAPTCHA challenge such as {{PRIVATE-ACCESS-TOKEN}},
 - Gating access to a resource for longstanding users such as {{LOX}},
-- Using a search engine with a fixed number of requests such as {{PRIVACY-PASS-KAGI}},
+- Using a search engine with a fixed number of requests such as {{PRIVACYPASS-KAGI}},
 - Selective disclosure of a credential attribute (location, age) such as
   {{PRIVATE-PROOF-API}}.
 - Redeeming previously issued credits as in {{ANONYMOUS-CREDIT-TOKENS}}.
@@ -338,7 +347,7 @@ their traffic without solely relying on the limitations of IP addresses or User-
 heuristics presented in {{motivation}}. This enables them to apply granular access controls,
 rate limits, or preferential treatment based on the verified identity of the crawler.
 
-# Security goals and threat model
+# Deployment considerations
 
 The security model includes several actors: credential issuers, attesters,
 clients (bots or agents), reverse proxies, and origin servers. The primary goals
@@ -352,6 +361,17 @@ If the Issuer is also the Origin or its reverse proxy, it is possible to use
 shared secrets for verification. In cases where the issuer and verifier are
 different entities, asymmetric cryptography becomes necessary, allowing the bot
 to prove its identity using a public key infrastructure.
+
+Such work is being carried out in the CFRG and Privacy Pass working group
+with the following drafts
+
+| Presentation   | Cryptography           | Privacy Pass                    |
+|:---------------|:-----------------------|:--------------------------------|
+| Private        | {{ARC}}                | {{PRIVACYPASS-ARC}}             |
+| Public/Private | {{BBS}}                | {{PRIVACYPASS-BBS}}             |
+| Public         | {{BLINDRSA}}           | {{PRIVACYPASS-PROTOCOL}}        |
+| Public         | {{PARTIALLY-BLINDRSA}} | {{PRIVACYPASS-PUBLIC-METADATA}} |
+| Private        | {{VOPRF}}              | {{PRIVACYPASS-PROTOCOL}}        |
 
 ## Single vs multi show {#single-vs-multi-show}
 
