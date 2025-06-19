@@ -241,12 +241,12 @@ Examples:
   {{PRIVATE-PROOF-API}}.
 - Redeeming previously issued credits as in {{ANONYMOUS-CREDIT-TOKENS}}.
 
-# Ecosystem overview
+# Ecosystem overview {#ecosystem}
 
 
 ~~~aasvg
                     +---------------+       +----------+
-               .--->| Reverse Proxy |------>|  Origin  |
+               .--->| Reverse Proxy +------>|  Origin  |
               /     +---------------+       +-----+----+
              /                                    ^
 +----------+/                                     ║
@@ -254,7 +254,7 @@ Examples:
 +----------+\                                     ║
              \                                    v
               \     +----------+            +-----+----+
-               '--->| Attester |----------->|  Issuer  |
+               '--->| Attester +----------->|  Issuer  |
                     +----------+            +----------+
 ~~~
 
@@ -267,7 +267,7 @@ optionally verified by proxies before reaching the origin. This chain allows for
 authentication without necessarily revealing identifying details to each
 intermediate.
 
-## AI agent use example
+## AI agent use example {#ai-agent}
 
 Humans and bots often interact with origins indirectly via clients such as
 browsers, agents, or CLI tools. These clients handle requests, potentially
@@ -305,6 +305,38 @@ origin, or a third party. Origins need mechanisms to identify organizations,
 rate-limit individuals, and authenticate users without relying solely on client
 IP or heuristics presented in {{motivation}}.
 
+## Web crawler example {#crawler}
+
+Search engines, web archivers, and security analysis tools operate bots as part
+of their operations to scan and retrieve content from a variety of sources.
+These automated agents are commonly referred to as crawlers.
+
+While their traffic is automated, it is often seen as desirable by origins.
+Legitimate crawlers contribute to improved SEO, enhanced security posture,
+and broader content reach through search indexing and archiving.
+Reliable authentication allows origins to differentiate these beneficial
+crawlers from malicious actors.
+
+In the framework provided in {{ecosystem}}, the interaction for a web crawler
+can be described as follows:
+
+~~~aasvg
+ .--------------------------.
+|    Company  +---------+    |       +---------------+       +----------+
+|             | Crawler +----+------>| Reverse Proxy +------>|  Origin  |
+|             +---------+    |       +---------------+       +----------+
+ '--------------------------'
+~~~
+
+Similar to the {{ai-agent}},
+the attester/issuer roles could be filled by the crawling company, a reverse proxy,
+the origin, or a third party. For instance, the crawling company itself is often
+the most authoritative entity to attest to the legitimacy of its crawlers,
+issuing cryptographic credentials that identify them.
+Origins require robust mechanisms to identify these organizations and differentiate
+their traffic without solely relying on the limitations of IP addresses or User-Agent
+heuristics presented in {{motivation}}. This enables them to apply granular access controls,
+rate limits, or preferential treatment based on the verified identity of the crawler.
 
 # Security goals and threat model
 
