@@ -9,18 +9,18 @@ number:
 date:
 consensus: true
 v: 3
-# area: AREA
-# workgroup: WG Working Group
+area: "Web and Internet Transport"
+workgroup: "Web Bot Auth"
 keyword:
  - bot authentication
  - web security
  - glossary
  - automated agents
 venue:
-#  group: WG
-#  type: Working Group
-#  mail: WG@example.com
-#  arch: https://example.com/WG
+  group: "Web Bot Auth"
+  type: "Working Group"
+  mail: "web-bot-auth@ietf.org"
+  arch: "https://mailarchive.ietf.org/arch/browse/web-bot-auth/"
   github: "thibmeu/draft-meunier-glossary-somehow"
   latest: "https://thibmeu.github.io/draft-meunier-glossary/draft-meunier-web-bot-auth-glossary.html"
 
