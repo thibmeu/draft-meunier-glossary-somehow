@@ -439,7 +439,9 @@ given you don't have to expose information through a catalog.
 Discovery may happen on-path, that is when a request arrives from a client to
 an origin.
 This could be considered a form of trust-on-first-use. While the level of trust is low,
-it could be viable for certain use cases.
+it could be viable for certain deployments for which knowing all agents a-priori is
+not viable. This could be due to their multiplicity, a frequent change in involved actors,
+or an origin that is willing to review new changes manually for instance.
 
 Such discovery could be via an HTTP header containing a domain name with a
 well-known, a URL, a certificate, etc.
