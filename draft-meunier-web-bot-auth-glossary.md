@@ -495,3 +495,21 @@ This document has no IANA actions.
 {:numbered="false"}
 
 TODO acknowledge.
+
+# Changelog
+{:numbered="false"}
+
+v01
+
+- Improve wording from on-path submission (thanks to Christopher Patton)
+- Add CFRG and Privacy Pass drafts within public/private presentation (thanks to Christopher Patton)
+- Add web crawler example along with AI agent
+- Add anonymous credit tokens draft (thanks to Sam Schlesinger)
+
+v00
+
+- Initial draft
+- Overall ecosystem architecture
+- Terminology
+- Rough deployment considerations
+- Reference multiple agent protocols
