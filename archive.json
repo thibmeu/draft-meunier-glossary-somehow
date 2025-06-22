@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-17T01:54:44.962241+00:00",
+  "timestamp": "2025-06-22T02:03:05.161690+00:00",
   "repo": "thibmeu/draft-meunier-glossary-somehow",
   "labels": [
     {
@@ -134,6 +134,24 @@
           "updatedAt": "2025-06-16T20:48:35Z"
         }
       ]
+    },
+    {
+      "number": 7,
+      "id": "I_kwDOOd3gLc68Tu-M",
+      "title": "Replace entity with clearer term in definication",
+      "url": "https://github.com/thibmeu/draft-meunier-glossary-somehow/issues/7",
+      "state": "OPEN",
+      "author": "thibmeu",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [
+        "bug"
+      ],
+      "body": "Raised by @cjpatton\n\nMultiple definition use the term \"entity\" which is not defined. This is out of convenience to have a general term.\n\nIt should be replaced with a more precise one, possibly multiple ones.\n\n#5 is going to introduce principal, which would help.",
+      "createdAt": "2025-06-19T07:30:01Z",
+      "updatedAt": "2025-06-19T07:30:01Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
